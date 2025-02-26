@@ -8,6 +8,6 @@ namespace RestaurantAutomation.Entities.Models
         public string? Description { get; set; } // Ürün açıklaması (isteğe bağlı)
         public string? Unit { get; set; } // Ürünün birimi (Örnek: "Kg", "Adet", "Litre", vb.)
         public decimal Price { get; set; } // Ürünün fiyatı
-        public decimal? ReorderLevel { get; set; } // Yeniden sipariş verilmesi gereken stok seviyesi (isteğe bağlı)
+        public decimal? ReorderLevel { get; set; } // Yeniden sipariş verilmesi gereken stok seviyesi
     }
 }
