@@ -1,13 +1,12 @@
 ﻿using RestaurantAutomation.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
     public class Payment : Entity
     {
+        public decimal Amount { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public Guid OrderID { get; set; }
+        public virtual Order? Order { get; set; }
     }
 }
