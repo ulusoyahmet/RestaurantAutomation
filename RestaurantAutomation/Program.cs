@@ -14,6 +14,7 @@ namespace RestaurantAutomation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new TableScreen());
+            //test
         }
     }
 }
