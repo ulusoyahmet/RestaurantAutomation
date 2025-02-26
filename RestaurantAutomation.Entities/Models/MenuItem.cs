@@ -10,5 +10,7 @@ namespace RestaurantAutomation.Entities.Models
         // category of the menu item
         public Guid CategoryID { get; set; }
         public virtual Category? Category { get; set; }
+        // Menü öğesinin kampanyaları (Many-to-Many ilişki)
+        public virtual ICollection<CampaignMenuItem>? CampaignMenuItems { get; set; }
     }
 }
