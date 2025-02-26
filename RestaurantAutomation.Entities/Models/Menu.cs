@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
-    public class LoyaltyProgram : Entity
+    public class Menu : Entity
     {
     }
 }
