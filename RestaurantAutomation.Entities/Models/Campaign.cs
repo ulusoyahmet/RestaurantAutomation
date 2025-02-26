@@ -1,13 +1,12 @@
 ﻿using RestaurantAutomation.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
     public class Campaign : Entity
     {
+        public string? Name { get; set; }
+        public decimal DiscountPercentage { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

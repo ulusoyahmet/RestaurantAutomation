@@ -1,13 +1,12 @@
 ﻿using RestaurantAutomation.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
     public class User : Entity
     {
+        public string? Username { get; set; }
+        public string? Password { get; set; }
+        public Guid RoleID { get; set; }
+        public virtual Role? Role { get; set; }
     }
 }

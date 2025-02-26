@@ -1,13 +1,13 @@
 ﻿using RestaurantAutomation.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
     public class OrderDetail : Entity
     {
+        public Guid OrderID { get; set; }
+        public virtual Order? Order { get; set; }
+        public Guid MenuItemID { get; set; }
+        public virtual MenuItem? MenuItem { get; set; }
+        public int Quantity { get; set; }
     }
 }

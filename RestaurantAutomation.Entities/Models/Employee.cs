@@ -1,13 +1,12 @@
 ﻿using RestaurantAutomation.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Entities.Models
 {
     public class Employee : Entity
     {
+        public string? Name { get; set; }
+        public string? Position { get; set; }
+        public decimal Salary { get; set; }
+        public virtual ICollection<Shift>? Shifts { get; set; }
     }
 }
