@@ -32,7 +32,6 @@
             label5 = new Label();
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
@@ -53,7 +52,6 @@
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(dataGridView1);
@@ -97,24 +95,13 @@
             flowLayoutPanel1.Size = new Size(406, 460);
             flowLayoutPanel1.TabIndex = 6;
             // 
-            // label4
-            // 
-            label4.BackColor = Color.Gold;
-            label4.Location = new Point(731, 677);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(113, 33);
-            label4.TabIndex = 5;
-            label4.Text = "Reserved";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // label3
             // 
             label3.BackColor = Color.Red;
-            label3.Location = new Point(600, 677);
+            label3.Location = new Point(680, 677);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(123, 33);
+            label3.Size = new Size(164, 33);
             label3.TabIndex = 5;
             label3.Text = "Occupied";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -125,7 +112,7 @@
             label2.Location = new Point(494, 677);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(97, 33);
+            label2.Size = new Size(178, 33);
             label2.TabIndex = 5;
             label2.Text = "Available";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -219,13 +206,13 @@
             btnAddTable.Text = "Add New Table";
             btnAddTable.UseVisualStyleBackColor = true;
             // 
-            // Table_Screen
+            // TableForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(923, 750);
             Controls.Add(groupBox1);
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(4, 5, 4, 5);            
             Text = "Table Screen";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -243,7 +230,6 @@
         private DataGridView dataGridView1;
         private Label label2;
         private Button btnMainMenu;
-        private Label label4;
         private Label label3;
         private FlowLayoutPanel flowLayoutPanel1;
         private DataGridViewTextBoxColumn Name;
