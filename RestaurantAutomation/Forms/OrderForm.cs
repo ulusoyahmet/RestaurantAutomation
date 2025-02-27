@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class OrderScreen : Form
+    public partial class OrderForm : Form
     {
-        public OrderScreen()
+        public OrderForm()
         {
             InitializeComponent();
         }
@@ -39,11 +39,6 @@ namespace RestaurantAutomation.UI.Forms
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
         {
 
         }

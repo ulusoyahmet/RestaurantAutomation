@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class ReportScreen : Form
+    public partial class MenuForm : Form
     {
-        public ReportScreen()
+        public MenuForm()
         {
             InitializeComponent();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void MenuScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
