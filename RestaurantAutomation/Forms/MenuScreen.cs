@@ -16,5 +16,15 @@ namespace RestaurantAutomation.UI.Forms
         {
             InitializeComponent();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void MenuScreen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
