@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             dataGridViewMenu = new DataGridView();
+            txtSearchproduct = new TextBox();
+            comboBox1 = new ComboBox();
             colName = new DataGridViewTextBoxColumn();
             colCategory = new DataGridViewComboBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
-            txtSearchproduct = new TextBox();
-            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMenu).BeginInit();
             SuspendLayout();
             // 
@@ -48,29 +48,6 @@
             dataGridViewMenu.Size = new Size(882, 188);
             dataGridViewMenu.TabIndex = 0;
             dataGridViewMenu.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // colName
-            // 
-            colName.HeaderText = "Product Name";
-            colName.MinimumWidth = 10;
-            colName.Name = "colName";
-            colName.Resizable = DataGridViewTriState.True;
-            colName.Width = 400;
-            // 
-            // colCategory
-            // 
-            colCategory.HeaderText = "Category";
-            colCategory.Items.AddRange(new object[] { "Main Courses", "Starters", "Beverages", "Desserts", "Snacks", "Beverages" });
-            colCategory.MinimumWidth = 10;
-            colCategory.Name = "colCategory";
-            colCategory.Width = 200;
-            // 
-            // colPrice
-            // 
-            colPrice.HeaderText = "Price";
-            colPrice.MinimumWidth = 10;
-            colPrice.Name = "colPrice";
-            colPrice.Width = 200;
             // 
             // txtSearchproduct
             // 
@@ -89,6 +66,29 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(150, 28);
             comboBox1.TabIndex = 2;
+            // 
+            // colName
+            // 
+            colName.HeaderText = "Product Name";
+            colName.MinimumWidth = 10;
+            colName.Name = "colName";
+            colName.Resizable = DataGridViewTriState.True;
+            colName.Width = 400;
+            // 
+            // colCategory
+            // 
+            colCategory.HeaderText = "Category";
+            colCategory.Items.AddRange(new object[] { "Main Courses", "Starters", "Beverages", "Desserts", "Snacks" });
+            colCategory.MinimumWidth = 10;
+            colCategory.Name = "colCategory";
+            colCategory.Width = 200;
+            // 
+            // colPrice
+            // 
+            colPrice.HeaderText = "Price";
+            colPrice.MinimumWidth = 10;
+            colPrice.Name = "colPrice";
+            colPrice.Width = 200;
             // 
             // MenuScreen
             // 
@@ -110,10 +110,10 @@
         #endregion
 
         private DataGridView dataGridViewMenu;
+        private TextBox txtSearchproduct;
+        private ComboBox comboBox1;
         private DataGridViewTextBoxColumn colName;
         private DataGridViewComboBoxColumn colCategory;
         private DataGridViewTextBoxColumn colPrice;
-        private TextBox txtSearchproduct;
-        private ComboBox comboBox1;
     }
 }
