@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class OrderScreen : Form
+    public partial class OrderForm : Form
     {
-        public OrderScreen()
+        public OrderForm()
         {
             InitializeComponent();
         }

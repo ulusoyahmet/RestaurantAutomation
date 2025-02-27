@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class LoginScreen : Form
+    public partial class LoginForm : Form
     {
-        public LoginScreen()
+        public LoginForm()
         {
             InitializeComponent();
         }

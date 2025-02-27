@@ -1,6 +1,6 @@
 ﻿namespace RestaurantAutomation.UI.Forms
 {
-    partial class ReportScreen
+    partial class ReportForm
     {
         /// <summary>
         /// Required designer variable.
