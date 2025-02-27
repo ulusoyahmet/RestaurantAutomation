@@ -41,27 +41,30 @@
             // 
             dataGridViewMenu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewMenu.Columns.AddRange(new DataGridViewColumn[] { colName, colCategory, colPrice });
-            dataGridViewMenu.Location = new Point(12, 44);
+            dataGridViewMenu.Location = new Point(7, 28);
+            dataGridViewMenu.Margin = new Padding(2, 2, 2, 2);
             dataGridViewMenu.Name = "dataGridViewMenu";
             dataGridViewMenu.RowHeadersWidth = 82;
-            dataGridViewMenu.Size = new Size(786, 300);
+            dataGridViewMenu.Size = new Size(882, 188);
             dataGridViewMenu.TabIndex = 0;
             dataGridViewMenu.CellContentClick += dataGridView1_CellContentClick;
             // 
             // txtSearchproduct
             // 
-            txtSearchproduct.Location = new Point(12, 380);
+            txtSearchproduct.Location = new Point(7, 238);
+            txtSearchproduct.Margin = new Padding(2, 2, 2, 2);
             txtSearchproduct.Name = "txtSearchproduct";
             txtSearchproduct.PlaceholderText = "Search Product";
-            txtSearchproduct.Size = new Size(200, 39);
+            txtSearchproduct.Size = new Size(125, 27);
             txtSearchproduct.TabIndex = 1;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(523, 380);
+            comboBox1.Location = new Point(322, 238);
+            comboBox1.Margin = new Padding(2, 2, 2, 2);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(242, 40);
+            comboBox1.Size = new Size(150, 28);
             comboBox1.TabIndex = 2;
             // 
             // colName
@@ -89,12 +92,13 @@
             // 
             // MenuScreen
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1103, 754);
+            ClientSize = new Size(1105, 471);
             Controls.Add(comboBox1);
             Controls.Add(txtSearchproduct);
             Controls.Add(dataGridViewMenu);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "MenuScreen";
             Text = "MenuScreen";
             Load += MenuScreen_Load;
