@@ -1,6 +1,6 @@
 ﻿namespace RestaurantAutomation.UI.Forms
 {
-    partial class OrderScreen
+    partial class OrderForm
     {
         /// <summary>
         /// Required designer variable.
@@ -65,7 +65,6 @@
             button2.TabIndex = 5;
             button2.Text = "Startes";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // dataGridView1
             // 
