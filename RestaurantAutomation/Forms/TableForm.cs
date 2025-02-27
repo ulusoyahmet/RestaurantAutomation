@@ -1,8 +1,8 @@
 ﻿namespace RestaurantAutomation.UI.Forms
 {
-    public partial class Table_Screen : Form
+    public partial class TableForm : Form
     {
-        public Table_Screen()
+        public TableForm()
         {
             InitializeComponent();
 
@@ -23,11 +23,6 @@
                 }
                 flowLayoutPanel1.Controls.Add(b);
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

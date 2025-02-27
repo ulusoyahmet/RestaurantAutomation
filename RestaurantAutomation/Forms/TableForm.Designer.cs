@@ -1,6 +1,6 @@
 ﻿namespace RestaurantAutomation.UI.Forms
 {
-    partial class Table_Screen
+    partial class TableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -177,7 +177,6 @@
             btnUpdateTable.TabIndex = 2;
             btnUpdateTable.Text = "Update Table";
             btnUpdateTable.UseVisualStyleBackColor = true;
-            btnUpdateTable.Click += this.btnUpdateTable_Click;
             // 
             // btnMainMenu
             // 
@@ -219,7 +218,6 @@
             btnAddTable.TabIndex = 2;
             btnAddTable.Text = "Add New Table";
             btnAddTable.UseVisualStyleBackColor = true;
-            btnAddTable.Click += this.btnAddTable_Click;
             // 
             // Table_Screen
             // 
@@ -228,7 +226,6 @@
             ClientSize = new Size(923, 750);
             Controls.Add(groupBox1);
             Margin = new Padding(4, 5, 4, 5);
-            Name = "Table_Screen";
             Text = "Table Screen";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
