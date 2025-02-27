@@ -15,6 +15,14 @@ namespace RestaurantAutomation.UI.Forms
         public TableScreen()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 19; i++)
+            {
+                Button b = new Button();
+                b.Text = "Table " + i;
+                b.Size = new Size(100, 100);
+                flowLayoutPanel1.Controls.Add(b);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
