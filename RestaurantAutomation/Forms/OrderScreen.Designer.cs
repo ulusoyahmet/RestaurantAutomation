@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             button1 = new Button();
             button2 = new Button();
             dataGridView1 = new DataGridView();
@@ -50,7 +50,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(799, 135);
+            button1.Location = new Point(799, 141);
             button1.Name = "button1";
             button1.Size = new Size(138, 70);
             button1.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(799, 238);
+            button4.Location = new Point(799, 251);
             button4.Name = "button4";
             button4.Size = new Size(138, 72);
             button4.TabIndex = 7;
@@ -120,9 +120,9 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle7.Format = "N0";
-            dataGridViewCellStyle7.NullValue = "0";
-            Column1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
+            Column1.DefaultCellStyle = dataGridViewCellStyle11;
             Column1.HeaderText = "Miktar";
             Column1.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
             Column1.MinimumWidth = 8;
@@ -131,8 +131,8 @@
             // 
             // dgwUnitPrice
             // 
-            dataGridViewCellStyle8.NullValue = "0";
-            dgwUnitPrice.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.NullValue = "0";
+            dgwUnitPrice.DefaultCellStyle = dataGridViewCellStyle12;
             dgwUnitPrice.HeaderText = "Fiyat";
             dgwUnitPrice.MinimumWidth = 6;
             dgwUnitPrice.Name = "dgwUnitPrice";
