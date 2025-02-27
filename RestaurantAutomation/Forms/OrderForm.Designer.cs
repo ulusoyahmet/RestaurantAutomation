@@ -1,6 +1,6 @@
 ﻿namespace RestaurantAutomation.UI.Forms
 {
-    partial class OrderScreen
+    partial class OrderForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             button1 = new Button();
             button2 = new Button();
             dataGridView1 = new DataGridView();
             dgwCancel = new DataGridViewTextBoxColumn();
             dgwProductName = new DataGridViewTextBoxColumn();
-            dgwQuantity = new DataGridViewComboBoxColumn();
+            Column1 = new DataGridViewComboBoxColumn();
             dgwUnitPrice = new DataGridViewTextBoxColumn();
             dgwAmount = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -41,18 +43,20 @@
             // 
             // button1
             // 
-            button1.Location = new Point(709, 92);
+            button1.Location = new Point(886, 115);
+            button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(97, 94);
+            button1.Size = new Size(121, 118);
             button1.TabIndex = 4;
             button1.Text = "Yiyecek";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(833, 92);
+            button2.Location = new Point(1041, 115);
+            button2.Margin = new Padding(4);
             button2.Name = "button2";
-            button2.Size = new Size(97, 94);
+            button2.Size = new Size(121, 118);
             button2.TabIndex = 5;
             button2.Text = "İçecek";
             button2.UseVisualStyleBackColor = true;
@@ -60,11 +64,12 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dgwCancel, dgwProductName, dgwQuantity, dgwUnitPrice, dgwAmount });
-            dataGridView1.Location = new Point(12, 81);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dgwCancel, dgwProductName, Column1, dgwUnitPrice, dgwAmount });
+            dataGridView1.Location = new Point(15, 101);
+            dataGridView1.Margin = new Padding(4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(607, 289);
+            dataGridView1.Size = new Size(759, 361);
             dataGridView1.TabIndex = 6;
             // 
             // dgwCancel
@@ -81,17 +86,21 @@
             dgwProductName.Name = "dgwProductName";
             dgwProductName.Width = 125;
             // 
-            // dgwQuantity
+            // Column1
             // 
-            dgwQuantity.HeaderText = "Miktar";
-            dgwQuantity.MinimumWidth = 6;
-            dgwQuantity.Name = "dgwQuantity";
-            dgwQuantity.Resizable = DataGridViewTriState.True;
-            dgwQuantity.SortMode = DataGridViewColumnSortMode.Automatic;
-            dgwQuantity.Width = 125;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = "0";
+            Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            Column1.HeaderText = "Miktar";
+            Column1.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            Column1.MinimumWidth = 8;
+            Column1.Name = "Column1";
+            Column1.Width = 150;
             // 
             // dgwUnitPrice
             // 
+            dataGridViewCellStyle2.NullValue = "0";
+            dgwUnitPrice.DefaultCellStyle = dataGridViewCellStyle2;
             dgwUnitPrice.HeaderText = "Fiyat";
             dgwUnitPrice.MinimumWidth = 6;
             dgwUnitPrice.Name = "dgwUnitPrice";
@@ -106,12 +115,13 @@
             // 
             // OrderScreen
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(974, 631);
+            ClientSize = new Size(1218, 789);
             Controls.Add(dataGridView1);
             Controls.Add(button2);
             Controls.Add(button1);
+            Margin = new Padding(4);
             Name = "OrderScreen";
             Text = "OrderScreen";
             Load += OrderScreen_Load;
@@ -125,7 +135,7 @@
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn dgwCancel;
         private DataGridViewTextBoxColumn dgwProductName;
-        private DataGridViewComboBoxColumn dgwQuantity;
+        private DataGridViewComboBoxColumn Column1;
         private DataGridViewTextBoxColumn dgwUnitPrice;
         private DataGridViewTextBoxColumn dgwAmount;
     }

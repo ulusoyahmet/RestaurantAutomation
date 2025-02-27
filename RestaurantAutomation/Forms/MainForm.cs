@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class ReportScreen : Form
+    public partial class MainForm : Form
     {
-        public ReportScreen()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

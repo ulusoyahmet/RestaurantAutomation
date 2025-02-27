@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class OrderScreen : Form
+    public partial class OrderForm : Form
     {
-        public OrderScreen()
+        public OrderForm()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace RestaurantAutomation.UI.Forms
             //var result = productRepo.GetProductCategory(categoryId);
             //lits->ekmek(count payment),kebap(count payment)
             ////yiyecekler / içecekler
-            
+
             //for (int i = 0; i < result.count; i++)
             //{
             //    //lokasyon büyüklük name text
@@ -37,5 +37,10 @@ namespace RestaurantAutomation.UI.Forms
             //}
 
         }
-    }    
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
 }

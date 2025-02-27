@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
-    public partial class MainScreen : Form
+    public partial class LoginForm : Form
     {
-        public MainScreen()
+        public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
