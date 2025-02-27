@@ -42,5 +42,10 @@ namespace RestaurantAutomation.UI.Forms
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
