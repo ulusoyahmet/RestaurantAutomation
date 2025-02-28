@@ -12,8 +12,6 @@ namespace RestaurantAutomation.DataAccess.Context
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
-        public DbSet<Menu> Menus { get; set; }
-        public DbSet<Employee> Employees { get; set; }
         public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
