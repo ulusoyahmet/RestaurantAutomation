@@ -42,5 +42,12 @@ namespace RestaurantAutomation.UI.Forms
         {
 
         }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = new();
+            mainForm.Show();
+            this.Hide();
+        }
     }
 }

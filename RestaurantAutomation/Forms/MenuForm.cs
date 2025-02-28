@@ -22,8 +22,8 @@ namespace RestaurantAutomation.UI.Forms
         private void GetAllCategories()
         {
             var data = _context.Categories.ToList();
-            if (data != null) 
-            { 
+            if (data != null)
+            {
                 cmbCategory.DataSource = data;
                 cmbCategory.DisplayMember = "Name";
                 cmbCategory.ValueMember = "ID";
@@ -81,6 +81,13 @@ namespace RestaurantAutomation.UI.Forms
                     }
                 }
             }
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = new();
+            mainForm.Show();
+            this.Hide();
         }
     }
 }
