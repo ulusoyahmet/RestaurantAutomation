@@ -8,7 +8,6 @@ namespace RestaurantAutomation.Entities.Models
         public Guid CustomerID { get; set; }
         public Guid TableID { get; set; }
         public virtual Table? Table { get; set; }
-        public Guid PaymentID { get; set; }
         public virtual Payment? Payment { get; set; }
     }
 }
