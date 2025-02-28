@@ -19,10 +19,4 @@
     <ProjectReference Include="..\RestaurantAutomation.Entities\RestaurantAutomation.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Abstractions\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
