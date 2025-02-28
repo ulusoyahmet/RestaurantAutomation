@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridViewMenu = new DataGridView();
+            dgwProducts = new DataGridView();
             colName = new DataGridViewTextBoxColumn();
             colCategory = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
@@ -52,21 +52,21 @@
             button2 = new Button();
             button3 = new Button();
             button5 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMenu).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgwProducts).BeginInit();
             grpProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbImage).BeginInit();
             SuspendLayout();
             // 
-            // dataGridViewMenu
+            // dgwProducts
             // 
-            dataGridViewMenu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMenu.Columns.AddRange(new DataGridViewColumn[] { colName, colCategory, colPrice });
-            dataGridViewMenu.Location = new Point(6, 21);
-            dataGridViewMenu.Margin = new Padding(2, 1, 2, 1);
-            dataGridViewMenu.Name = "dataGridViewMenu";
-            dataGridViewMenu.RowHeadersWidth = 82;
-            dataGridViewMenu.Size = new Size(478, 259);
-            dataGridViewMenu.TabIndex = 0;
+            dgwProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgwProducts.Columns.AddRange(new DataGridViewColumn[] { colName, colCategory, colPrice });
+            dgwProducts.Location = new Point(6, 21);
+            dgwProducts.Margin = new Padding(2, 1, 2, 1);
+            dgwProducts.Name = "dgwProducts";
+            dgwProducts.RowHeadersWidth = 82;
+            dgwProducts.Size = new Size(478, 259);
+            dgwProducts.TabIndex = 0;
             // 
             // colName
             // 
@@ -170,6 +170,7 @@
             btnUploadImage.TabIndex = 9;
             btnUploadImage.Text = "Upload";
             btnUploadImage.UseVisualStyleBackColor = true;
+            btnUploadImage.Click += btnUploadImage_Click;
             // 
             // label7
             // 
@@ -313,11 +314,12 @@
             Controls.Add(label1);
             Controls.Add(comboBox1);
             Controls.Add(txtSearchproduct);
-            Controls.Add(dataGridViewMenu);
+            Controls.Add(dgwProducts);
             Margin = new Padding(2, 1, 2, 1);
             Name = "MenuForm";
             Text = "MenuScreen";
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMenu).EndInit();
+            Load += MenuForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgwProducts).EndInit();
             grpProduct.ResumeLayout(false);
             grpProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbImage).EndInit();
@@ -327,7 +329,7 @@
 
         #endregion
 
-        private DataGridView dataGridViewMenu;
+        private DataGridView dgwProducts;
         private TextBox txtSearchproduct;
         private ComboBox comboBox1;
         private Label label1;
