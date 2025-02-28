@@ -9,6 +9,8 @@ namespace RestaurantAutomation.Entities.Models
         public decimal Price { get; set; }
         // category of the menu item
         public Guid CategoryID { get; set; }
-        public virtual Category? Category { get; set; }        
+        public virtual Category? Category { get; set; }
+        // Resmi veritabanında saklamak için byte[]
+        public byte[]? Image { get; set; }
     }
 }
