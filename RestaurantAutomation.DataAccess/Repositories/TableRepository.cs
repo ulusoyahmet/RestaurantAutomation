@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using RestaurantAutomation.DataAccess.Context;
+﻿using RestaurantAutomation.DataAccess.Context;
+using RestaurantAutomation.Entities.Models;
 
 namespace RestaurantAutomation.DataAccess.Repositories
 {
