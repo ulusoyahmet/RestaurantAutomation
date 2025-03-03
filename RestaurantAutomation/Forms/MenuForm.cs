@@ -1,4 +1,6 @@
-﻿using RestaurantAutomation.DataAccess.Context;
+﻿using RestaurantAutomation.Business.Services;
+using RestaurantAutomation.DataAccess.Context;
+using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
 using System.Windows.Forms;
 
@@ -7,16 +9,21 @@ namespace RestaurantAutomation.UI.Forms
     public partial class MenuForm : Form
     {
         private readonly AppDbContext _context;
+        private readonly MenuItemService _menuItemService;
+        private readonly MenuItemRepository menuItemRepository;
+
         public MenuForm()
         {
             InitializeComponent();
             _context = new AppDbContext();
+            menuItemRepository = new MenuItemRepository(_context);
+            _menuItemService = new MenuItemService(menuItemRepository);
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
             GetAllCategories();
-
+            GetAllProducts();
         }
 
         private void GetAllCategories()
@@ -89,5 +96,44 @@ namespace RestaurantAutomation.UI.Forms
             mainForm.Show();
             this.Hide();
         }
+        private void txtSearchText_TextChanged(object sender, EventArgs e)
+        {
+            GetAllProducts(txtSearchText.Text);
+        }
+
+        private void GetAllProducts(string searchText = null)
+        {
+            List<MenuItem> data;
+            if (searchText != null && searchText.Length >= 3)
+            {
+                //arama yap
+                data = _menuItemService.GetAll().Where(x => x.Name.ToLower().Contains(searchText)).ToList();
+            }
+            else
+            {
+                //tüm datayı getir
+                data = _menuItemService.GetAll().ToList();
+
+            }
+
+            // datagridview datasource'ını temizle
+            dgwProducts.DataSource = null;
+            // datagridview datasource'ına yeni datayı ata
+            dgwProducts.DataSource = data;
+        }
+
+        MenuItem? selectedMenuItem;
+        private void dgwProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            // get selected item
+            selectedMenuItem = (MenuItem)dgwProducts.CurrentRow.DataBoundItem;
+            txtProductName.Text = selectedMenuItem.Name;
+            txtDescription.Text = selectedMenuItem.Description;
+            txtPrice.Text = selectedMenuItem.Price.ToString();
+            cmbCategory.SelectedValue = selectedMenuItem.CategoryID;
+        }
+
+        
     }
 }

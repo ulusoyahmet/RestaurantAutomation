@@ -33,6 +33,7 @@
             btnMenu = new Button();
             btnOrder = new Button();
             btnTable = new Button();
+            btnLogin = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             groupBox1.Controls.Add(btnMenu);
             groupBox1.Controls.Add(btnOrder);
             groupBox1.Controls.Add(btnTable);
-            groupBox1.Location = new Point(39, 12);
+            groupBox1.Location = new Point(124, 77);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(510, 299);
             groupBox1.TabIndex = 2;
@@ -89,11 +90,23 @@
             btnTable.UseVisualStyleBackColor = true;
             btnTable.Click += btnTable_Click;
             // 
+            // btnLogin
+            // 
+            btnLogin.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogin.Location = new Point(12, 12);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(31, 30);
+            btnLogin.TabIndex = 11;
+            btnLogin.Text = "🡰";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(592, 326);
+            ClientSize = new Size(755, 467);
+            Controls.Add(btnLogin);
             Controls.Add(groupBox1);
             Name = "MainForm";
             Text = "MainScreen";
@@ -109,5 +122,6 @@
         private Button btnMenu;
         private Button btnOrder;
         private Button btnTable;
+        private Button btnLogin;
     }
 }
