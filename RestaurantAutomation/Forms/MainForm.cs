@@ -45,7 +45,9 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-
+            ReportForm reportForm = new();
+            this.Hide();
+            reportForm.Show();
         }
     }
 }

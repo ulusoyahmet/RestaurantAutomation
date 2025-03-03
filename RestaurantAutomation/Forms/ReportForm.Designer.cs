@@ -28,12 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ReportScreen";
+            btnMainMenu = new Button();
+            SuspendLayout();
+            // 
+            // btnMainMenu
+            // 
+            btnMainMenu.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMainMenu.Location = new Point(14, 15);
+            btnMainMenu.Margin = new Padding(5, 6, 5, 6);
+            btnMainMenu.Name = "btnMainMenu";
+            btnMainMenu.Size = new Size(57, 64);
+            btnMainMenu.TabIndex = 11;
+            btnMainMenu.Text = "🡰";
+            btnMainMenu.UseVisualStyleBackColor = true;
+            btnMainMenu.Click += btnMainMenu_Click;
+            // 
+            // ReportForm
+            // 
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1173, 787);
+            Controls.Add(btnMainMenu);
+            Name = "ReportForm";
+            Text = "ReportScreen";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnMainMenu;
     }
 }
