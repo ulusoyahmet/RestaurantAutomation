@@ -58,38 +58,39 @@
             // dgwProducts
             // 
             dgwProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgwProducts.Location = new Point(9, 68);
-            dgwProducts.Margin = new Padding(3, 2, 3, 2);
+            dgwProducts.Location = new Point(12, 87);
+            dgwProducts.Margin = new Padding(4, 3, 4, 3);
             dgwProducts.Name = "dgwProducts";
             dgwProducts.RowHeadersWidth = 82;
-            dgwProducts.Size = new Size(683, 432);
+            dgwProducts.Size = new Size(888, 553);
             dgwProducts.TabIndex = 0;
             // 
             // txtSearchproduct
             // 
-            txtSearchproduct.Location = new Point(17, 513);
-            txtSearchproduct.Margin = new Padding(3, 2, 3, 2);
+            txtSearchproduct.Location = new Point(22, 657);
+            txtSearchproduct.Margin = new Padding(4, 3, 4, 3);
             txtSearchproduct.Name = "txtSearchproduct";
             txtSearchproduct.PlaceholderText = "Search Product";
-            txtSearchproduct.Size = new Size(155, 31);
+            txtSearchproduct.Size = new Size(200, 39);
             txtSearchproduct.TabIndex = 1;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Main Courses", "Starters", "Beverages", "Desserts" });
-            comboBox1.Location = new Point(506, 515);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
+            comboBox1.Location = new Point(658, 659);
+            comboBox1.Margin = new Padding(4, 3, 4, 3);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(187, 33);
+            comboBox1.Size = new Size(242, 40);
             comboBox1.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(417, 515);
+            label1.Location = new Point(542, 659);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(54, 25);
+            label1.Size = new Size(72, 32);
             label1.TabIndex = 3;
             label1.Text = "Filter:";
             // 
@@ -97,9 +98,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 7.125F, FontStyle.Underline, GraphicsUnit.Point, 162);
-            label2.Location = new Point(603, 558);
+            label2.Location = new Point(784, 714);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(89, 20);
+            label2.Size = new Size(115, 25);
             label2.TabIndex = 4;
             label2.Text = "Clean Filters";
             // 
@@ -116,29 +118,29 @@
             grpProduct.Controls.Add(label3);
             grpProduct.Controls.Add(cmbCategory);
             grpProduct.Controls.Add(txtProductName);
-            grpProduct.Location = new Point(736, 68);
-            grpProduct.Margin = new Padding(3, 2, 3, 2);
+            grpProduct.Location = new Point(957, 87);
+            grpProduct.Margin = new Padding(4, 3, 4, 3);
             grpProduct.Name = "grpProduct";
-            grpProduct.Padding = new Padding(3, 2, 3, 2);
-            grpProduct.Size = new Size(439, 492);
+            grpProduct.Padding = new Padding(4, 3, 4, 3);
+            grpProduct.Size = new Size(571, 630);
             grpProduct.TabIndex = 5;
             grpProduct.TabStop = false;
             grpProduct.Text = "Product Details";
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(179, 185);
-            txtPrice.Margin = new Padding(4, 5, 4, 5);
+            txtPrice.Location = new Point(233, 237);
+            txtPrice.Margin = new Padding(5, 6, 5, 6);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(235, 31);
+            txtPrice.Size = new Size(304, 39);
             txtPrice.TabIndex = 10;
             // 
             // btnUploadImage
             // 
-            btnUploadImage.Location = new Point(36, 428);
-            btnUploadImage.Margin = new Padding(3, 2, 3, 2);
+            btnUploadImage.Location = new Point(47, 548);
+            btnUploadImage.Margin = new Padding(4, 3, 4, 3);
             btnUploadImage.Name = "btnUploadImage";
-            btnUploadImage.Size = new Size(116, 37);
+            btnUploadImage.Size = new Size(151, 47);
             btnUploadImage.TabIndex = 9;
             btnUploadImage.Text = "Upload";
             btnUploadImage.UseVisualStyleBackColor = true;
@@ -147,63 +149,68 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(17, 370);
+            label7.Location = new Point(22, 474);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(132, 25);
+            label7.Size = new Size(175, 32);
             label7.TabIndex = 8;
             label7.Text = "Upload Picture:";
             // 
             // pcbImage
             // 
-            pcbImage.Location = new Point(179, 370);
-            pcbImage.Margin = new Padding(3, 2, 3, 2);
+            pcbImage.Location = new Point(233, 474);
+            pcbImage.Margin = new Padding(4, 3, 4, 3);
             pcbImage.Name = "pcbImage";
-            pcbImage.Size = new Size(179, 93);
+            pcbImage.Size = new Size(233, 119);
             pcbImage.TabIndex = 7;
             pcbImage.TabStop = false;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(26, 258);
+            label6.Location = new Point(34, 330);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(106, 25);
+            label6.Size = new Size(140, 32);
             label6.TabIndex = 6;
             label6.Text = "Description:";
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(179, 248);
-            txtDescription.Margin = new Padding(3, 2, 3, 2);
+            txtDescription.Location = new Point(233, 317);
+            txtDescription.Margin = new Padding(4, 3, 4, 3);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(235, 86);
+            txtDescription.Size = new Size(304, 109);
             txtDescription.TabIndex = 6;
             txtDescription.Text = "";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(27, 185);
+            label5.Location = new Point(35, 237);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(53, 25);
+            label5.Size = new Size(70, 32);
             label5.TabIndex = 4;
             label5.Text = "Price:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(27, 133);
+            label4.Location = new Point(35, 170);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(88, 25);
+            label4.Size = new Size(115, 32);
             label4.TabIndex = 3;
             label4.Text = "Category:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(26, 88);
+            label3.Location = new Point(34, 113);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(130, 25);
+            label3.Size = new Size(172, 32);
             label3.TabIndex = 2;
             label3.Text = "Product Name:";
             // 
@@ -211,27 +218,26 @@
             // 
             cmbCategory.FormattingEnabled = true;
             cmbCategory.Items.AddRange(new object[] { "Main Courses", "Starters", "Beverages", "Desserts" });
-            cmbCategory.Location = new Point(179, 130);
-            cmbCategory.Margin = new Padding(3, 2, 3, 2);
+            cmbCategory.Location = new Point(233, 166);
+            cmbCategory.Margin = new Padding(4, 3, 4, 3);
             cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(235, 33);
+            cmbCategory.Size = new Size(304, 40);
             cmbCategory.TabIndex = 1;
             // 
             // txtProductName
             // 
-            txtProductName.Location = new Point(179, 83);
-            txtProductName.Margin = new Padding(3, 2, 3, 2);
+            txtProductName.Location = new Point(233, 106);
+            txtProductName.Margin = new Padding(4, 3, 4, 3);
             txtProductName.Name = "txtProductName";
-            txtProductName.PlaceholderText = "Product Name";
-            txtProductName.Size = new Size(235, 31);
+            txtProductName.Size = new Size(304, 39);
             txtProductName.TabIndex = 0;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(959, 576);
-            btnAdd.Margin = new Padding(3, 2, 3, 2);
+            btnAdd.Location = new Point(979, 732);
+            btnAdd.Margin = new Padding(4, 3, 4, 3);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(177, 67);
+            btnAdd.Size = new Size(230, 86);
             btnAdd.TabIndex = 6;
             btnAdd.Text = "ADD";
             btnAdd.UseVisualStyleBackColor = true;
@@ -239,30 +245,30 @@
             // 
             // button2
             // 
-            button2.Location = new Point(753, 576);
-            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Location = new Point(1247, 732);
+            button2.Margin = new Padding(4, 3, 4, 3);
             button2.Name = "button2";
-            button2.Size = new Size(177, 67);
+            button2.Size = new Size(230, 86);
             button2.TabIndex = 7;
             button2.Text = "UPDATE";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(753, 666);
-            button3.Margin = new Padding(3, 2, 3, 2);
+            button3.Location = new Point(979, 852);
+            button3.Margin = new Padding(4, 3, 4, 3);
             button3.Name = "button3";
-            button3.Size = new Size(177, 65);
+            button3.Size = new Size(230, 83);
             button3.TabIndex = 8;
             button3.Text = "DELETE";
             button3.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Location = new Point(959, 666);
-            button5.Margin = new Padding(3, 2, 3, 2);
+            button5.Location = new Point(1247, 852);
+            button5.Margin = new Padding(4, 3, 4, 3);
             button5.Name = "button5";
-            button5.Size = new Size(177, 65);
+            button5.Size = new Size(230, 83);
             button5.TabIndex = 9;
             button5.Text = "CLEAN";
             button5.UseVisualStyleBackColor = true;
@@ -270,10 +276,10 @@
             // btnMainMenu
             // 
             btnMainMenu.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnMainMenu.Location = new Point(9, 11);
-            btnMainMenu.Margin = new Padding(4, 5, 4, 5);
+            btnMainMenu.Location = new Point(12, 14);
+            btnMainMenu.Margin = new Padding(5, 6, 5, 6);
             btnMainMenu.Name = "btnMainMenu";
-            btnMainMenu.Size = new Size(44, 50);
+            btnMainMenu.Size = new Size(57, 64);
             btnMainMenu.TabIndex = 10;
             btnMainMenu.Text = "🡰";
             btnMainMenu.UseVisualStyleBackColor = true;
@@ -281,9 +287,9 @@
             // 
             // MenuForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1197, 775);
+            ClientSize = new Size(1556, 992);
             Controls.Add(btnMainMenu);
             Controls.Add(button5);
             Controls.Add(button3);
@@ -295,7 +301,7 @@
             Controls.Add(comboBox1);
             Controls.Add(txtSearchproduct);
             Controls.Add(dgwProducts);
-            Margin = new Padding(3, 2, 3, 2);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MenuForm";
             Text = "MenuScreen";
             Load += MenuForm_Load;
