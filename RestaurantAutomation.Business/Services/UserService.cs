@@ -61,6 +61,11 @@ namespace RestaurantAutomation.Business.Services
             return _userRepository.GetByID(id);
         }
 
+        public User GetByUserName(string userName)
+        {
+            return _userRepository.GetByUserName(userName);
+        }
+
         public bool IfEntityExists(Expression<Func<User, bool>> filter)
         {
             return _userRepository.IfEntityExists(filter);

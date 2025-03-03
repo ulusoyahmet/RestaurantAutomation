@@ -29,79 +29,99 @@
         private void InitializeComponent()
         {
             GroupBox groupBox1;
-            btnSignIn = new Button();
-            lblUsername = new Label();
-            lblPassword = new Label();
-            txtUsername = new TextBox();
             txtPassword = new TextBox();
+            txtUsername = new TextBox();
+            lblPassword = new Label();
+            lblUsername = new Label();
+            btnSignIn = new Button();
+            label1 = new Label();
+            cmbRoles = new ComboBox();
             groupBox1 = new GroupBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnSignIn
-            // 
-            btnSignIn.Location = new Point(122, 119);
-            btnSignIn.Name = "btnSignIn";
-            btnSignIn.Size = new Size(178, 30);
-            btnSignIn.TabIndex = 0;
-            btnSignIn.Text = "Sign In";
-            btnSignIn.UseVisualStyleBackColor = true;
-            btnSignIn.Click += button1_Click;
-            // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cmbRoles);
+            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(txtPassword);
             groupBox1.Controls.Add(txtUsername);
             groupBox1.Controls.Add(lblPassword);
             groupBox1.Controls.Add(lblUsername);
             groupBox1.Controls.Add(btnSignIn);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(220, 105);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(360, 187);
+            groupBox1.Size = new Size(360, 225);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Enter += groupBox1_Enter;
             // 
-            // lblUsername
+            // txtPassword
             // 
-            lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(56, 51);
-            lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(60, 15);
-            lblUsername.TabIndex = 1;
-            lblUsername.Text = "Username";
+            txtPassword.Location = new Point(119, 115);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(178, 23);
+            txtPassword.TabIndex = 4;
+            // 
+            // txtUsername
+            // 
+            txtUsername.Location = new Point(119, 83);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(178, 23);
+            txtUsername.TabIndex = 3;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(56, 83);
+            lblPassword.Location = new Point(53, 118);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(57, 15);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
-            // txtUsername
+            // lblUsername
             // 
-            txtUsername.Location = new Point(122, 48);
-            txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(178, 23);
-            txtUsername.TabIndex = 3;
+            lblUsername.AutoSize = true;
+            lblUsername.Location = new Point(53, 86);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(60, 15);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
             // 
-            // txtPassword
+            // btnSignIn
             // 
-            txtPassword.Location = new Point(122, 80);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(178, 23);
-            txtPassword.TabIndex = 4;
+            btnSignIn.Location = new Point(119, 154);
+            btnSignIn.Name = "btnSignIn";
+            btnSignIn.Size = new Size(178, 30);
+            btnSignIn.TabIndex = 0;
+            btnSignIn.Text = "Sign In / Sign Up";
+            btnSignIn.Click += btnSignIn_Click;
             // 
-            // LoginScreen
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(53, 52);
+            label1.Name = "label1";
+            label1.Size = new Size(30, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Role";
+            // 
+            // cmbRoles
+            // 
+            cmbRoles.FormattingEnabled = true;
+            cmbRoles.Location = new Point(119, 49);
+            cmbRoles.Name = "cmbRoles";
+            cmbRoles.Size = new Size(178, 23);
+            cmbRoles.TabIndex = 6;
+            // 
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 211);
+            ClientSize = new Size(805, 523);
             Controls.Add(groupBox1);
-            Name = "LoginScreen";
+            Name = "LoginForm";
             Text = "LoginScreen";
+            Load += LoginForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -115,5 +135,7 @@
         private TextBox txtUsername;
         private Label lblPassword;
         private Label lblUsername;
+        private ComboBox cmbRoles;
+        private Label label1;
     }
 }
