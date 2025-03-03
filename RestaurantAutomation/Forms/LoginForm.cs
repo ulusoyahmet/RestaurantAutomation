@@ -1,6 +1,7 @@
 ﻿using RestaurantAutomation.Business.Services;
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
+using RestaurantAutomation.Entities.Models;
 
 namespace RestaurantAutomation.UI.Forms
 {
@@ -24,6 +25,11 @@ namespace RestaurantAutomation.UI.Forms
 
             _roleService = new RoleService(_roleRepository);
             _userService = new UserService(_userRepository);
+        }
+
+        public static class SessionManager
+        {
+            public static User? LoggedInUser { get; set; }
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -53,6 +59,9 @@ namespace RestaurantAutomation.UI.Forms
                     && user.RoleID == (Guid)cmbRoles?.SelectedValue)
                 {
                     MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Store the logged-in user
+                    SessionManager.LoggedInUser = user;
 
                     MainForm mainForm = new();
                     this.Hide();

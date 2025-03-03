@@ -1,20 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using RestaurantAutomation.Business.Services;
+using RestaurantAutomation.DataAccess.Context;
+using RestaurantAutomation.DataAccess.Repositories;
+using static RestaurantAutomation.UI.Forms.LoginForm;
 
 namespace RestaurantAutomation.UI.Forms
 {
     public partial class MainForm : Form
     {
+        private readonly RoleService _roleService;
+        private readonly RoleRepository roleRepository;
+        private readonly AppDbContext _context;
+
         public MainForm()
         {
             InitializeComponent();
+
+            _context = new AppDbContext();
+            roleRepository = new RoleRepository(_context);
+            _roleService = new RoleService(roleRepository);
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            if (SessionManager.LoggedInUser != null)
+            {
+                var role = _roleService.GetByID(SessionManager.LoggedInUser.RoleID);
+
+                // Hide Reports button if the user is not an Admin
+                btnReports.Visible = role.Name == "Admin";
+            }
         }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,5 +64,7 @@ namespace RestaurantAutomation.UI.Forms
             this.Hide();
             reportForm.Show();
         }
+
+        
     }
 }

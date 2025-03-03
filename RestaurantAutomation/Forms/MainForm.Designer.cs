@@ -42,21 +42,18 @@
             groupBox1.Controls.Add(btnMenu);
             groupBox1.Controls.Add(btnOrder);
             groupBox1.Controls.Add(btnTable);
-            groupBox1.Location = new Point(56, 20);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Location = new Point(39, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(729, 499);
+            groupBox1.Size = new Size(510, 299);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Menu";
             // 
             // btnReports
             // 
-            btnReports.Location = new Point(374, 218);
-            btnReports.Margin = new Padding(4, 5, 4, 5);
+            btnReports.Location = new Point(262, 131);
             btnReports.Name = "btnReports";
-            btnReports.Size = new Size(290, 111);
+            btnReports.Size = new Size(203, 67);
             btnReports.TabIndex = 2;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
@@ -64,10 +61,9 @@
             // 
             // btnMenu
             // 
-            btnMenu.Location = new Point(76, 218);
-            btnMenu.Margin = new Padding(4, 5, 4, 5);
+            btnMenu.Location = new Point(53, 131);
             btnMenu.Name = "btnMenu";
-            btnMenu.Size = new Size(290, 111);
+            btnMenu.Size = new Size(203, 67);
             btnMenu.TabIndex = 3;
             btnMenu.Text = "Menu Management";
             btnMenu.UseVisualStyleBackColor = true;
@@ -75,10 +71,9 @@
             // 
             // btnOrder
             // 
-            btnOrder.Location = new Point(374, 95);
-            btnOrder.Margin = new Padding(4, 5, 4, 5);
+            btnOrder.Location = new Point(262, 57);
             btnOrder.Name = "btnOrder";
-            btnOrder.Size = new Size(290, 111);
+            btnOrder.Size = new Size(203, 67);
             btnOrder.TabIndex = 5;
             btnOrder.Text = "Order Management";
             btnOrder.UseVisualStyleBackColor = true;
@@ -86,10 +81,9 @@
             // 
             // btnTable
             // 
-            btnTable.Location = new Point(76, 95);
-            btnTable.Margin = new Padding(4, 5, 4, 5);
+            btnTable.Location = new Point(53, 57);
             btnTable.Name = "btnTable";
-            btnTable.Size = new Size(290, 111);
+            btnTable.Size = new Size(203, 67);
             btnTable.TabIndex = 6;
             btnTable.Text = "Table Management";
             btnTable.UseVisualStyleBackColor = true;
@@ -97,13 +91,13 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(846, 544);
+            ClientSize = new Size(592, 326);
             Controls.Add(groupBox1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Text = "MainScreen";
+            Load += MainForm_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
