@@ -9,5 +9,11 @@ namespace RestaurantAutomation.Entities.Models
 
         // MenuItem ile ilişki
         public virtual ICollection<MenuItem>? MenuItems { get; set; } // Bu kategoriye ait menü öğeleri
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

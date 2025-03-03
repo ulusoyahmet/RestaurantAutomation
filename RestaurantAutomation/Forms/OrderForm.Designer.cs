@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            button1 = new Button();
-            button2 = new Button();
+            btnMainCourses = new Button();
+            btnStarters = new Button();
+            categoryBindingSource = new BindingSource(components);
             dataGridView1 = new DataGridView();
             dgwCancel = new DataGridViewTextBoxColumn();
             dgwProductName = new DataGridViewTextBoxColumn();
@@ -39,35 +41,41 @@
             dgwUnitPrice = new DataGridViewTextBoxColumn();
             dgwAmount = new DataGridViewTextBoxColumn();
             dgwDate = new DataGridViewTextBoxColumn();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            btnBeverages = new Button();
+            btnDesserts = new Button();
+            btnSaveOrder = new Button();
             dataGridView2 = new DataGridView();
-            button6 = new Button();
+            btnNewOrder = new Button();
             btnMainMenu = new Button();
+            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnMainCourses
             // 
-            button1.Location = new Point(999, 202);
-            button1.Margin = new Padding(4);
-            button1.Name = "button1";
-            button1.Size = new Size(172, 88);
-            button1.TabIndex = 4;
-            button1.Text = "Main Courses";
-            button1.UseVisualStyleBackColor = true;
+            btnMainCourses.Location = new Point(999, 202);
+            btnMainCourses.Margin = new Padding(4);
+            btnMainCourses.Name = "btnMainCourses";
+            btnMainCourses.Size = new Size(172, 88);
+            btnMainCourses.TabIndex = 4;
+            btnMainCourses.Text = "Main Courses";
+            btnMainCourses.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnStarters
             // 
-            button2.Location = new Point(999, 62);
-            button2.Margin = new Padding(4);
-            button2.Name = "button2";
-            button2.Size = new Size(172, 88);
-            button2.TabIndex = 5;
-            button2.Text = "Startes";
-            button2.UseVisualStyleBackColor = true;
+            btnStarters.Location = new Point(999, 62);
+            btnStarters.Margin = new Padding(4);
+            btnStarters.Name = "btnStarters";
+            btnStarters.Size = new Size(172, 88);
+            btnStarters.TabIndex = 5;
+            btnStarters.Text = "Starters...";
+            btnStarters.UseVisualStyleBackColor = true;
+            btnStarters.Click += btnStarters_Click;
+            // 
+            // categoryBindingSource
+            // 
+            categoryBindingSource.DataSource = typeof(Entities.Models.Category);
             // 
             // dataGridView1
             // 
@@ -123,40 +131,40 @@
             // 
             // dgwDate
             // 
-            dgwDate.HeaderText = "ShippDate";
+            dgwDate.HeaderText = "Sipariş Tarihi";
             dgwDate.MinimumWidth = 6;
             dgwDate.Name = "dgwDate";
             dgwDate.Width = 125;
             // 
-            // button3
+            // btnBeverages
             // 
-            button3.Location = new Point(999, 482);
-            button3.Margin = new Padding(4);
-            button3.Name = "button3";
-            button3.Size = new Size(172, 90);
-            button3.TabIndex = 7;
-            button3.Text = "Beverages";
-            button3.UseVisualStyleBackColor = true;
+            btnBeverages.Location = new Point(999, 482);
+            btnBeverages.Margin = new Padding(4);
+            btnBeverages.Name = "btnBeverages";
+            btnBeverages.Size = new Size(172, 90);
+            btnBeverages.TabIndex = 7;
+            btnBeverages.Text = "Beverages";
+            btnBeverages.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnDesserts
             // 
-            button4.Location = new Point(999, 340);
-            button4.Margin = new Padding(4);
-            button4.Name = "button4";
-            button4.Size = new Size(172, 90);
-            button4.TabIndex = 7;
-            button4.Text = "Desserts";
-            button4.UseVisualStyleBackColor = true;
+            btnDesserts.Location = new Point(999, 340);
+            btnDesserts.Margin = new Padding(4);
+            btnDesserts.Name = "btnDesserts";
+            btnDesserts.Size = new Size(172, 90);
+            btnDesserts.TabIndex = 7;
+            btnDesserts.Text = "Desserts";
+            btnDesserts.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnSaveOrder
             // 
-            button5.Location = new Point(749, 284);
-            button5.Margin = new Padding(4);
-            button5.Name = "button5";
-            button5.Size = new Size(210, 49);
-            button5.TabIndex = 8;
-            button5.Text = "Sipariş Kaydet";
-            button5.UseVisualStyleBackColor = true;
+            btnSaveOrder.Location = new Point(749, 284);
+            btnSaveOrder.Margin = new Padding(4);
+            btnSaveOrder.Name = "btnSaveOrder";
+            btnSaveOrder.Size = new Size(210, 49);
+            btnSaveOrder.TabIndex = 8;
+            btnSaveOrder.Text = "Sipariş Kaydet";
+            btnSaveOrder.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -168,15 +176,15 @@
             dataGridView2.Size = new Size(944, 215);
             dataGridView2.TabIndex = 9;
             // 
-            // button6
+            // btnNewOrder
             // 
-            button6.Location = new Point(15, 284);
-            button6.Margin = new Padding(4);
-            button6.Name = "button6";
-            button6.Size = new Size(210, 49);
-            button6.TabIndex = 10;
-            button6.Text = "Yeni Sipariş";
-            button6.UseVisualStyleBackColor = true;
+            btnNewOrder.Location = new Point(15, 284);
+            btnNewOrder.Margin = new Padding(4);
+            btnNewOrder.Name = "btnNewOrder";
+            btnNewOrder.Size = new Size(210, 49);
+            btnNewOrder.TabIndex = 10;
+            btnNewOrder.Text = "Yeni Sipariş";
+            btnNewOrder.UseVisualStyleBackColor = true;
             // 
             // btnMainMenu
             // 
@@ -196,38 +204,40 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1205, 574);
             Controls.Add(btnMainMenu);
-            Controls.Add(button6);
+            Controls.Add(btnNewOrder);
             Controls.Add(dataGridView2);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
+            Controls.Add(btnSaveOrder);
+            Controls.Add(btnDesserts);
+            Controls.Add(btnBeverages);
             Controls.Add(dataGridView1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnStarters);
+            Controls.Add(btnMainCourses);
             Margin = new Padding(4);
             Name = "OrderForm";
             Text = "OrderScreen";
             Load += OrderScreen_Load;
+            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private Button button1;
-        private Button button2;
+        private Button btnMainCourses;
+        private Button btnStarters;
         private DataGridView dataGridView1;
-        private Button button3;
-        private Button button4;
+        private Button btnBeverages;
+        private Button btnDesserts;
+        private Button btnSaveOrder;
+        private DataGridView dataGridView2;
+        private Button btnNewOrder;
+        private Button btnMainMenu;
         private DataGridViewTextBoxColumn dgwCancel;
         private DataGridViewTextBoxColumn dgwProductName;
         private DataGridViewComboBoxColumn Column1;
         private DataGridViewTextBoxColumn dgwUnitPrice;
         private DataGridViewTextBoxColumn dgwAmount;
         private DataGridViewTextBoxColumn dgwDate;
-        private Button button5;
-        private DataGridView dataGridView2;
-        private Button button6;
-        private Button btnMainMenu;
+        private BindingSource categoryBindingSource;
     }
 }
