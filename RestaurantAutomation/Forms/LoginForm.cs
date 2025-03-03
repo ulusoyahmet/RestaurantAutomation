@@ -74,7 +74,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             else
             {
-                // Check if the selected role is "Admin"
+                // Check if selected role is "Admin"
                 var selectedRole = _roleService.GetByID((Guid)cmbRoles.SelectedValue);
 
                 if (selectedRole.Name == "Admin")
