@@ -67,6 +67,14 @@ namespace RestaurantAutomation.Business.Services
                 throw new Exception("Entity null olamaz.");
             }
 
+            OrderValidator cVal = new();
+            ValidationResult result = cVal.Validate(entity);
+
+            if (!result.IsValid)
+            {
+                throw new Exception(string.Join("\n", result.Errors));
+            }
+
             _orderRepository.Update(entity);
         }
     }

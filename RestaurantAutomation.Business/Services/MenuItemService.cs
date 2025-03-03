@@ -18,6 +18,11 @@ namespace RestaurantAutomation.Business.Services
 
         public void Create(MenuItem entity)
         {
+            if (entity == null)
+            {
+                throw new Exception("Entity null olamaz.");
+            }
+
             MenuItemValidator cVal = new();
             ValidationResult result = cVal.Validate(entity);
 
@@ -66,6 +71,14 @@ namespace RestaurantAutomation.Business.Services
             if (entity == null)
             {
                 throw new Exception("Entity null olamaz.");
+            }
+
+            MenuItemValidator cVal = new();
+            ValidationResult result = cVal.Validate(entity);
+
+            if (!result.IsValid)
+            {
+                throw new Exception(string.Join("\n", result.Errors));
             }
 
             _menuItemRepository.Update(entity);

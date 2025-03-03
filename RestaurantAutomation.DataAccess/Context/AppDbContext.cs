@@ -16,9 +16,10 @@ namespace RestaurantAutomation.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;
-            Initial Catalog=RestaurantAutomation;Integrated Security=true");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
 
+
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
