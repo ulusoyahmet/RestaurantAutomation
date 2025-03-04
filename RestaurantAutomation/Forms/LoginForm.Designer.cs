@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             GroupBox groupBox1;
+            cmbRoles = new ComboBox();
+            label1 = new Label();
             txtPassword = new TextBox();
             txtUsername = new TextBox();
             lblPassword = new Label();
             lblUsername = new Label();
             btnSignIn = new Button();
-            label1 = new Label();
-            cmbRoles = new ComboBox();
             groupBox1 = new GroupBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -55,10 +55,28 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
+            // cmbRoles
+            // 
+            cmbRoles.FormattingEnabled = true;
+            cmbRoles.Location = new Point(119, 49);
+            cmbRoles.Name = "cmbRoles";
+            cmbRoles.Size = new Size(178, 23);
+            cmbRoles.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(53, 52);
+            label1.Name = "label1";
+            label1.Size = new Size(30, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Role";
+            // 
             // txtPassword
             // 
             txtPassword.Location = new Point(119, 115);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(178, 23);
             txtPassword.TabIndex = 4;
             // 
@@ -95,23 +113,6 @@
             btnSignIn.TabIndex = 0;
             btnSignIn.Text = "Sign In / Sign Up";
             btnSignIn.Click += btnSignIn_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(53, 52);
-            label1.Name = "label1";
-            label1.Size = new Size(30, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Role";
-            // 
-            // cmbRoles
-            // 
-            cmbRoles.FormattingEnabled = true;
-            cmbRoles.Location = new Point(119, 49);
-            cmbRoles.Name = "cmbRoles";
-            cmbRoles.Size = new Size(178, 23);
-            cmbRoles.TabIndex = 6;
             // 
             // LoginForm
             // 
