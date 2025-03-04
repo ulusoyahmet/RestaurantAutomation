@@ -1,0 +1,2 @@
+﻿INSERT INTO [dbo].[Roles] ([ID], [Name]) VALUES (N'3ab782b9-46c6-46c3-8a90-52da52aeab6b', N'employee')
+INSERT INTO [dbo].[Roles] ([ID], [Name]) VALUES (N'4ec3d5ae-297e-4f0c-8c95-c9b96a697d67', N'admin')

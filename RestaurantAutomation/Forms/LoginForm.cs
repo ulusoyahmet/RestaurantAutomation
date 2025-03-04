@@ -74,17 +74,21 @@ namespace RestaurantAutomation.UI.Forms
             }
             else
             {
-                // Check if selected role is "Admin"
+                // Check if selected role is "admin"
                 var selectedRole = _roleService.GetByID((Guid)cmbRoles.SelectedValue);
 
-                if (selectedRole.Name == "Admin")
+                if (selectedRole.Name == "admin" && _userService.IfEntityExists(x=> x.RoleID == selectedRole.ID))
                 {
                     MessageBox.Show("Admin accounts can only be created by an existing admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // clear the fields
+                    txtUsername.Text = "";
+                    txtPassword.Text = "";
+                    cmbRoles.SelectedIndex = -1;
                     return;
                 }
 
-                // Create new user with non-admin role
-                var newUser = new Entities.Models.User
+                // Create new user 
+                var newUser = new User
                 {
                     ID = Guid.NewGuid(),
                     Username = txtUsername.Text,

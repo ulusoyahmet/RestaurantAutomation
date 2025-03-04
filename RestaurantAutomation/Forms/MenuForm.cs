@@ -1,4 +1,6 @@
-﻿using RestaurantAutomation.DataAccess.Context;
+﻿using RestaurantAutomation.Business.Services;
+using RestaurantAutomation.DataAccess.Context;
+using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
 using System.Windows.Forms;
 
@@ -7,16 +9,21 @@ namespace RestaurantAutomation.UI.Forms
     public partial class MenuForm : Form
     {
         private readonly AppDbContext _context;
+        private readonly MenuItemService _menuItemService;
+        private readonly MenuItemRepository menuItemRepository;
+
         public MenuForm()
         {
             InitializeComponent();
             _context = new AppDbContext();
+            menuItemRepository = new MenuItemRepository(_context);
+            _menuItemService = new MenuItemService(menuItemRepository);
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
             GetAllCategories();
-
+            GetAllProducts();
         }
 
         private void GetAllCategories()
@@ -35,25 +42,53 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (var context = new AppDbContext())
+
+            try
             {
-                var newMenuItem = new MenuItem
+                // if the selectedMenuItem is null, it means that the user is trying to add a new product
+                if (selectedMenuItem == null)
                 {
-                    Name = txtProductName.Text,
-                    CategoryID = (Guid)cmbCategory.SelectedValue, // Doğrudan ID kullan
-                    Price = Convert.ToDecimal(txtPrice.Text),
-                    Description = txtDescription.Text,
-                    Image = currentImageData
-                };
+                    var newMenuItem = new MenuItem
+                    {
+                        Name = txtProductName.Text,
+                        CategoryID = (Guid)cmbCategory.SelectedValue,
+                        Price = Convert.ToDecimal(txtPrice.Text),
+                        Description = txtDescription.Text,
+                        Image = currentImageData
+                    };
 
-                context.MenuItems.Add(newMenuItem);
-                context.SaveChanges();
+                    if (!_menuItemService.IfEntityExists(x => x.Name == newMenuItem.Name))
+                    {
+                        _menuItemService.Create(newMenuItem);
 
-                MessageBox.Show("Product added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadMenuItems();
+                        MessageBox.Show("Product added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadMenuItems();
+                    }
+                    else
+                    {
+                        // if the product already exists in the database show a message
+                        MessageBox.Show("Product already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                // if the selectedMenuItem is not null, it means that the user is trying to update an existing product
+                else
+                {
+                    selectedMenuItem.Name = txtProductName.Text;
+                    selectedMenuItem.CategoryID = (Guid)cmbCategory.SelectedValue;
+                    selectedMenuItem.Price = Convert.ToDecimal(txtPrice.Text);
+                    selectedMenuItem.Description = txtDescription.Text;
+                    selectedMenuItem.Image = currentImageData;
+                    _menuItemService.Update(selectedMenuItem);
+                    MessageBox.Show("Product updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadMenuItems();
+                }
             }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
 
         private void LoadMenuItems()
         {
@@ -70,10 +105,10 @@ namespace RestaurantAutomation.UI.Forms
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Seçilen resmi PictureBox'ta göster
+                    // show the selected image in the picturebox
                     pcbImage.Image = new Bitmap(openFileDialog.FileName);
 
-                    // Resmi byte[] dizisine çevirerek kaydet
+                    // convert the image to byte array
                     using (MemoryStream ms = new MemoryStream())
                     {
                         pcbImage.Image.Save(ms, pcbImage.Image.RawFormat);
@@ -88,6 +123,78 @@ namespace RestaurantAutomation.UI.Forms
             MainForm mainForm = new();
             mainForm.Show();
             this.Hide();
+        }
+        private void txtSearchText_TextChanged(object sender, EventArgs e)
+        {
+            GetAllProducts(txtSearchText.Text.ToLower());
+        }
+
+        private void GetAllProducts(string searchText = null)
+        {
+            List<MenuItem> data;
+            if (searchText != null && searchText.Length >= 3)
+            {
+                // get products by search text
+                data = _menuItemService.GetAll().Where(x => x.Name.ToLower().Contains(searchText)
+                || x.Category.Name.ToLower().Contains(searchText)).ToList();
+            }
+            else
+            {
+                // get all products
+                data = _menuItemService.GetAll().ToList();
+
+            }
+
+            // clear datagridview datasource
+            dgwProducts.DataSource = null;
+            // define new datasource
+            dgwProducts.DataSource = data;
+        }
+
+        MenuItem? selectedMenuItem;
+        private void dgwProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            // get selected item
+            selectedMenuItem = (MenuItem)dgwProducts.CurrentRow.DataBoundItem;
+            txtProductName.Text = selectedMenuItem.Name;
+            txtDescription.Text = selectedMenuItem.Description;
+            txtPrice.Text = selectedMenuItem.Price.ToString();
+            cmbCategory.SelectedValue = selectedMenuItem.CategoryID;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            // Clear all textboxes and selectedMenuItem
+            txtProductName.Text = "";
+            txtDescription.Text = "";
+            txtPrice.Text = "";
+            cmbCategory.SelectedIndex = -1;
+            selectedMenuItem = null;
+            pcbImage.Image = null;
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            // delete the selected product
+            try
+            {
+                if (selectedMenuItem != null)
+                {
+                    _menuItemService.Delete(selectedMenuItem.ID);
+                    MessageBox.Show("Product deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadMenuItems();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a product to delete!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);;
+            }
         }
     }
 }

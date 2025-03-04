@@ -65,6 +65,11 @@ namespace RestaurantAutomation.UI.Forms
             reportForm.Show();
         }
 
-        
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new();
+            this.Hide();
+            loginForm.Show();
+        }
     }
 }
