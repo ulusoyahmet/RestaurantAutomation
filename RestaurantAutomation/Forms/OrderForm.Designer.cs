@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             btnMainCourses = new Button();
             btnStarters = new Button();
             categoryBindingSource = new BindingSource(components);
@@ -54,20 +54,18 @@
             // 
             // btnMainCourses
             // 
-            btnMainCourses.Location = new Point(999, 202);
-            btnMainCourses.Margin = new Padding(4);
+            btnMainCourses.Location = new Point(799, 162);
             btnMainCourses.Name = "btnMainCourses";
-            btnMainCourses.Size = new Size(172, 88);
+            btnMainCourses.Size = new Size(138, 70);
             btnMainCourses.TabIndex = 4;
             btnMainCourses.Text = "Main Courses";
             btnMainCourses.UseVisualStyleBackColor = true;
             // 
             // btnStarters
             // 
-            btnStarters.Location = new Point(999, 62);
-            btnStarters.Margin = new Padding(4);
+            btnStarters.Location = new Point(799, 50);
             btnStarters.Name = "btnStarters";
-            btnStarters.Size = new Size(172, 88);
+            btnStarters.Size = new Size(138, 70);
             btnStarters.TabIndex = 5;
             btnStarters.Text = "Starters...";
             btnStarters.UseVisualStyleBackColor = true;
@@ -81,11 +79,10 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dgwCancel, dgwProductName, Column1, dgwUnitPrice, dgwAmount, dgwDate });
-            dataGridView1.Location = new Point(15, 62);
-            dataGridView1.Margin = new Padding(4);
+            dataGridView1.Location = new Point(12, 50);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(944, 198);
+            dataGridView1.Size = new Size(755, 158);
             dataGridView1.TabIndex = 6;
             // 
             // dgwCancel
@@ -104,9 +101,9 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = "0";
-            Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "0";
+            Column1.DefaultCellStyle = dataGridViewCellStyle3;
             Column1.HeaderText = "Miktar";
             Column1.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
             Column1.MinimumWidth = 8;
@@ -115,8 +112,8 @@
             // 
             // dgwUnitPrice
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            dgwUnitPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.NullValue = "0";
+            dgwUnitPrice.DefaultCellStyle = dataGridViewCellStyle4;
             dgwUnitPrice.HeaderText = "Fiyat";
             dgwUnitPrice.MinimumWidth = 6;
             dgwUnitPrice.Name = "dgwUnitPrice";
@@ -138,30 +135,27 @@
             // 
             // btnBeverages
             // 
-            btnBeverages.Location = new Point(999, 482);
-            btnBeverages.Margin = new Padding(4);
+            btnBeverages.Location = new Point(799, 386);
             btnBeverages.Name = "btnBeverages";
-            btnBeverages.Size = new Size(172, 90);
+            btnBeverages.Size = new Size(138, 72);
             btnBeverages.TabIndex = 7;
             btnBeverages.Text = "Beverages";
             btnBeverages.UseVisualStyleBackColor = true;
             // 
             // btnDesserts
             // 
-            btnDesserts.Location = new Point(999, 340);
-            btnDesserts.Margin = new Padding(4);
+            btnDesserts.Location = new Point(799, 272);
             btnDesserts.Name = "btnDesserts";
-            btnDesserts.Size = new Size(172, 90);
+            btnDesserts.Size = new Size(138, 72);
             btnDesserts.TabIndex = 7;
             btnDesserts.Text = "Desserts";
             btnDesserts.UseVisualStyleBackColor = true;
             // 
             // btnSaveOrder
             // 
-            btnSaveOrder.Location = new Point(749, 284);
-            btnSaveOrder.Margin = new Padding(4);
+            btnSaveOrder.Location = new Point(599, 227);
             btnSaveOrder.Name = "btnSaveOrder";
-            btnSaveOrder.Size = new Size(210, 49);
+            btnSaveOrder.Size = new Size(168, 39);
             btnSaveOrder.TabIndex = 8;
             btnSaveOrder.Text = "Sipariş Kaydet";
             btnSaveOrder.UseVisualStyleBackColor = true;
@@ -169,19 +163,17 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(15, 357);
-            dataGridView2.Margin = new Padding(4);
+            dataGridView2.Location = new Point(12, 286);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(944, 215);
+            dataGridView2.Size = new Size(755, 172);
             dataGridView2.TabIndex = 9;
             // 
             // btnNewOrder
             // 
-            btnNewOrder.Location = new Point(15, 284);
-            btnNewOrder.Margin = new Padding(4);
+            btnNewOrder.Location = new Point(12, 227);
             btnNewOrder.Name = "btnNewOrder";
-            btnNewOrder.Size = new Size(210, 49);
+            btnNewOrder.Size = new Size(168, 39);
             btnNewOrder.TabIndex = 10;
             btnNewOrder.Text = "Yeni Sipariş";
             btnNewOrder.UseVisualStyleBackColor = true;
@@ -189,10 +181,10 @@
             // btnMainMenu
             // 
             btnMainMenu.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnMainMenu.Location = new Point(15, 3);
-            btnMainMenu.Margin = new Padding(4, 5, 4, 5);
+            btnMainMenu.Location = new Point(12, 2);
+            btnMainMenu.Margin = new Padding(3, 4, 3, 4);
             btnMainMenu.Name = "btnMainMenu";
-            btnMainMenu.Size = new Size(44, 50);
+            btnMainMenu.Size = new Size(35, 40);
             btnMainMenu.TabIndex = 11;
             btnMainMenu.Text = "🡰";
             btnMainMenu.UseVisualStyleBackColor = true;
@@ -200,9 +192,10 @@
             // 
             // OrderForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1205, 574);
+            ClientSize = new Size(964, 459);
+            ControlBox = false;
             Controls.Add(btnMainMenu);
             Controls.Add(btnNewOrder);
             Controls.Add(dataGridView2);
@@ -212,9 +205,9 @@
             Controls.Add(dataGridView1);
             Controls.Add(btnStarters);
             Controls.Add(btnMainCourses);
-            Margin = new Padding(4);
             Name = "OrderForm";
-            Text = "OrderScreen";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Order Management";
             Load += OrderScreen_Load;
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

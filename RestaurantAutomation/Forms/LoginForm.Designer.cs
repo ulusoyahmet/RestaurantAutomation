@@ -49,79 +49,87 @@
             groupBox1.Controls.Add(lblPassword);
             groupBox1.Controls.Add(lblUsername);
             groupBox1.Controls.Add(btnSignIn);
-            groupBox1.Location = new Point(220, 105);
+            groupBox1.Location = new Point(12, 13);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(360, 225);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(411, 300);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
             // cmbRoles
             // 
             cmbRoles.FormattingEnabled = true;
-            cmbRoles.Location = new Point(119, 49);
+            cmbRoles.Location = new Point(136, 65);
+            cmbRoles.Margin = new Padding(3, 4, 3, 4);
             cmbRoles.Name = "cmbRoles";
-            cmbRoles.Size = new Size(178, 23);
+            cmbRoles.Size = new Size(203, 28);
             cmbRoles.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(53, 52);
+            label1.Location = new Point(61, 69);
             label1.Name = "label1";
-            label1.Size = new Size(30, 15);
+            label1.Size = new Size(39, 20);
             label1.TabIndex = 5;
             label1.Text = "Role";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(119, 115);
+            txtPassword.Location = new Point(136, 153);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(178, 23);
+            txtPassword.Size = new Size(203, 27);
             txtPassword.TabIndex = 4;
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(119, 83);
+            txtUsername.Location = new Point(136, 111);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(178, 23);
+            txtUsername.Size = new Size(203, 27);
             txtUsername.TabIndex = 3;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(53, 118);
+            lblPassword.Location = new Point(61, 157);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(57, 15);
+            lblPassword.Size = new Size(70, 20);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(53, 86);
+            lblUsername.Location = new Point(61, 115);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(60, 15);
+            lblUsername.Size = new Size(75, 20);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Username";
             // 
             // btnSignIn
             // 
-            btnSignIn.Location = new Point(119, 154);
+            btnSignIn.Location = new Point(136, 205);
+            btnSignIn.Margin = new Padding(3, 4, 3, 4);
             btnSignIn.Name = "btnSignIn";
-            btnSignIn.Size = new Size(178, 30);
+            btnSignIn.Size = new Size(203, 40);
             btnSignIn.TabIndex = 0;
             btnSignIn.Text = "Sign In / Sign Up";
             btnSignIn.Click += btnSignIn_Click;
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(805, 523);
+            ClientSize = new Size(451, 335);
             Controls.Add(groupBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "LoginForm";
-            Text = "LoginScreen";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Sign Up / Login";
             Load += LoginForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

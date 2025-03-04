@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            btnLogout = new Button();
+            btnCategory = new Button();
             btnReports = new Button();
             btnMenu = new Button();
             btnOrder = new Button();
@@ -39,22 +41,49 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnLogout);
+            groupBox1.Controls.Add(btnCategory);
             groupBox1.Controls.Add(btnReports);
             groupBox1.Controls.Add(btnMenu);
             groupBox1.Controls.Add(btnOrder);
             groupBox1.Controls.Add(btnTable);
-            groupBox1.Location = new Point(124, 77);
+            groupBox1.Location = new Point(142, 103);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(510, 299);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(583, 399);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Menu";
             // 
+            // btnLogout
+            // 
+            btnLogout.Location = new Point(299, 272);
+            btnLogout.Margin = new Padding(3, 4, 3, 4);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(232, 89);
+            btnLogout.TabIndex = 12;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
+            // btnCategory
+            // 
+            btnCategory.Location = new Point(61, 272);
+            btnCategory.Margin = new Padding(3, 4, 3, 4);
+            btnCategory.Name = "btnCategory";
+            btnCategory.Size = new Size(232, 89);
+            btnCategory.TabIndex = 7;
+            btnCategory.Text = "Category Management";
+            btnCategory.UseVisualStyleBackColor = true;
+            btnCategory.Click += btnCategory_Click;
+            // 
             // btnReports
             // 
-            btnReports.Location = new Point(262, 131);
+            btnReports.Location = new Point(299, 175);
+            btnReports.Margin = new Padding(3, 4, 3, 4);
             btnReports.Name = "btnReports";
-            btnReports.Size = new Size(203, 67);
+            btnReports.Size = new Size(232, 89);
             btnReports.TabIndex = 2;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
@@ -62,9 +91,10 @@
             // 
             // btnMenu
             // 
-            btnMenu.Location = new Point(53, 131);
+            btnMenu.Location = new Point(61, 175);
+            btnMenu.Margin = new Padding(3, 4, 3, 4);
             btnMenu.Name = "btnMenu";
-            btnMenu.Size = new Size(203, 67);
+            btnMenu.Size = new Size(232, 89);
             btnMenu.TabIndex = 3;
             btnMenu.Text = "Menu Management";
             btnMenu.UseVisualStyleBackColor = true;
@@ -72,9 +102,10 @@
             // 
             // btnOrder
             // 
-            btnOrder.Location = new Point(262, 57);
+            btnOrder.Location = new Point(299, 76);
+            btnOrder.Margin = new Padding(3, 4, 3, 4);
             btnOrder.Name = "btnOrder";
-            btnOrder.Size = new Size(203, 67);
+            btnOrder.Size = new Size(232, 89);
             btnOrder.TabIndex = 5;
             btnOrder.Text = "Order Management";
             btnOrder.UseVisualStyleBackColor = true;
@@ -82,9 +113,10 @@
             // 
             // btnTable
             // 
-            btnTable.Location = new Point(53, 57);
+            btnTable.Location = new Point(61, 76);
+            btnTable.Margin = new Padding(3, 4, 3, 4);
             btnTable.Name = "btnTable";
-            btnTable.Size = new Size(203, 67);
+            btnTable.Size = new Size(232, 89);
             btnTable.TabIndex = 6;
             btnTable.Text = "Table Management";
             btnTable.UseVisualStyleBackColor = true;
@@ -93,9 +125,10 @@
             // btnLogin
             // 
             btnLogin.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnLogin.Location = new Point(12, 12);
+            btnLogin.Location = new Point(14, 16);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(31, 30);
+            btnLogin.Size = new Size(35, 40);
             btnLogin.TabIndex = 11;
             btnLogin.Text = "🡰";
             btnLogin.UseVisualStyleBackColor = true;
@@ -103,13 +136,15 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(755, 467);
+            ClientSize = new Size(863, 623);
             Controls.Add(btnLogin);
             Controls.Add(groupBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
-            Text = "MainScreen";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Main Menu";
             Load += MainForm_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
@@ -123,5 +158,7 @@
         private Button btnOrder;
         private Button btnTable;
         private Button btnLogin;
+        private Button btnLogout;
+        private Button btnCategory;
     }
 }

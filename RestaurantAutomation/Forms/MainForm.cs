@@ -71,5 +71,17 @@ namespace RestaurantAutomation.UI.Forms
             this.Hide();
             loginForm.Show();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            // Logout logic...
+        }
+
+        private void btnCategory_Click(object sender, EventArgs e)
+        {
+            CategoryForm categoryForm = new();
+            this.Hide();
+            categoryForm.Show();
+        }
     }
 }

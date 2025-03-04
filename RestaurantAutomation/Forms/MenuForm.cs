@@ -120,8 +120,7 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new();
-            mainForm.Show();
+            Program.MainFormInstance.Show();
             this.Hide();
         }
         private void txtSearchText_TextChanged(object sender, EventArgs e)
@@ -193,7 +192,7 @@ namespace RestaurantAutomation.UI.Forms
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);;
+                MessageBox.Show(ex.Message); ;
             }
         }
     }

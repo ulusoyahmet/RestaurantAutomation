@@ -56,6 +56,7 @@
             cmbEditCategory = new ComboBox();
             label1 = new Label();
             btnAdd = new Button();
+            btnMainMenu = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             grpboxAdd.SuspendLayout();
@@ -72,7 +73,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { iDDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn });
             dataGridView1.DataSource = categoryBindingSource;
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Location = new Point(12, 55);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
@@ -140,7 +141,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(12, 372);
+            btnDelete.Location = new Point(12, 415);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(136, 55);
             btnDelete.TabIndex = 3;
@@ -150,7 +151,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(12, 433);
+            btnEdit.Location = new Point(12, 476);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(136, 55);
             btnEdit.TabIndex = 3;
@@ -160,7 +161,7 @@
             // 
             // btnList
             // 
-            btnList.Location = new Point(12, 494);
+            btnList.Location = new Point(12, 537);
             btnList.Name = "btnList";
             btnList.Size = new Size(136, 55);
             btnList.TabIndex = 3;
@@ -185,7 +186,7 @@
             grpboxAdd.Controls.Add(txtAddName);
             grpboxAdd.Controls.Add(lblName);
             grpboxAdd.Controls.Add(lblDescription);
-            grpboxAdd.Location = new Point(169, 311);
+            grpboxAdd.Location = new Point(169, 354);
             grpboxAdd.Name = "grpboxAdd";
             grpboxAdd.Size = new Size(801, 238);
             grpboxAdd.TabIndex = 4;
@@ -208,7 +209,7 @@
             grpBoxDelete.Controls.Add(cmbDeleteCategory);
             grpBoxDelete.Controls.Add(label5);
             grpBoxDelete.Controls.Add(btnDeleteCategory);
-            grpBoxDelete.Location = new Point(169, 311);
+            grpBoxDelete.Location = new Point(169, 354);
             grpBoxDelete.Name = "grpBoxDelete";
             grpBoxDelete.Size = new Size(801, 238);
             grpBoxDelete.TabIndex = 5;
@@ -302,7 +303,7 @@
             grpBoxEdit.Controls.Add(label3);
             grpBoxEdit.Controls.Add(label4);
             grpBoxEdit.Controls.Add(btnEditSave);
-            grpBoxEdit.Location = new Point(169, 311);
+            grpBoxEdit.Location = new Point(169, 354);
             grpBoxEdit.Name = "grpBoxEdit";
             grpBoxEdit.Size = new Size(801, 238);
             grpBoxEdit.TabIndex = 5;
@@ -334,7 +335,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(12, 311);
+            btnAdd.Location = new Point(12, 354);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(136, 55);
             btnAdd.TabIndex = 6;
@@ -342,11 +343,25 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
+            // btnMainMenu
+            // 
+            btnMainMenu.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMainMenu.Location = new Point(12, 8);
+            btnMainMenu.Margin = new Padding(3, 4, 3, 4);
+            btnMainMenu.Name = "btnMainMenu";
+            btnMainMenu.Size = new Size(35, 40);
+            btnMainMenu.TabIndex = 11;
+            btnMainMenu.Text = "🡰";
+            btnMainMenu.UseVisualStyleBackColor = true;
+            btnMainMenu.Click += btnMainMenu_Click;
+            // 
             // CategoryForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 575);
+            ClientSize = new Size(982, 610);
+            ControlBox = false;
+            Controls.Add(btnMainMenu);
             Controls.Add(btnAdd);
             Controls.Add(grpBoxEdit);
             Controls.Add(grpBoxDelete);
@@ -356,7 +371,8 @@
             Controls.Add(btnDelete);
             Controls.Add(dataGridView1);
             Name = "CategoryForm";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Manage Categories";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
@@ -398,5 +414,6 @@
         private Label label1;
         private Button btnSaveNew;
         private Button btnAdd;
+        private Button btnMainMenu;
     }
 }

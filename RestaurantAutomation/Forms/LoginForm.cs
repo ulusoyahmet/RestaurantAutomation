@@ -15,6 +15,8 @@ namespace RestaurantAutomation.UI.Forms
         private readonly RoleService _roleService;
         private readonly UserService _userService;
 
+        public bool LoginSuccessful { get; private set; } = false;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -63,9 +65,8 @@ namespace RestaurantAutomation.UI.Forms
                     // Store the logged-in user
                     SessionManager.LoggedInUser = user;
 
-                    MainForm mainForm = new();
-                    this.Hide();
-                    mainForm.Show();
+                    LoginSuccessful = true;
+                    this.Close();
                 }
                 else
                 {
@@ -77,7 +78,7 @@ namespace RestaurantAutomation.UI.Forms
                 // Check if selected role is "admin"
                 var selectedRole = _roleService.GetByID((Guid)cmbRoles.SelectedValue);
 
-                if (selectedRole.Name == "admin" && _userService.IfEntityExists(x=> x.RoleID == selectedRole.ID))
+                if (selectedRole.Name == "admin" && _userService.IfEntityExists(x => x.RoleID == selectedRole.ID))
                 {
                     MessageBox.Show("Admin accounts can only be created by an existing admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     // clear the fields
@@ -100,10 +101,8 @@ namespace RestaurantAutomation.UI.Forms
 
                 MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // login
-                MainForm mainForm = new();
-                this.Hide();
-                mainForm.Show();
+                LoginSuccessful = true;
+                this.Close();
             }
         }
 

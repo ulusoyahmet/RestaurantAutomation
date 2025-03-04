@@ -66,7 +66,8 @@ namespace RestaurantAutomation.UI.Forms
         private void btnEdit_Click(object sender, EventArgs e)
         {
             // Category edit groupbox will be visible
-            InitializeEditGroupBoxControls();
+            cmbEditCategory.DataSource = _categoryRepository.GetAll();
+            _selectedCategory = (Category)cmbEditCategory.SelectedItem;
             grpBoxEdit.Visible = true;
             grpboxAdd.Visible = false;
             grpBoxDelete.Visible = false;
@@ -110,14 +111,6 @@ namespace RestaurantAutomation.UI.Forms
             }
         }
 
-        private void InitializeEditGroupBoxControls()
-        {
-            // Clear all controls and reinitialize them
-            grpboxAdd.Controls.Clear();
-            cmbEditCategory.DataSource = _categoryRepository.GetAll();
-            _selectedCategory = (Category)cmbEditCategory.SelectedItem;
-        }
-
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
             // Add new category logic here...
@@ -152,6 +145,12 @@ namespace RestaurantAutomation.UI.Forms
                 MessageBox.Show(ex.Message);
                 throw;
             }
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            Program.MainFormInstance.Show();
+            this.Hide();
         }
     }
 }
