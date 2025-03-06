@@ -14,10 +14,7 @@ namespace RestaurantAutomation.Business.Validators
         {
             RuleFor(x => x.OrderDate)
            .NotEmpty().WithMessage("Order date cannot be empty.")
-           .Must(orderDate => orderDate <= DateTime.Now).WithMessage("Order date cannot be in the future.");
-
-            RuleFor(x => x.CustomerID)
-                .NotEmpty().WithMessage("Customer ID is required.");
+           .Must(orderDate => orderDate <= DateTime.Now).WithMessage("Order date cannot be in the future.");            
 
             RuleFor(x => x.TableID)
                 .NotEmpty().WithMessage("Table ID is required.");

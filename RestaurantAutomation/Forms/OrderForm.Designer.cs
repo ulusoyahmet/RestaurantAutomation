@@ -259,6 +259,7 @@
             cmbTableNo.Name = "cmbTableNo";
             cmbTableNo.Size = new Size(50, 28);
             cmbTableNo.TabIndex = 6;
+            cmbTableNo.SelectedIndexChanged += cmbTableNo_SelectedIndexChanged;
             // 
             // OrderForm
             // 

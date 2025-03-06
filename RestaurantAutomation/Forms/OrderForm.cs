@@ -436,7 +436,8 @@ namespace RestaurantAutomation.UI.Forms
                     Margin = new Padding(5)
                 };
 
-                itemButton.Click += (sender, e) => {
+                itemButton.Click += (sender, e) =>
+                {
                     AddItemToOrder(item);
                     menuItemsForm.Close();
                 };
@@ -511,8 +512,7 @@ namespace RestaurantAutomation.UI.Forms
             {
                 ID = Guid.NewGuid(),
                 OrderDate = DateTime.Now,
-                TableID = _currentTableId.Value,
-                CustomerID = Guid.Empty // Müşteri bilgisi gerekirse burada eklenebilir
+                TableID = _currentTableId.Value                
             };
 
             _orderService.Create(order);
