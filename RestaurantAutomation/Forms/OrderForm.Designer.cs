@@ -50,6 +50,7 @@
             btnOrderHistory = new Button();
             nmrTable = new NumericUpDown();
             label2 = new Label();
+            cmbTableNo = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nmrTable).BeginInit();
             SuspendLayout();
@@ -119,6 +120,7 @@
             btnMainCourses.TabIndex = 2;
             btnMainCourses.Text = "Main Courses";
             btnMainCourses.UseVisualStyleBackColor = true;
+            btnMainCourses.Click += btnMainCourses_Click;
             // 
             // btnDesserts
             // 
@@ -128,6 +130,7 @@
             btnDesserts.TabIndex = 2;
             btnDesserts.Text = "Desserts";
             btnDesserts.UseVisualStyleBackColor = true;
+            btnDesserts.Click += btnDesserts_Click;
             // 
             // btnBeverages
             // 
@@ -137,6 +140,7 @@
             btnBeverages.TabIndex = 2;
             btnBeverages.Text = "Beverages";
             btnBeverages.UseVisualStyleBackColor = true;
+            btnBeverages.Click += btnBeverages_Click;
             // 
             // dataGridView1
             // 
@@ -233,7 +237,7 @@
             // 
             // nmrTable
             // 
-            nmrTable.Location = new Point(89, 57);
+            nmrTable.Location = new Point(89, 17);
             nmrTable.Name = "nmrTable";
             nmrTable.Size = new Size(44, 27);
             nmrTable.TabIndex = 4;
@@ -248,11 +252,20 @@
             label2.TabIndex = 5;
             label2.Text = "Order Management";
             // 
+            // cmbTableNo
+            // 
+            cmbTableNo.FormattingEnabled = true;
+            cmbTableNo.Location = new Point(83, 56);
+            cmbTableNo.Name = "cmbTableNo";
+            cmbTableNo.Size = new Size(50, 28);
+            cmbTableNo.TabIndex = 6;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(630, 399);
+            Controls.Add(cmbTableNo);
             Controls.Add(label2);
             Controls.Add(nmrTable);
             Controls.Add(dataGridView1);
@@ -303,5 +316,6 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
+        private ComboBox cmbTableNo;
     }
 }

@@ -169,13 +169,15 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
+            if (selectedTable!=null)
+            {
+                // Toggle table status
+                selectedTable.Status = selectedTable.Status == "Empty" ? "Occupied" : "Empty";
+                _tableService.Update(selectedTable);
 
-            // Toggle table status
-            selectedTable.Status = selectedTable.Status == "Empty" ? "Occupied" : "Empty";
-            _tableService.Update(selectedTable);
-
-            // Update button appearance
-            LoadTables();
+                // Update button appearance
+                LoadTables();
+            }           
 
         }
 
@@ -209,11 +211,6 @@ namespace RestaurantAutomation.UI.Forms
                 MessageBox.Show($"Error deleting table: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
-
 
         // Add this field at class level
         private Table? selectedTable;
