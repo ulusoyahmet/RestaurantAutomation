@@ -543,11 +543,11 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
         {
-            if (!_currentOrderId.HasValue)
-            {
-                MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (!_currentOrderId.HasValue)
+            //{
+            //    MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
             DialogResult result = MessageBox.Show("Bu siparişi iptal etmek istediğinizden emin misiniz?", "Sipariş İptali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -556,17 +556,20 @@ namespace RestaurantAutomation.UI.Forms
                 try
                 {
                     // Delete order details
-                    var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
-                    foreach (var detail in orderDetails)
-                    {
-                        _orderDetailService.Delete(detail.ID);
-                    }
+                    //var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
+                    //foreach (var detail in orderDetails)
+                    //{
+                    //    var product = _menuItemService.GetByID(detail.MenuItemID);
+                    //    _orderDetailService.DeleteByOrderProductID(detail.ID, product.ID);
+                    //}
 
                     // Delete order
-                    _orderService.Delete(_currentOrderId.Value);
+                    //_orderService.Delete(_currentOrderId.Value);
 
                     // Update table status
                     UpdateTableStatus("Empty");
+
+                    dataGridView1.Rows.Clear();
 
                     // Clear order list
                     _orderItemsTable.Clear();
@@ -655,7 +658,12 @@ namespace RestaurantAutomation.UI.Forms
                     note = txtNote.Text;
                     richTextBox1.Text = note;
 
+                    Order currentOrder = _orderRepository.GetByID(Guid.Parse(_currentOrderId.ToString()));
+                    currentOrder.Note = note;
+                    _orderRepository.Update(currentOrder);
                     MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    lblOrderNotes.Text = "Note: " + note;
                 }
             }
             catch (Exception ex)
@@ -738,5 +746,7 @@ namespace RestaurantAutomation.UI.Forms
                 }
             }
         }
+
+
     }
 }
