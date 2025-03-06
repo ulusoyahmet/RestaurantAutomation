@@ -112,7 +112,8 @@ namespace RestaurantAutomation.UI.Forms
             deleteButtonColumn.Text = "Sil";
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             deleteButtonColumn.Name = "DeleteColumn";
-            deleteButtonColumn.Width = 60;
+            deleteButtonColumn.Width = 100;
+            deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Check if column already exists before adding
             if (dataGridView1.Columns["DeleteColumn"] == null)
@@ -199,7 +200,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                var tables = _tableService.GetAll();
+                var tables = _tableService.GetAll().OrderBy(t => t.TableNumber);
                 cmbTableNo.Items.Clear();
                 foreach (var table in tables)
                 {
@@ -652,9 +653,7 @@ namespace RestaurantAutomation.UI.Forms
                 if (noteForm.ShowDialog() == DialogResult.OK)
                 {
                     note = txtNote.Text;
-
-                    // Here you should actually save the note to the order in database
-                    // For example: _orderService.AddNote(_currentOrderId.Value, note);
+                    richTextBox1.Text = note;
 
                     MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
