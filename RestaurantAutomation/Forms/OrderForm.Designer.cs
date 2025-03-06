@@ -38,6 +38,11 @@
             btnDesserts = new Button();
             btnBeverages = new Button();
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewButtonColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
             btnCompleteOrder = new Button();
             btnCancelOrder = new Button();
             btnPayment = new Button();
@@ -136,11 +141,50 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridView1.Location = new Point(152, 91);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(452, 201);
+            dataGridView1.Size = new Size(471, 201);
             dataGridView1.TabIndex = 3;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Delete";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 75;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "ProductName";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            Column3.FillWeight = 50F;
+            Column3.HeaderText = "Quantity";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 75;
+            // 
+            // Column4
+            // 
+            Column4.FillWeight = 50F;
+            Column4.HeaderText = "Price";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            Column4.Width = 60;
+            // 
+            // Column5
+            // 
+            Column5.FillWeight = 50F;
+            Column5.HeaderText = "TotalPrice";
+            Column5.MinimumWidth = 6;
+            Column5.Name = "Column5";
+            Column5.Width = 80;
             // 
             // btnCompleteOrder
             // 
@@ -208,7 +252,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(613, 399);
+            ClientSize = new Size(630, 399);
             Controls.Add(label2);
             Controls.Add(nmrTable);
             Controls.Add(dataGridView1);
@@ -254,5 +298,10 @@
         private Button btnOrderHistory;
         private NumericUpDown nmrTable;
         private Label label2;
+        private DataGridViewButtonColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
     }
 }
