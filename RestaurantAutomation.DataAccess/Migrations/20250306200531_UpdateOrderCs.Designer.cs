@@ -12,8 +12,8 @@ using RestaurantAutomation.DataAccess.Context;
 namespace RestaurantAutomation.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250306212929_OrderNoteAdded")]
-    partial class OrderNoteAdded
+    [Migration("20250306200531_UpdateOrderCs")]
+    partial class UpdateOrderCs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,9 +75,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -203,7 +200,7 @@ namespace RestaurantAutomation.DataAccess.Migrations
             modelBuilder.Entity("RestaurantAutomation.Entities.Models.Order", b =>
                 {
                     b.HasOne("RestaurantAutomation.Entities.Models.Table", "Table")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("TableID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -260,11 +257,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
             modelBuilder.Entity("RestaurantAutomation.Entities.Models.Order", b =>
                 {
                     b.Navigation("Payment");
-                });
-
-            modelBuilder.Entity("RestaurantAutomation.Entities.Models.Table", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

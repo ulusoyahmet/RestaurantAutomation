@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestaurantAutomation.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class OrderNoteAdded : Migration
+    public partial class database1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -98,8 +98,7 @@ namespace RestaurantAutomation.DataAccess.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TableID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TableID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
