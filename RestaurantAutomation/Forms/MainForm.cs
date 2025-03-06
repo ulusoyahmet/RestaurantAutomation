@@ -28,7 +28,7 @@ namespace RestaurantAutomation.UI.Forms
                 var role = _roleService.GetByID(SessionManager.LoggedInUser.RoleID);
 
                 // Hide Reports button if the user is not an Admin
-                btnReports.Visible = role.Name == "Admin";
+                btnReports.Visible = role.Name == "admin";
             }
         }
 
@@ -46,7 +46,7 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            OrderForm orderForm = new();
+            OrderForm orderForm = new(null);
             this.Hide();
             orderForm.Show();
         }

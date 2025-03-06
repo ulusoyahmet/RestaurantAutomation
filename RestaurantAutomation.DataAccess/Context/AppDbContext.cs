@@ -16,10 +16,11 @@ namespace RestaurantAutomation.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BPMLTJH\SQLEXPRESS;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
+            // Melek SQL String:
+            // optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BPMLTJH\SQLEXPRESS;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
 
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
 
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
