@@ -146,26 +146,26 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                // If there is an active order, delete from database
+                // Eğer aktif bir sipariş varsa, veritabanından sil
                 if (_currentOrderId.HasValue)
                 {
                     var orderDetails = _orderDetailService.GetAll()
-                        .Where(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId)
-                        .FirstOrDefault();
+                        .FirstOrDefault(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId);
 
                     if (orderDetails != null)
                     {
-                        _orderDetailService.Delete(orderDetails.ID);
+                        // Bileşik anahtarı kullanarak silme işlemi yap
+                        _orderDetailService.DeleteByOrderProductID(orderDetails.OrderID, orderDetails.MenuItemID);
                     }
                 }
 
-                // Remove from DataTable
+                // DataTable'dan sil
                 _orderItemsTable.Rows.RemoveAt(rowIndex);
 
-                // Update total
+                // Toplamı güncelle
                 UpdateTotal();
 
-                // If no items left in order, change table status to Empty
+                // Siparişte ürün kalmadıysa, masa durumunu Boş olarak değiştir
                 if (_orderItemsTable.Rows.Count == 0)
                 {
                     UpdateTableStatus("Empty");
