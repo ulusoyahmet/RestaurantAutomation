@@ -57,7 +57,7 @@ namespace RestaurantAutomation.UI.Forms
         private void LoadTables()
         {
             flowLayoutPanel1.Controls.Clear();
-            var tables = _tableService.GetAll().OrderBy(t => t.TableNumber); // Masaları sıralı al
+            var tables = _tableService.GetAll();
 
             foreach (var table in tables)
             {
@@ -145,60 +145,21 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                // Yeni form oluştur
-                Form categoryForm = new Form
+                // Get the highest table number and increment by 1
+                var maxTableNumber = _tableService.GetAll().Any()
+                    ? _tableService.GetAll().Max(t => t.TableNumber)
+                    : 0;
+
+                var newTable = new Table
                 {
-                    Text = "Select Table Category",
-                    Size = new Size(300, 150),
-                    StartPosition = FormStartPosition.CenterParent,
-                    FormBorderStyle = FormBorderStyle.FixedDialog
+                    TableNumber = maxTableNumber + 1,
+                    Status = "Empty", // Default status
+                    TableCategory = "Indoor" // Default category
                 };
 
-                // ComboBox oluştur ve kategorileri ekle
-                ComboBox cmbCategory = new ComboBox
-                {
-                    DropDownStyle = ComboBoxStyle.DropDownList,
-                    Location = new Point(50, 20),
-                    Width = 200
-                };
-                cmbCategory.Items.AddRange(new string[] { "Indoor", "Outdoor", "VIP" });
-                cmbCategory.SelectedIndex = 0;
-
-                // Onaylama butonu
-                Button btnOK = new Button
-                {
-                    Text = "OK",
-                    DialogResult = DialogResult.OK,
-                    Location = new Point(100, 60),
-                    Width = 80
-                };
-
-                // Form'a öğeleri ekle
-                categoryForm.Controls.Add(cmbCategory);
-                categoryForm.Controls.Add(btnOK);
-                categoryForm.AcceptButton = btnOK;
-
-                // Kullanıcı seçim yaptı mı kontrol et
-                if (categoryForm.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedCategory = cmbCategory.SelectedItem.ToString();
-
-                    // Yeni masa numarasını belirle
-                    var maxTableNumber = _tableService.GetAll().Any()
-                        ? _tableService.GetAll().Max(t => t.TableNumber)
-                        : 0;
-
-                    var newTable = new Table
-                    {
-                        TableNumber = maxTableNumber + 1,
-                        Status = "Empty", // Varsayılan boş durum
-                        TableCategory = selectedCategory
-                    };
-
-                    _tableService.Create(newTable);
-                    LoadTables();
-                    MessageBox.Show("Table added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                _tableService.Create(newTable);
+                LoadTables();
+                MessageBox.Show("Table added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -281,3 +242,39 @@ namespace RestaurantAutomation.UI.Forms
         }
     }
 }
+
+
+//namespace RestaurantAutomation.UI.Forms
+//{
+//    public partial class TableForm : Form
+//    {
+//        public TableForm()
+//        {
+//            InitializeComponent();
+
+//            for (int i = 0; i < 19; i++)
+//            {
+//                Button b = new Button();
+//                b.Text = "Table " + i;
+//                b.Name = "btn_" + i;
+//                b.Size = new Size(100, 100);
+
+//                if (i % 2 == 0)
+//                {
+//                    b.BackColor = Color.GreenYellow;
+//                }
+//                else
+//                {
+//                    b.BackColor = Color.Red;
+//                }
+//                flowLayoutPanel1.Controls.Add(b);
+//            }
+//        }
+
+//        private void btnMainMenu_Click(object sender, EventArgs e)
+//        {
+//            Program.MainFormInstance.Show();
+//            this.Hide();
+//        }
+//    }
+//}
