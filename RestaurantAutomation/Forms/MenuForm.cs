@@ -22,8 +22,8 @@ namespace RestaurantAutomation.UI.Forms
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            GetAllCategories();
-            GetAllProducts();
+            GetAllProducts(null);
+            GetAllCategories();        
         }
 
         private void GetAllCategories()

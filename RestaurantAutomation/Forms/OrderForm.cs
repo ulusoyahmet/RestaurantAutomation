@@ -30,7 +30,9 @@ namespace RestaurantAutomation.UI.Forms
         //private DataTable _orderItemsTable;
         //private decimal _totalAmount = 0;
 
-        public OrderForm()
+        private readonly Table _currentTable;
+
+        public OrderForm(Table table)
         {
             InitializeComponent();
             _context = new AppDbContext();
@@ -46,6 +48,9 @@ namespace RestaurantAutomation.UI.Forms
             _menuItemService = new MenuItemService(_menuItemRepository);
             _categoryService = new CategoryService(_categoryRepository);
             _orderDetailService = new OrderDetailService(_orderDetailRepository);
+
+            _currentTable = table;
+
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
