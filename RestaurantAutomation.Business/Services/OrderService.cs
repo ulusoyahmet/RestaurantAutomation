@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using RestaurantAutomation.Business.Validators;
 using RestaurantAutomation.DataAccess.Abstractions;
 using RestaurantAutomation.DataAccess.Repositories;
@@ -37,6 +38,26 @@ namespace RestaurantAutomation.Business.Services
             }
 
             _orderRepository.Delete(id);
+        }
+
+        public Order GetByCompoundID(Guid tableID, Guid orderID)
+        {
+            if (tableID == Guid.Empty || orderID == Guid.Empty)
+            {
+                throw new Exception("ID bilgisi boş olamaz.");
+            }
+
+            return _orderRepository.GetByCompoundID(tableID, orderID);
+        }
+
+        public void DeleteByCompoundID(Guid tableID, Guid orderID)
+        {
+            if (tableID == Guid.Empty || orderID == Guid.Empty)
+            {
+                throw new Exception("ID bilgisi boş olamaz.");
+            }
+
+            _orderRepository.DeleteByCompoundID(tableID, orderID);
         }
 
         public IEnumerable<Order> GetAll()
