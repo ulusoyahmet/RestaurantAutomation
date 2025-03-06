@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace RestaurantAutomation.Business.Validators
 {
-    public class OrderValidator:AbstractValidator<Order>
+    public class OrderValidator : AbstractValidator<Order>
     {
         public OrderValidator()
         {
             RuleFor(x => x.OrderDate)
            .NotEmpty().WithMessage("Order date cannot be empty.")
            .Must(orderDate => orderDate <= DateTime.Now).WithMessage("Order date cannot be in the future.");
-
-            RuleFor(x => x.CustomerID)
-                .NotEmpty().WithMessage("Customer ID is required.");
 
             RuleFor(x => x.TableID)
                 .NotEmpty().WithMessage("Table ID is required.");

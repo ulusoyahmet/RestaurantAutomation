@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestaurantAutomation.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initialization : Migration
+    public partial class database1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,32 +22,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Menus",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menus", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +59,7 @@ namespace RestaurantAutomation.DataAccess.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MenuID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,11 +70,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                         principalTable: "Categories",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MenuItems_Menus_MenuID",
-                        column: x => x.MenuID,
-                        principalTable: "Menus",
-                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -129,7 +98,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TableID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -194,11 +162,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuItems_MenuID",
-                table: "MenuItems",
-                column: "MenuID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_MenuItemID",
                 table: "OrderDetails",
                 column: "MenuItemID");
@@ -224,9 +187,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
@@ -246,9 +206,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Menus");
 
             migrationBuilder.DropTable(
                 name: "Tables");

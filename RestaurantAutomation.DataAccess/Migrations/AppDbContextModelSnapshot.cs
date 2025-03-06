@@ -73,9 +73,6 @@ namespace RestaurantAutomation.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomerID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -200,7 +197,7 @@ namespace RestaurantAutomation.DataAccess.Migrations
             modelBuilder.Entity("RestaurantAutomation.Entities.Models.Order", b =>
                 {
                     b.HasOne("RestaurantAutomation.Entities.Models.Table", "Table")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("TableID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -257,6 +254,11 @@ namespace RestaurantAutomation.DataAccess.Migrations
             modelBuilder.Entity("RestaurantAutomation.Entities.Models.Order", b =>
                 {
                     b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("RestaurantAutomation.Entities.Models.Table", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

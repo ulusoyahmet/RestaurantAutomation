@@ -1,165 +1,8 @@
-﻿//using RestaurantAutomation.Business.Services;
-//using RestaurantAutomation.DataAccess.Context;
-//using RestaurantAutomation.DataAccess.Repositories;
-//using RestaurantAutomation.Entities.Models;
-//using System.Data;
-
-//namespace RestaurantAutomation.UI.Forms
-//{
-//   public partial class OrderForm : Form
-//    {
-//        private readonly OrderService _orderService;
-//        private readonly TableService _tableService;
-//        private readonly MenuItemService _menuItemService;
-//        private readonly CategoryService _categoryService;
-//        private readonly OrderDetailService _orderDetailService;
-
-//        private readonly OrderRepository _orderRepository;
-//        private readonly TableRepository _tableRepository;
-//        private readonly MenuItemRepository _menuItemRepository;
-//        private readonly CategoryRepository _categoryRepository;
-//        private readonly OrderDetailRepository _orderDetailRepository;
-
-//        private readonly AppDbContext _context;
-//        private readonly AppDbContext _dbContext;
-
-//        private Guid? _currentOrderId = null;
-//        private Guid? _currentTableId = null;
-//        private DataTable _orderItemsTable;
-//        //private Guid _currentOrderId;
-//        //private DataTable _orderItemsTable;
-//        //private decimal _totalAmount = 0;
-
-//        private readonly Table _currentTable;
-
-//        public OrderForm(Table table)
-//        {
-//            InitializeComponent();
-//            _context = new AppDbContext();
-//            _dbContext = new AppDbContext();
-//            _orderRepository = new OrderRepository(_context);
-//            _tableRepository = new TableRepository(_context);
-//            _menuItemRepository = new MenuItemRepository(_context);
-//            _categoryRepository = new CategoryRepository(_context);
-//            _orderDetailRepository = new OrderDetailRepository(_context, _dbContext);
-
-//            _orderService = new OrderService(_orderRepository);
-//            _tableService = new TableService(_tableRepository);
-//            _menuItemService = new MenuItemService(_menuItemRepository);
-//            _categoryService = new CategoryService(_categoryRepository);
-//            _orderDetailService = new OrderDetailService(_orderDetailRepository);
-
-//            _currentTable = table;
-
-//        }
-
-//        private void btnMainMenu_Click(object sender, EventArgs e)
-//        {
-//            Program.MainFormInstance.Show();
-//            this.Hide();
-//        }
-
-//        private void OrderForm_Load(object sender, EventArgs e)
-//        {
-
-//        }
-
-//        private void btnStarters_Click(object sender, EventArgs e)
-//        {
-//            ShowCategoryItems("Starters");
-//        }
-
-//        private void ShowCategoryItems(string categoryName)
-//        {
-//            var category = _categoryService.GetAll().FirstOrDefault(c => c.Name == categoryName);
-//            if (category == null) return;
-
-//            //Yeni form oluştur:          
-
-//            Form menuItemsForm = new Form()
-//            {
-//                Text = categoryName,
-//                Size = new Size(400, 600),
-//                StartPosition = FormStartPosition.CenterScreen,
-//                FormBorderStyle = FormBorderStyle.FixedDialog,
-//                MaximizeBox = false,
-//                MinimizeBox = false
-//            };
-
-//            FlowLayoutPanel panel = new FlowLayoutPanel()
-//            {
-//                Dock = DockStyle.Fill,
-//                AutoScroll = true,
-//                Padding = new Padding(10)
-//            };
-//            menuItemsForm.Controls.Add(panel);
-
-//            // Veriyi al ve kategoriye göre filtrele
-//            var menuItems = _menuItemService.GetAll().Where(m => m.CategoryID == category.ID);
-
-
-//            foreach (var item in menuItems)
-//            {
-//                Button menuItemButton = new Button()
-//                {
-//                    Text = $"{item.Name}\n{item.Price:C2}",
-//                    Tag = item,
-//                    Width = 120,
-//                    Height = 50
-//                };
-//                menuItemButton.Click += (sender, e) =>
-//                {
-//                    AddToOrder((MenuItem)((Button)sender).Tag);
-//                    menuItemsForm.Close();
-//                };
-//                panel.Controls.Add(menuItemButton);
-//            }
-//            menuItemsForm.Show();
-
-//        }
-
-//        private void AddToOrder(MenuItem tag)
-//        {
-//            int quantity = 1;
-//            decimal totalPrice = tag.Price * quantity;
-
-//            DataGridViewRow row = new DataGridViewRow();
-//            row.Cells.Add(new DataGridViewButtonCell() { Value = "Sil" });
-//            row.Cells.Add(new DataGridViewTextBoxCell() { Value = tag.Name });
-//            row.Cells.Add(new DataGridViewTextBoxCell() { Value = quantity });
-//            row.Cells.Add(new DataGridViewTextBoxCell() { Value = tag.Price });
-//            row.Cells.Add(new DataGridViewTextBoxCell() { Value = totalPrice });
-
-//            dataGridView1.Rows.Add(row);
-//        }
-
-//        private void btnMainCourses_Click(object sender, EventArgs e)
-//        {
-//            ShowCategoryItems("MainCourses");
-//        }
-
-//        private void btnDesserts_Click(object sender, EventArgs e)
-//        {
-//            ShowCategoryItems("Desserts");
-//        }
-
-//        private void btnBeverages_Click(object sender, EventArgs e)
-//        {
-//            ShowCategoryItems("Beverages");
-//        }
-//    }
-//}
-//*/
-using RestaurantAutomation.Business.Services;
+﻿using RestaurantAutomation.Business.Services;
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
@@ -181,10 +24,10 @@ namespace RestaurantAutomation.UI.Forms
         private readonly AppDbContext _dbContext;
 
         private Guid? _currentOrderId = null;
-        private Guid? _currentTableId = null;
+        private Table _currentTable = null;
         private DataTable _orderItemsTable;
 
-        public OrderForm(Table table)
+        public OrderForm(Table selectedTable)
         {
             InitializeComponent();
             _context = new AppDbContext();
@@ -201,7 +44,41 @@ namespace RestaurantAutomation.UI.Forms
             _categoryService = new CategoryService(_categoryRepository);
             _orderDetailService = new OrderDetailService(_orderDetailRepository);
 
+            if (selectedTable == null)
+            {
+                int tableNumber = Convert.ToInt32(cmbTableNo.SelectedItem);
+                var table = _tableService.GetAll().FirstOrDefault(t => t.TableNumber == tableNumber);
+            }
+            else
+            {
+                _currentTable = selectedTable; // Seçili masayı ayarla
+            }
+
             InitializeDataGridView();
+
+            if (_currentTable != null)
+            {
+                cmbTableNo.Text = _currentTable.TableNumber.ToString();
+                lblOrderStatus.Text = _currentTable.Status;
+
+                // Eğer masa doluysa, aktif siparişi yükle
+                if (_currentTable.Status == "Occupied")
+                {
+                    LoadActiveOrder(_currentTable.ID);
+                }
+            }
+
+            if (_currentTable != null)
+            {
+                cmbTableNo.Text = _currentTable.TableNumber.ToString();
+                lblOrderStatus.Text = _currentTable.Status;
+
+                // If table is occupied, load the active order
+                if (_currentTable.Status == "Occupied")
+                {
+                    LoadActiveOrder(_currentTable.ID);
+                }
+            }
         }
 
         private void InitializeDataGridView()
@@ -213,7 +90,7 @@ namespace RestaurantAutomation.UI.Forms
             _orderItemsTable.Columns.Add("Price", typeof(decimal));
             _orderItemsTable.Columns.Add("TotalPrice", typeof(decimal));
 
-            // DataGridView kontrolünü oluştur (eğer varsa tasarımda, kod burayı atlayacaktır)
+            // If dataGridView1 doesn't exist in the design, create it programmatically
             if (dataGridView1 == null)
             {
                 dataGridView1 = new DataGridView();
@@ -229,7 +106,7 @@ namespace RestaurantAutomation.UI.Forms
 
             dataGridView1.DataSource = _orderItemsTable;
 
-            // Sil butonu sütunu ekle
+            // Add delete button column
             DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
             deleteButtonColumn.HeaderText = "Sil";
             deleteButtonColumn.Text = "Sil";
@@ -237,26 +114,28 @@ namespace RestaurantAutomation.UI.Forms
             deleteButtonColumn.Name = "DeleteColumn";
             deleteButtonColumn.Width = 60;
 
-            // Sütun eklenmiş mi kontrol et, eklenmediyse ekle
+            // Check if column already exists before adding
             if (dataGridView1.Columns["DeleteColumn"] == null)
             {
                 dataGridView1.Columns.Add(deleteButtonColumn);
             }
 
-            // Id sütununu gizle
+            // Hide Id column
             dataGridView1.Columns["Id"].Visible = false;
 
-            // DataGridView olayları
+            // Register event handler
             dataGridView1.CellClick += dataGridView1_CellClick;
 
-            // Total değerini güncelle
+            // Update total
             UpdateTotal();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Sil butonu tıklandığında
-            if (e.ColumnIndex == dataGridView1.Columns["DeleteColumn"].Index && e.RowIndex >= 0)
+            // Handle delete button click
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
+                dataGridView1.Columns["DeleteColumn"] != null &&
+                e.ColumnIndex == dataGridView1.Columns["DeleteColumn"].Index)
             {
                 Guid itemId = (Guid)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
                 RemoveOrderItem(e.RowIndex, itemId);
@@ -265,24 +144,37 @@ namespace RestaurantAutomation.UI.Forms
 
         private void RemoveOrderItem(int rowIndex, Guid menuItemId)
         {
-            // Eğer aktif sipariş varsa, veritabanından da sil
-            if (_currentOrderId.HasValue)
+            try
             {
-                var orderDetails = _orderDetailService.GetAll()
-                    .Where(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId)
-                    .FirstOrDefault();
-
-                if (orderDetails != null)
+                // If there is an active order, delete from database
+                if (_currentOrderId.HasValue)
                 {
-                    _orderDetailService.Delete(orderDetails.ID);
+                    var orderDetails = _orderDetailService.GetAll()
+                        .Where(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId)
+                        .FirstOrDefault();
+
+                    if (orderDetails != null)
+                    {
+                        _orderDetailService.Delete(orderDetails.ID);
+                    }
+                }
+
+                // Remove from DataTable
+                _orderItemsTable.Rows.RemoveAt(rowIndex);
+
+                // Update total
+                UpdateTotal();
+
+                // If no items left in order, change table status to Empty
+                if (_orderItemsTable.Rows.Count == 0)
+                {
+                    UpdateTableStatus("Empty");
                 }
             }
-
-            // DataTable'dan satırı kaldır
-            _orderItemsTable.Rows.RemoveAt(rowIndex);
-
-            // Toplamı güncelle
-            UpdateTotal();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ürün silinirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UpdateTotal()
@@ -293,86 +185,84 @@ namespace RestaurantAutomation.UI.Forms
                 total += Convert.ToDecimal(row["TotalPrice"]);
             }
 
-            // Total Label'ı güncelle
+            // Update total label
             lblTotalAmount.Text = total.ToString("C2");
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            // Masa numaralarını combobox'a yükle
+            // Load table numbers into combobox
             LoadTableNumbers();
         }
 
         private void LoadTableNumbers()
         {
-            var tables = _tableService.GetAll();
-            cmbTableNo.Items.Clear();
-            foreach (var table in tables)
+            try
             {
-                cmbTableNo.Items.Add(table.TableNumber);
-            }
-
-            if (cmbTableNo.Items.Count > 0)
-            {
-                cmbTableNo.SelectedIndex = 0;
-            }
-        }
-
-        private void cmbTableNo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbTableNo.SelectedItem != null)
-            {
-                int tableNumber = Convert.ToInt32(cmbTableNo.SelectedItem);
-                var table = _tableService.GetAll().FirstOrDefault(t => t.TableNumber == tableNumber);
-
-                if (table != null)
+                var tables = _tableService.GetAll();
+                cmbTableNo.Items.Clear();
+                foreach (var table in tables)
                 {
-                    _currentTableId = table.ID;
-                    lblOrderStatus.Text = table.Status;
+                    cmbTableNo.Items.Add(table.TableNumber);
+                }
 
-                    // Eğer masa dolu ise, aktif siparişi yükle
-                    if (table.Status == "Dolu")
+                if (cmbTableNo.Items.Count > 0)
+                {
+                    // Only set selected index if the current table isn't already selected
+                    if (_currentTable == null)
                     {
-                        LoadActiveOrder(table.ID);
-                    }
-                    else
-                    {
-                        // Yeni sipariş için tabloyu temizle
-                        _orderItemsTable.Clear();
-                        _currentOrderId = null;
+                        cmbTableNo.SelectedIndex = 0;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Masa bilgileri yüklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void LoadActiveOrder(Guid tableId)
         {
-            var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.Payment == null);
-
-            if (order != null)
+            try
             {
-                _currentOrderId = order.ID;
-                _orderItemsTable.Clear();
+                var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.Payment == null);
 
-                // Sipariş detaylarını yükle
-                var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == order.ID);
-
-                foreach (var detail in orderDetails)
+                if (order != null)
                 {
-                    var menuItem = _menuItemService.GetByID(detail.MenuItemID);
-                    if (menuItem != null)
-                    {
-                        DataRow row = _orderItemsTable.NewRow();
-                        row["Id"] = menuItem.ID;
-                        row["ProductName"] = menuItem.Name;
-                        row["Quantity"] = detail.Quantity;
-                        row["Price"] = menuItem.Price;
-                        row["TotalPrice"] = menuItem.Price * detail.Quantity;
-                        _orderItemsTable.Rows.Add(row);
-                    }
-                }
+                    _currentOrderId = order.ID;
+                    _orderItemsTable.Clear();
 
-                UpdateTotal();
+                    // Load order details
+                    var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == order.ID);
+
+                    foreach (var detail in orderDetails)
+                    {
+                        var menuItem = _menuItemService.GetByID(detail.MenuItemID);
+                        if (menuItem != null)
+                        {
+                            DataRow row = _orderItemsTable.NewRow();
+                            row["Id"] = menuItem.ID;
+                            row["ProductName"] = menuItem.Name;
+                            row["Quantity"] = detail.Quantity;
+                            row["Price"] = menuItem.Price;
+                            row["TotalPrice"] = menuItem.Price * detail.Quantity;
+                            _orderItemsTable.Rows.Add(row);
+                        }
+                    }
+
+                    UpdateTotal();
+                }
+                else
+                {
+                    // No active order for this table
+                    _currentOrderId = null;
+                    _orderItemsTable.Clear();
+                    UpdateTotal();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş bilgisi alınırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -398,162 +288,223 @@ namespace RestaurantAutomation.UI.Forms
 
         private void OpenMenuItemsForm(string categoryName)
         {
-            var category = _categoryService.GetAll().FirstOrDefault(c => c.Name == categoryName);
-            if (category == null) return;
-
-            // Yeni form oluştur
-            Form menuItemsForm = new Form
+            try
             {
-                Text = categoryName,
-                Width = 500,
-                Height = 400,
-                StartPosition = FormStartPosition.CenterParent,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                MaximizeBox = false,
-                MinimizeBox = false
-            };
-
-            FlowLayoutPanel panel = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-                Padding = new Padding(10)
-            };
-
-            menuItemsForm.Controls.Add(panel);
-
-            // Kategorideki menü öğelerini yükle
-            var menuItems = _menuItemService.GetAll().Where(m => m.CategoryID == category.ID);
-
-            foreach (MenuItem item in menuItems)
-            {
-                Button itemButton = new Button
+                var category = _categoryService.GetAll().FirstOrDefault(c => c.Name == categoryName);
+                if (category == null)
                 {
-                    Text = $"{item.Name}\n{item.Price:C2}",
-                    Width = 120,
-                    Height = 80,
-                    Tag = item,
-                    Margin = new Padding(5)
+                    MessageBox.Show($"{categoryName} kategorisi bulunamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Create new form
+                Form menuItemsForm = new Form
+                {
+                    Text = categoryName,
+                    Width = 500,
+                    Height = 400,
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
                 };
 
-                itemButton.Click += (sender, e) => {
-                    AddItemToOrder(item);
-                    menuItemsForm.Close();
+                FlowLayoutPanel panel = new FlowLayoutPanel
+                {
+                    Dock = DockStyle.Fill,
+                    AutoScroll = true,
+                    Padding = new Padding(10)
                 };
 
-                panel.Controls.Add(itemButton);
+                menuItemsForm.Controls.Add(panel);
+
+                // Load menu items for the category
+                var menuItems = _menuItemService.GetAll().Where(m => m.CategoryID == category.ID);
+
+                if (!menuItems.Any())
+                {
+                    MessageBox.Show($"{categoryName} kategorisinde ürün bulunamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                foreach (MenuItem item in menuItems)
+                {
+                    Button itemButton = new Button
+                    {
+                        Text = $"{item.Name}\n{item.Price:C2}",
+                        Width = 120,
+                        Height = 80,
+                        Tag = item,
+                        Margin = new Padding(5)
+                    };
+
+                    itemButton.Click += (sender, e) =>
+                    {
+                        AddItemToOrder(item);
+                        menuItemsForm.Close();
+                    };
+
+                    panel.Controls.Add(itemButton);
+                }
+
+                menuItemsForm.ShowDialog();
             }
-
-            menuItemsForm.ShowDialog();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Menü öğeleri yüklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AddItemToOrder(MenuItem menuItem)
         {
-            // Eğer masa seçilmemişse
-            if (!_currentTableId.HasValue)
+            try
             {
-                MessageBox.Show("Lütfen önce bir masa seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Eğer aynı üründen varsa, miktarını artır
-            bool itemExists = false;
-            foreach (DataRow row in _orderItemsTable.Rows)
-            {
-                if ((Guid)row["Id"] == menuItem.ID)
+                // Check if table is selected
+                if (_currentTable == null)
                 {
-                    int currentQuantity = Convert.ToInt32(row["Quantity"]);
-                    row["Quantity"] = currentQuantity + 1;
-                    row["TotalPrice"] = menuItem.Price * (currentQuantity + 1);
-                    itemExists = true;
+                    MessageBox.Show("Lütfen önce bir masa seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                    // Eğer aktif sipariş varsa, sipariş detayını güncelle
-                    if (_currentOrderId.HasValue)
+                // Check if item already exists in order
+                bool itemExists = false;
+                foreach (DataRow row in _orderItemsTable.Rows)
+                {
+                    if ((Guid)row["Id"] == menuItem.ID)
                     {
-                        UpdateOrderDetail(menuItem.ID, currentQuantity + 1);
+                        int currentQuantity = Convert.ToInt32(row["Quantity"]);
+                        row["Quantity"] = currentQuantity + 1;
+                        row["TotalPrice"] = menuItem.Price * (currentQuantity + 1);
+                        itemExists = true;
+
+                        // If there's an active order, update order detail
+                        if (_currentOrderId.HasValue)
+                        {
+                            UpdateOrderDetail(menuItem.ID, currentQuantity + 1);
+                        }
+
+                        break;
+                    }
+                }
+
+                // If item does not exist, add new row
+                if (!itemExists)
+                {
+                    DataRow newRow = _orderItemsTable.NewRow();
+                    newRow["Id"] = menuItem.ID;
+                    newRow["ProductName"] = menuItem.Name;
+                    newRow["Quantity"] = 1;
+                    newRow["Price"] = menuItem.Price;
+                    newRow["TotalPrice"] = menuItem.Price;
+                    _orderItemsTable.Rows.Add(newRow);
+
+                    // If no active order, create new one
+                    if (!_currentOrderId.HasValue)
+                    {
+                        CreateNewOrder();
                     }
 
-                    break;
+                    // Add order detail
+                    AddOrderDetail(menuItem.ID, 1);
                 }
-            }
 
-            // Eğer ürün daha önce eklenmemişse, yeni satır ekle
-            if (!itemExists)
+                // Update total amount
+                UpdateTotal();
+
+                // Update table status
+                UpdateTableStatus("Occupied");
+            }
+            catch (Exception ex)
             {
-                DataRow newRow = _orderItemsTable.NewRow();
-                newRow["Id"] = menuItem.ID;
-                newRow["ProductName"] = menuItem.Name;
-                newRow["Quantity"] = 1;
-                newRow["Price"] = menuItem.Price;
-                newRow["TotalPrice"] = menuItem.Price;
-                _orderItemsTable.Rows.Add(newRow);
-
-                // Eğer aktif sipariş yoksa, yeni sipariş oluştur
-                if (!_currentOrderId.HasValue)
-                {
-                    CreateNewOrder();
-                }
-
-                // Sipariş detayı ekle
-                AddOrderDetail(menuItem.ID, 1);
+                MessageBox.Show($"Ürün eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Toplam tutarı güncelle
-            UpdateTotal();
-
-            // Masa durumunu güncelle
-            UpdateTableStatus("Dolu");
         }
 
         private void CreateNewOrder()
         {
-            var order = new Order
+            try
             {
-                ID = Guid.NewGuid(),
-                OrderDate = DateTime.Now,
-                TableID = _currentTableId.Value,
-                CustomerID = Guid.Empty // Müşteri bilgisi gerekirse burada eklenebilir
-            };
+                if (_currentTable == null)
+                {
+                    MessageBox.Show("Sipariş oluşturmak için bir masa seçilmelidir.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            _orderService.Create(order);
-            _currentOrderId = order.ID;
+                var order = new Order
+                {
+                    ID = Guid.NewGuid(),
+                    OrderDate = DateTime.Now,
+                    TableID = _currentTable.ID
+                };
+
+                _orderService.Create(order);
+                _currentOrderId = order.ID;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş oluşturulurken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AddOrderDetail(Guid menuItemId, int quantity)
         {
-            var orderDetail = new OrderDetail
+            try
             {
-                ID = Guid.NewGuid(),
-                OrderID = _currentOrderId.Value,
-                MenuItemID = menuItemId,
-                Quantity = quantity
-            };
+                var orderDetail = new OrderDetail
+                {
+                    ID = Guid.NewGuid(),
+                    OrderID = _currentOrderId.Value,
+                    MenuItemID = menuItemId,
+                    Quantity = quantity
+                };
 
-            _orderDetailService.Create(orderDetail);
+                _orderDetailService.Create(orderDetail);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş detayı eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UpdateOrderDetail(Guid menuItemId, int newQuantity)
         {
-            var orderDetail = _orderDetailService.GetAll()
-                .FirstOrDefault(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId);
-
-            if (orderDetail != null)
+            try
             {
-                orderDetail.Quantity = newQuantity;
-                _orderDetailService.Update(orderDetail);
+                var orderDetail = _orderDetailService.GetAll()
+                    .FirstOrDefault(od => od.OrderID == _currentOrderId.Value && od.MenuItemID == menuItemId);
+
+                if (orderDetail != null)
+                {
+                    orderDetail.Quantity = newQuantity;
+                    _orderDetailService.Update(orderDetail);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş detayı güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void UpdateTableStatus(string status)
         {
-            if (_currentTableId.HasValue)
+            try
             {
-                var table = _tableService.GetByID(_currentTableId.Value);
-                table.Status = status;
-                _tableService.Update(table);
+                if (_currentTable != null)
+                {
+                    var table = _tableService.GetByID(_currentTable.ID);
+                    table.Status = status;
+                    _tableService.Update(table);
 
-                // Status label'ı güncelle
-                lblOrderStatus.Text = status;
+                    // Update status label
+                    lblOrderStatus.Text = status;
+
+                    // Also update the current table object's status
+                    _currentTable.Status = status;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Masa durumu güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -565,22 +516,28 @@ namespace RestaurantAutomation.UI.Forms
                 return;
             }
 
-            // Ödeme formunu açabilirsiniz burada
-            MessageBox.Show("Sipariş tamamlandı. Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                // You can open payment form here
+                MessageBox.Show("Sipariş tamamlandı. Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // PaymentForm açılabilir
-            // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-            // paymentForm.ShowDialog();
+                // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
+                // paymentForm.ShowDialog();
 
-            // Masa durumunu güncelle
-            UpdateTableStatus("Boş");
+                // Update table status
+                UpdateTableStatus("Empty");
 
-            // Sipariş listesini temizle
-            _orderItemsTable.Clear();
-            _currentOrderId = null;
+                // Clear order list
+                _orderItemsTable.Clear();
+                _currentOrderId = null;
 
-            // Toplamı güncelle
-            UpdateTotal();
+                // Update total
+                UpdateTotal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş tamamlanırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
@@ -595,27 +552,34 @@ namespace RestaurantAutomation.UI.Forms
 
             if (result == DialogResult.Yes)
             {
-                // Sipariş detaylarını sil
-                var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
-                foreach (var detail in orderDetails)
+                try
                 {
-                    _orderDetailService.Delete(detail.ID);
+                    // Delete order details
+                    var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
+                    foreach (var detail in orderDetails)
+                    {
+                        _orderDetailService.Delete(detail.ID);
+                    }
+
+                    // Delete order
+                    _orderService.Delete(_currentOrderId.Value);
+
+                    // Update table status
+                    UpdateTableStatus("Empty");
+
+                    // Clear order list
+                    _orderItemsTable.Clear();
+                    _currentOrderId = null;
+
+                    // Update total
+                    UpdateTotal();
+
+                    MessageBox.Show("Sipariş başarıyla iptal edildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                // Siparişi sil
-                _orderService.Delete(_currentOrderId.Value);
-
-                // Masa durumunu güncelle
-                UpdateTableStatus("Boş");
-
-                // Sipariş listesini temizle
-                _orderItemsTable.Clear();
-                _currentOrderId = null;
-
-                // Toplamı güncelle
-                UpdateTotal();
-
-                MessageBox.Show("Sipariş başarıyla iptal edildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Sipariş iptal edilirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -627,12 +591,18 @@ namespace RestaurantAutomation.UI.Forms
                 return;
             }
 
-            // Ödeme formunu açabilirsiniz
-            MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                // You can open payment form here
+                MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // PaymentForm açılabilir
-            // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-            // paymentForm.ShowDialog();
+                // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
+                // paymentForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAddNote_Click(object sender, EventArgs e)
@@ -643,65 +613,131 @@ namespace RestaurantAutomation.UI.Forms
                 return;
             }
 
-            // Not ekleme diyaloğu
-            string note = "";
-
-            // Basit bir input diyaloğu
-            Form noteForm = new Form
+            try
             {
-                Width = 400,
-                Height = 200,
-                Text = "Sipariş Notu Ekle",
-                StartPosition = FormStartPosition.CenterParent,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                MaximizeBox = false,
-                MinimizeBox = false
-            };
+                // Note adding dialog
+                string note = "";
 
-            TextBox txtNote = new TextBox
+                // Simple input dialog
+                Form noteForm = new Form
+                {
+                    Width = 400,
+                    Height = 200,
+                    Text = "Sipariş Notu Ekle",
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
+
+                TextBox txtNote = new TextBox
+                {
+                    Multiline = true,
+                    Width = 350,
+                    Height = 100,
+                    Location = new Point(20, 20)
+                };
+
+                Button btnSave = new Button
+                {
+                    Text = "Kaydet",
+                    Location = new Point(150, 130),
+                    DialogResult = DialogResult.OK
+                };
+
+                noteForm.Controls.Add(txtNote);
+                noteForm.Controls.Add(btnSave);
+                noteForm.AcceptButton = btnSave;
+
+                if (noteForm.ShowDialog() == DialogResult.OK)
+                {
+                    note = txtNote.Text;
+
+                    // Here you should actually save the note to the order in database
+                    // For example: _orderService.AddNote(_currentOrderId.Value, note);
+
+                    MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
             {
-                Multiline = true,
-                Width = 350,
-                Height = 100,
-                Location = new Point(20, 20)
-            };
-
-            Button btnSave = new Button
-            {
-                Text = "Kaydet",
-                Location = new Point(150, 130),
-                DialogResult = DialogResult.OK
-            };
-
-            noteForm.Controls.Add(txtNote);
-            noteForm.Controls.Add(btnSave);
-            noteForm.AcceptButton = btnSave;
-
-            if (noteForm.ShowDialog() == DialogResult.OK)
-            {
-                note = txtNote.Text;
-
-                // Notu textbox'a ekle
-                txtNote.Text = note;
-
-                MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Not eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnOrderHistory_Click(object sender, EventArgs e)
         {
-            // Sipariş geçmişi formunu açabilirsiniz
-            MessageBox.Show("Sipariş geçmişi ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                // You can open order history form here
+                MessageBox.Show("Sipariş geçmişi ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // OrderHistoryForm açılabilir
-            // OrderHistoryForm historyForm = new OrderHistoryForm();
-            // historyForm.ShowDialog();
+                // OrderHistoryForm historyForm = new OrderHistoryForm();
+                // historyForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Sipariş geçmişi açılırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
-            Program.MainFormInstance.Show();
-            this.Hide();
+            // Go back to main menu
+            if (Program.MainFormInstance != null)
+            {
+                Program.MainFormInstance.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Ana form bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            // Dispose database contexts to prevent memory leaks
+            _context?.Dispose();
+            _dbContext?.Dispose();
+        }
+
+        private void cmbTableNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTableNo.SelectedItem != null)
+            {
+                try
+                {
+                    int tableNumber = Convert.ToInt32(cmbTableNo.SelectedItem);
+                    var table = _tableService.GetAll().FirstOrDefault(t => t.TableNumber == tableNumber);
+
+                    if (table != null)
+                    {
+                        _currentTable = table;
+                        lblOrderStatus.Text = table.Status;
+
+                        // If table is occupied, load active order
+                        if (table.Status == "Occupied")
+                        {
+                            LoadActiveOrder(table.ID);
+                        }
+                        else
+                        {
+                            // Clear table for new order
+                            _orderItemsTable.Clear();
+                            _currentOrderId = null;
+                            UpdateTotal();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Masa bilgisi alınırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
