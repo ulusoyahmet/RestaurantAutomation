@@ -169,7 +169,7 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
-            if (selectedTable!=null)
+            if (selectedTable != null)
             {
                 // Toggle table status
                 selectedTable.Status = selectedTable.Status == "Empty" ? "Occupied" : "Empty";
@@ -177,7 +177,7 @@ namespace RestaurantAutomation.UI.Forms
 
                 // Update button appearance
                 LoadTables();
-            }           
+            }
 
         }
 
