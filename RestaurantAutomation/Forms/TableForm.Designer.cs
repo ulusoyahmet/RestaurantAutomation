@@ -32,9 +32,7 @@
             lblTotal = new Label();
             label7 = new Label();
             lstAddition = new ListBox();
-            lstOrders = new ListBox();
             label6 = new Label();
-            label4 = new Label();
             label3 = new Label();
             label5 = new Label();
             label2 = new Label();
@@ -53,9 +51,7 @@
             groupBox1.Controls.Add(lblTotal);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(lstAddition);
-            groupBox1.Controls.Add(lstOrders);
             groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label2);
@@ -77,7 +73,7 @@
             // lblTotal
             // 
             lblTotal.AutoSize = true;
-            lblTotal.Location = new Point(565, 429);
+            lblTotal.Location = new Point(607, 444);
             lblTotal.Margin = new Padding(2, 0, 2, 0);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(85, 20);
@@ -87,7 +83,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(518, 429);
+            label7.Location = new Point(558, 444);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new Size(45, 20);
@@ -97,40 +93,21 @@
             // lstAddition
             // 
             lstAddition.FormattingEnabled = true;
-            lstAddition.Location = new Point(518, 104);
+            lstAddition.Location = new Point(338, 104);
             lstAddition.Margin = new Padding(2, 3, 2, 3);
             lstAddition.Name = "lstAddition";
-            lstAddition.Size = new Size(174, 324);
+            lstAddition.Size = new Size(354, 324);
             lstAddition.TabIndex = 10;
-            // 
-            // lstOrders
-            // 
-            lstOrders.FormattingEnabled = true;
-            lstOrders.Location = new Point(334, 103);
-            lstOrders.Margin = new Padding(2, 3, 2, 3);
-            lstOrders.Name = "lstOrders";
-            lstOrders.Size = new Size(162, 344);
-            lstOrders.TabIndex = 10;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(546, 83);
+            label6.Location = new Point(338, 81);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(70, 20);
             label6.TabIndex = 9;
             label6.Text = "Addition:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(370, 79);
-            label4.Margin = new Padding(2, 0, 2, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(90, 20);
-            label4.TabIndex = 9;
-            label4.Text = "Order Items:";
             // 
             // label3
             // 

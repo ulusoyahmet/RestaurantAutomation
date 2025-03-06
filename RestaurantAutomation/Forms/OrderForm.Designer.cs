@@ -141,53 +141,58 @@
             dataGridView1.Location = new Point(152, 91);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(471, 201);
+            dataGridView1.Size = new Size(661, 201);
             dataGridView1.TabIndex = 3;
             // 
             // btnCompleteOrder
             // 
-            btnCompleteOrder.Location = new Point(12, 340);
+            btnCompleteOrder.Location = new Point(198, 311);
             btnCompleteOrder.Name = "btnCompleteOrder";
             btnCompleteOrder.Size = new Size(94, 48);
             btnCompleteOrder.TabIndex = 2;
             btnCompleteOrder.Text = "Complete Order";
             btnCompleteOrder.UseVisualStyleBackColor = true;
+            btnCompleteOrder.Click += btnCompleteOrder_Click;
             // 
             // btnCancelOrder
             // 
-            btnCancelOrder.Location = new Point(142, 340);
+            btnCancelOrder.Location = new Point(328, 311);
             btnCancelOrder.Name = "btnCancelOrder";
             btnCancelOrder.Size = new Size(94, 48);
             btnCancelOrder.TabIndex = 2;
             btnCancelOrder.Text = "Cancel Order";
             btnCancelOrder.UseVisualStyleBackColor = true;
+            btnCancelOrder.Click += btnCancelOrder_Click;
             // 
             // btnPayment
             // 
-            btnPayment.Location = new Point(265, 340);
+            btnPayment.Location = new Point(451, 311);
             btnPayment.Name = "btnPayment";
             btnPayment.Size = new Size(94, 48);
             btnPayment.TabIndex = 2;
             btnPayment.Text = "Payment";
             btnPayment.UseVisualStyleBackColor = true;
+            btnPayment.Click += btnPayment_Click;
             // 
             // btnAddNote
             // 
-            btnAddNote.Location = new Point(385, 340);
+            btnAddNote.Location = new Point(571, 311);
             btnAddNote.Name = "btnAddNote";
             btnAddNote.Size = new Size(94, 48);
             btnAddNote.TabIndex = 2;
             btnAddNote.Text = "Add Note";
             btnAddNote.UseVisualStyleBackColor = true;
+            btnAddNote.Click += btnAddNote_Click;
             // 
             // btnOrderHistory
             // 
-            btnOrderHistory.Location = new Point(510, 340);
+            btnOrderHistory.Location = new Point(696, 311);
             btnOrderHistory.Name = "btnOrderHistory";
             btnOrderHistory.Size = new Size(94, 48);
             btnOrderHistory.TabIndex = 2;
             btnOrderHistory.Text = "Order History";
             btnOrderHistory.UseVisualStyleBackColor = true;
+            btnOrderHistory.Click += btnOrderHistory_Click;
             // 
             // label2
             // 
@@ -212,7 +217,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(630, 399);
+            ClientSize = new Size(948, 569);
             Controls.Add(cmbTableNo);
             Controls.Add(label2);
             Controls.Add(dataGridView1);
