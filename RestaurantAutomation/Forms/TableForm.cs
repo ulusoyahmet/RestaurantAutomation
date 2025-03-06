@@ -176,7 +176,7 @@ namespace RestaurantAutomation.UI.Forms
 
             // Update button appearance
             LoadTables();
-            
+
         }
 
         private void btnDeleteTable_Click(object sender, EventArgs e)
@@ -210,24 +210,39 @@ namespace RestaurantAutomation.UI.Forms
             }
         }
 
-        private void btnListTables_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadTables(); // Refresh the table display
-                MessageBox.Show("Tables listed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to list tables. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-       
+
+
+
 
         // Add this field at class level
         private Table? selectedTable;
 
+        private void btnJumptoOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedTable != null)
+                {
+                    // Create new instance of OrderForm with the selected table
+                    OrderForm orderForm = new OrderForm(selectedTable);
+                    // Hide current form
+                    this.Hide();
+                    // Show OrderForm
+                    orderForm.ShowDialog();
+                    // When OrderForm closes, show this form again
+                    this.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a table first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening order form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 

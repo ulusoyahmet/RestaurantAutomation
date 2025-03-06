@@ -42,7 +42,7 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnUpdateTable = new Button();
             btnMainMenu = new Button();
-            btnListTables = new Button();
+            btnJumptoOrder = new Button();
             btnDeleteTable = new Button();
             btnAddTable = new Button();
             groupBox1.SuspendLayout();
@@ -63,7 +63,7 @@
             groupBox1.Controls.Add(flowLayoutPanel1);
             groupBox1.Controls.Add(btnUpdateTable);
             groupBox1.Controls.Add(btnMainMenu);
-            groupBox1.Controls.Add(btnListTables);
+            groupBox1.Controls.Add(btnJumptoOrder);
             groupBox1.Controls.Add(btnDeleteTable);
             groupBox1.Controls.Add(btnAddTable);
             groupBox1.Location = new Point(12, 6);
@@ -203,15 +203,15 @@
             btnMainMenu.UseVisualStyleBackColor = true;
             btnMainMenu.Click += btnMainMenu_Click;
             // 
-            // btnListTables
+            // btnJumptoOrder
             // 
-            btnListTables.Location = new Point(159, 378);
-            btnListTables.Name = "btnListTables";
-            btnListTables.Size = new Size(116, 30);
-            btnListTables.TabIndex = 2;
-            btnListTables.Text = "Show Table List";
-            btnListTables.UseVisualStyleBackColor = true;
-            btnListTables.Click += btnListTables_Click;
+            btnJumptoOrder.Location = new Point(159, 378);
+            btnJumptoOrder.Name = "btnJumptoOrder";
+            btnJumptoOrder.Size = new Size(116, 30);
+            btnJumptoOrder.TabIndex = 2;
+            btnJumptoOrder.Text = "Jump to Order";
+            btnJumptoOrder.UseVisualStyleBackColor = true;
+            btnJumptoOrder.Click += btnJumptoOrder_Click;
             // 
             // btnDeleteTable
             // 
@@ -252,7 +252,7 @@
 
         private GroupBox groupBox1;
         private Button btnUpdateTable;
-        private Button btnListTables;
+        private Button btnJumptoOrder;
         private Button btnDeleteTable;
         private Button btnAddTable;
         private Label label2;
