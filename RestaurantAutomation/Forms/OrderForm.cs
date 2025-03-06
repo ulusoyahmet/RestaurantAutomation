@@ -23,6 +23,9 @@ namespace RestaurantAutomation.UI.Forms
         private readonly AppDbContext _context;
         private readonly AppDbContext _dbContext;
 
+        private Guid? _currentOrderId = null;
+        private Guid? _currentTableId = null;
+        private DataTable _orderItemsTable;
         //private Guid _currentOrderId;
         //private DataTable _orderItemsTable;
         //private decimal _totalAmount = 0;
@@ -63,7 +66,12 @@ namespace RestaurantAutomation.UI.Forms
 
         private void ShowCategoryItems(string categoryName)
         {
-            Form menuForm = new Form()
+            var category = _categoryService.GetAll().FirstOrDefault(c => c.Name == categoryName);
+            if (category == null) return;
+
+            //Yeni form oluştur:          
+
+            Form menuItemsForm = new Form()
             {
                 Text = categoryName,
                 Size = new Size(400, 600),
@@ -79,38 +87,45 @@ namespace RestaurantAutomation.UI.Forms
                 AutoScroll = true,
                 Padding = new Padding(10)
             };
-            menuForm.Controls.Add(panel);
+            menuItemsForm.Controls.Add(panel);
 
             // Veriyi al ve kategoriye göre filtrele
-            Guid catID = (Guid)((_categoryService.GetAll().FirstOrDefault(x => x.Name == categoryName)).ID);
-            var menuItems = _menuItemService.GetAll()
-                .Where(m => m.Category != null && m.CategoryID == catID) // Null koruması
-                .ToList();
+            var menuItems = _menuItemService.GetAll().Where(m => m.CategoryID == category.ID);
 
-            if (menuItems.Any())
+
+            foreach (var item in menuItems)
             {
-                foreach (var item in menuItems)
+                Button menuItemButton = new Button()
                 {
-                    Button menuItemButton = new Button()
-                    {
-                        Text = item.Name + "\n" + item.Price.ToString("C"),
-                        Tag = item,
-                        Width = 150,
-                        Height = 50
-                    };
-                    menuItemButton.Click += (s, e) => AddToOrder((MenuItem)((Button)s).Tag);
-                    panel.Controls.Add(menuItemButton);
-                }
+                    Text = $"{item.Name}\n{item.Price:C2}",
+                    Tag = item,
+                    Width = 120,
+                    Height = 50
+                };
+                menuItemButton.Click += (sender, e) =>
+                {
+                    AddToOrder((MenuItem)((Button)sender).Tag);
+                    menuItemsForm.Close();
+                };
+                panel.Controls.Add(menuItemButton);
             }
-            else
-            {
-                MessageBox.Show("Bu kategoriye ait ürün bulunamadı.");
-            }
+            menuItemsForm.Show();
+
         }
 
         private void AddToOrder(MenuItem tag)
         {
-            
+            int quantity = 1;
+            decimal totalPrice = tag.Price * quantity;
+
+            DataGridViewRow row = new DataGridViewRow();
+            row.Cells.Add(new DataGridViewButtonCell() { Value = "Sil" });
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = tag.Name });
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = quantity });
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = tag.Price });
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = totalPrice });
+
+            dataGridView1.Rows.Add(row);
         }
     }
 }
