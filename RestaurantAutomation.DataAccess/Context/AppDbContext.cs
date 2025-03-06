@@ -16,7 +16,8 @@ namespace RestaurantAutomation.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BPMLTJH\SQLEXPRESS;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
+            //optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BPMLTJH\SQLEXPRESS;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
 
 
             

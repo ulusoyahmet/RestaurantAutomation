@@ -99,8 +99,10 @@ namespace RestaurantAutomation.UI.Forms
 
                 _userService.Create(newUser);
 
-                MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Store the logged-in user
+                SessionManager.LoggedInUser = user;
                 LoginSuccessful = true;
                 this.Close();
             }
