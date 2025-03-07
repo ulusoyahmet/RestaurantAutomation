@@ -21,6 +21,9 @@ namespace RestaurantAutomation.DataAccess.Context
 
             //optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
 
+            //ebru
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-IAR6P2O;Initial Catalog=RestaurantAutomation;Integrated Security=True;Trust Server Certificate=True;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
