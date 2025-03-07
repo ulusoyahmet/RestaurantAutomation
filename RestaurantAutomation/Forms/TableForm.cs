@@ -149,7 +149,7 @@ namespace RestaurantAutomation.UI.Forms
                 Form categoryForm = new Form
                 {
                     Text = "Select Table Category",
-                    Size = new Size(300, 150),
+                    Size = new Size(300, 200),
                     StartPosition = FormStartPosition.CenterParent,
                     FormBorderStyle = FormBorderStyle.FixedDialog
                 };
@@ -161,7 +161,7 @@ namespace RestaurantAutomation.UI.Forms
                     Location = new Point(50, 20),
                     Width = 200
                 };
-                cmbCategory.Items.AddRange(new string[] { "Indoor", "Outdoor", "VIP" });
+                cmbCategory.Items.AddRange(new string[] { "Indoor", "Outdoor", "Garden" });
                 cmbCategory.SelectedIndex = 0;
 
                 // Onaylama butonu
@@ -169,8 +169,9 @@ namespace RestaurantAutomation.UI.Forms
                 {
                     Text = "OK",
                     DialogResult = DialogResult.OK,
-                    Location = new Point(100, 60),
-                    Width = 80
+                    Location = new Point(100, 70),
+                    Width = 80,
+                    Height = 50
                 };
 
                 // Form'a öğeleri ekle
