@@ -2,7 +2,6 @@
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
-using RestaurantAutomation.UI.Helpers;
 using System.Data;
 
 namespace RestaurantAutomation.UI.Forms
@@ -14,14 +13,12 @@ namespace RestaurantAutomation.UI.Forms
         private readonly MenuItemService _menuItemService;
         private readonly CategoryService _categoryService;
         private readonly OrderDetailService _orderDetailService;
-        private readonly PaymentService _paymentService;
 
         private readonly OrderRepository _orderRepository;
         private readonly TableRepository _tableRepository;
         private readonly MenuItemRepository _menuItemRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly OrderDetailRepository _orderDetailRepository;
-        private readonly PaymentRepository _paymentRepository;
 
         private readonly AppDbContext _context;
         private readonly AppDbContext _dbContext;
@@ -40,14 +37,12 @@ namespace RestaurantAutomation.UI.Forms
             _menuItemRepository = new MenuItemRepository(_context);
             _categoryRepository = new CategoryRepository(_context);
             _orderDetailRepository = new OrderDetailRepository(_context, _dbContext);
-            _paymentRepository = new PaymentRepository(_context);
 
             _orderService = new OrderService(_orderRepository);
             _tableService = new TableService(_tableRepository);
             _menuItemService = new MenuItemService(_menuItemRepository);
             _categoryService = new CategoryService(_categoryRepository);
             _orderDetailService = new OrderDetailService(_orderDetailRepository);
-            _paymentService = new PaymentService(_paymentRepository);
 
             if (selectedTable == null)
             {
@@ -335,25 +330,14 @@ namespace RestaurantAutomation.UI.Forms
 
                 foreach (MenuItem item in menuItems)
                 {
-    
-                    Button? itemButton = new Button
+                    Button itemButton = new Button
                     {
                         Text = $"{item.Name}\n{item.Price:C2}",
-                        TextAlign = ContentAlignment.BottomCenter,
                         Width = 120,
                         Height = 80,
                         Tag = item,
-                        Margin = new Padding(5),
-                        BackgroundImageLayout = ImageLayout.Stretch
+                        Margin = new Padding(5)
                     };
-
-
-                    // Try to set background image
-                    var image = ImageHelper.ByteArrayToImage(item.Image);
-                    if (image != null)
-                    {
-                        itemButton.BackgroundImage = image;
-                    }
 
                     itemButton.Click += (sender, e) =>
                     {
@@ -363,28 +347,6 @@ namespace RestaurantAutomation.UI.Forms
 
                     panel.Controls.Add(itemButton);
                 }
-
-                //foreach (MenuItem item in menuItems)
-                //{
-                //    Button itemButton = new Button
-                //    {
-                //        Text = $"{item.Name}\n{item.Price:C2}",
-                //        Width = 120,
-                //        Height = 80,
-                //        Tag = item,
-                //        Margin = new Padding(5),
-                //        // add menu item image(binary in db) to button
-                //        BackgroundImage = ImageHelper.ByteArrayToImage(item.Image),
-                //    };
-
-                //    itemButton.Click += (sender, e) =>
-                //    {
-                //        AddItemToOrder(item);
-                //        menuItemsForm.Close();
-                //    };
-
-                //    panel.Controls.Add(itemButton);
-                //}
 
                 menuItemsForm.ShowDialog();
             }
@@ -546,38 +508,7 @@ namespace RestaurantAutomation.UI.Forms
                 MessageBox.Show($"Masa durumu güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void btnCompleteOrder_Click(object sender, EventArgs e)
-        {
-            if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
-            {
-                MessageBox.Show("Tamamlanacak sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                // You can open payment form here
-                MessageBox.Show("Sipariş tamamlandı. Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-                // paymentForm.ShowDialog();
-
-                // Update table status
-                UpdateTableStatus("Empty");
-
-                // Clear order list
-                _orderItemsTable.Clear();
-                _currentOrderId = null;
-
-                // Update total
-                UpdateTotal();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Sipariş tamamlanırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
         {
@@ -623,6 +554,7 @@ namespace RestaurantAutomation.UI.Forms
                 }
             }
         }
+
         private void btnPayment_Click(object sender, EventArgs e)
         {
             if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
@@ -721,31 +653,9 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing payment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        //private void btnPayment_Click(object sender, EventArgs e)
-        //{
-        //    if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
-        //    {
-        //        MessageBox.Show("Ödenecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        // You can open payment form here
-        //        MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //        // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-        //        // paymentForm.ShowDialog();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
 
         private void btnAddNote_Click(object sender, EventArgs e)
         {
@@ -816,136 +726,98 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                // Create order history form
-                Form historyForm = new Form
+                // Sipariş geçmişi için yeni bir form oluştur
+                Form gecmisForm = new Form
                 {
-                    Text = "Order History",
-                    Size = new Size(800, 600),
+                    Text = "Sipariş Geçmişi",
+                    Width = 800,
+                    Height = 500,
                     StartPosition = FormStartPosition.CenterParent,
                     FormBorderStyle = FormBorderStyle.FixedDialog,
                     MaximizeBox = false,
                     MinimizeBox = false
                 };
 
-                // Create DataGridView
-                DataGridView dgvHistory = new DataGridView
+                // DataGridView oluştur
+                DataGridView dgvSiparisGecmisi = new DataGridView
                 {
                     Dock = DockStyle.Fill,
-                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                     AllowUserToAddRows = false,
                     AllowUserToDeleteRows = false,
                     ReadOnly = true,
-                    SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                    MultiSelect = false
-                };
+                    //AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                    SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                };               
 
-                // Create DataTable for order history
-                DataTable historyTable = new DataTable();
-                historyTable.Columns.AddRange(new DataColumn[]
-                {
-            new DataColumn("OrderID", typeof(Guid)),
-            new DataColumn("TableNumber", typeof(int)),
-            new DataColumn("OrderDate", typeof(DateTime)),
-            new DataColumn("TotalAmount", typeof(decimal)),
-            new DataColumn("Status", typeof(string)),
-            new DataColumn("Note", typeof(string))
-                });
-
-                // Load order history data
-                var orders = _orderService.GetAll()
-                    .OrderByDescending(o => o.OrderDate)
+                // Ödenmiş siparişleri veritabanından al
+                var odenmisler = _orderService.GetAll()
+                    .Where(o => o.IsPayment == true && o.IsDeleted == false)
                     .ToList();
 
-                foreach (var order in orders)
+                // DataTable oluştur
+                DataTable dtSiparisler = new DataTable();
+                dtSiparisler.Columns.Add("Sipariş ID", typeof(string));
+                dtSiparisler.Columns.Add("Sipariş Tarihi", typeof(DateTime));
+                dtSiparisler.Columns.Add("Masa No", typeof(int));
+                dtSiparisler.Columns.Add("Ürünler", typeof(string));
+                dtSiparisler.Columns.Add("Toplam Tutar", typeof(decimal));
+
+                // Siparişleri DataTable'a ekle
+                foreach (var siparis in odenmisler)
                 {
-                    var table = _tableService.GetByID(order.TableID);
-                    decimal totalAmount = 0;
+                    // Sipariş detaylarını al
+                    var siparisDetaylari = _orderDetailService.GetAll()
+                        .Where(od => od.OrderID == siparis.ID)
+                        .ToList();
 
-                    // Calculate total amount from order details
-                    var orderDetails = _orderDetailService.GetAll()
-                        .Where(od => od.OrderID == order.ID);
+                    // Masa numarasını al
+                    var masa = _tableService.GetByID(siparis.TableID);
+                    int masaNo = masa != null ? masa.TableNumber : 0;
 
-                    foreach (var detail in orderDetails)
+                    // Ürün listesini oluştur
+                    List<string> urunListesi = new List<string>();
+                    decimal toplamTutar = 0;
+
+                    foreach (var detay in siparisDetaylari)
                     {
-                        var menuItem = _menuItemService.GetByID(detail.MenuItemID);
+                        var menuItem = _menuItemService.GetByID(detay.MenuItemID);
                         if (menuItem != null)
                         {
-                            totalAmount += menuItem.Price * detail.Quantity;
+                            urunListesi.Add($"{menuItem.Name} x{detay.Quantity}");
+                            toplamTutar += menuItem.Price * detay.Quantity;
                         }
                     }
 
-                    // Add row to history table
-                    historyTable.Rows.Add(
-                        order.ID,
-                        table?.TableNumber,
-                        order.OrderDate,
-                        totalAmount,
-                        order.Payment != null ? "Paid" : "Active",
-                        order.Note
+                    // DataTable'a ekle
+                    dtSiparisler.Rows.Add(
+                        siparis.ID.ToString(),
+                        siparis.OrderDate,
+                        masaNo,
+                        string.Join(", ", urunListesi),
+                        toplamTutar
                     );
                 }
 
-                // Set DataSource first
-                dgvHistory.DataSource = historyTable;
+                // DataGridView'e DataTable'ı ata
+                dgvSiparisGecmisi.DataSource = dtSiparisler;
 
-                // Format columns - with null checks and try-catch
-                try
+                // Panel oluştur (butonun dataGridView'in üstünde görünmesi için)
+                Panel panel = new Panel
                 {
-                    if (dgvHistory.Columns != null)
-                    {
-                        var orderIdColumn = dgvHistory.Columns["OrderID"];
-                        if (orderIdColumn != null)
-                        {
-                            orderIdColumn.Visible = false;
-                        }
-
-                        var orderDateColumn = dgvHistory.Columns["OrderDate"];
-                        if (orderDateColumn != null)
-                        {
-                            orderDateColumn.DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-                        }
-
-                        var totalAmountColumn = dgvHistory.Columns["TotalAmount"];
-                        if (totalAmountColumn != null)
-                        {
-                            totalAmountColumn.DefaultCellStyle.Format = "C2";
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error formatting columns: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-
-                // Add double click handler to show order details
-                //dgvHistory.DoubleClick += (s, ev) =>
-                //{
-                //    if (dgvHistory.CurrentRow != null)
-                //    {
-                //        Guid orderId = (Guid)dgvHistory.CurrentRow.Cells["OrderID"].Value;
-                //        ShowOrderDetails(orderId);
-                //    }
-                //};
-
-                // Create close button
-                Button btnClose = new Button
-                {
-                    Text = "Close",
-                    DialogResult = DialogResult.OK,
-                    Dock = DockStyle.Bottom,
-                    Height = 40
+                    Dock = DockStyle.Fill
                 };
 
-                // Add controls to form
-                historyForm.Controls.Add(dgvHistory);
-                historyForm.Controls.Add(btnClose);
+                // Form'a kontrolleri ekle
+                panel.Controls.Add(dgvSiparisGecmisi);
+                
+                gecmisForm.Controls.Add(panel);               
 
-                historyForm.ShowDialog();
+                // Formu göster
+                gecmisForm.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading order history: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Sipariş geçmişi açılırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

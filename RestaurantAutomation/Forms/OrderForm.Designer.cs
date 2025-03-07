@@ -141,7 +141,7 @@
             dataGridView1.Location = new Point(171, 90);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(643, 201);
+            dataGridView1.Size = new Size(637, 201);
             dataGridView1.TabIndex = 3;
             // 
             // btnCancelOrder
@@ -215,7 +215,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(885, 399);
+            ClientSize = new Size(813, 399);
             ControlBox = false;
             Controls.Add(lbl);
             Controls.Add(cmbTableNo);
