@@ -419,6 +419,7 @@ namespace RestaurantAutomation.UI.Forms
                         Height = 120,
                         Tag = item,
                         Margin = new Padding(5),
+                        Font = new Font("Arial", 10, FontStyle.Bold),
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
 
