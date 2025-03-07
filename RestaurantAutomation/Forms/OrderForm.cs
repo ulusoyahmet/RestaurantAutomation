@@ -112,7 +112,8 @@ namespace RestaurantAutomation.UI.Forms
             deleteButtonColumn.Text = "Sil";
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             deleteButtonColumn.Name = "DeleteColumn";
-            deleteButtonColumn.Width = 60;
+            deleteButtonColumn.Width = 100;
+            deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Check if column already exists before adding
             if (dataGridView1.Columns["DeleteColumn"] == null)
@@ -199,7 +200,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                var tables = _tableService.GetAll();
+                var tables = _tableService.GetAll().OrderBy(t => t.TableNumber); ;
                 cmbTableNo.Items.Clear();
                 foreach (var table in tables)
                 {
@@ -542,11 +543,11 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
         {
-            if (!_currentOrderId.HasValue)
-            {
-                MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (!_currentOrderId.HasValue)
+            //{
+            //    MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
             DialogResult result = MessageBox.Show("Bu siparişi iptal etmek istediğinizden emin misiniz?", "Sipariş İptali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -555,17 +556,24 @@ namespace RestaurantAutomation.UI.Forms
                 try
                 {
                     // Delete order details
-                    var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
-                    foreach (var detail in orderDetails)
-                    {
-                        _orderDetailService.Delete(detail.ID);
-                    }
+                    //var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
+                    //foreach (var detail in orderDetails)
+                    //{
+                    //    var product = _menuItemService.GetByID(detail.MenuItemID);
+                    //    _orderDetailService.DeleteByOrderProductID(detail.ID, product.ID);
+                    //}
 
                     // Delete order
-                    _orderService.Delete(_currentOrderId.Value);
+                    //_orderService.Delete(_currentOrderId.Value);
 
                     // Update table status
                     UpdateTableStatus("Empty");
+
+                    if (dataGridView1 != null)
+                    {
+                        ((DataTable)dataGridView1.DataSource).Rows.Clear();
+                    }
+
 
                     // Clear order list
                     _orderItemsTable.Clear();
@@ -656,7 +664,12 @@ namespace RestaurantAutomation.UI.Forms
                     // Here you should actually save the note to the order in database
                     // For example: _orderService.AddNote(_currentOrderId.Value, note);
 
+                    Order currentOrder = _orderRepository.GetByID(Guid.Parse(_currentOrderId.ToString()));
+                    currentOrder.Note = note;
+                    _orderRepository.Update(currentOrder);
                     MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    lblOrderNotes.Text = "Note: " + note;
                 }
             }
             catch (Exception ex)
@@ -739,5 +752,7 @@ namespace RestaurantAutomation.UI.Forms
                 }
             }
         }
+
+
     }
 }

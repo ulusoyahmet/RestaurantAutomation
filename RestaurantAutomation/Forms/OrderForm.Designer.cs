@@ -45,6 +45,7 @@
             btnOrderHistory = new Button();
             label2 = new Label();
             cmbTableNo = new ComboBox();
+            lbl = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 59);
+            label1.Location = new Point(31, 58);
             label1.Name = "label1";
             label1.Size = new Size(71, 20);
             label1.TabIndex = 1;
@@ -71,7 +72,7 @@
             // lblOrderStatus
             // 
             lblOrderStatus.AutoSize = true;
-            lblOrderStatus.Location = new Point(152, 59);
+            lblOrderStatus.Location = new Point(171, 58);
             lblOrderStatus.Name = "lblOrderStatus";
             lblOrderStatus.Size = new Size(52, 20);
             lblOrderStatus.TabIndex = 1;
@@ -80,7 +81,7 @@
             // lblTotalAmount
             // 
             lblTotalAmount.AutoSize = true;
-            lblTotalAmount.Location = new Point(293, 59);
+            lblTotalAmount.Location = new Point(312, 58);
             lblTotalAmount.Name = "lblTotalAmount";
             lblTotalAmount.Size = new Size(45, 20);
             lblTotalAmount.TabIndex = 1;
@@ -89,7 +90,7 @@
             // lblOrderNotes
             // 
             lblOrderNotes.AutoSize = true;
-            lblOrderNotes.Location = new Point(449, 59);
+            lblOrderNotes.Location = new Point(490, 58);
             lblOrderNotes.Name = "lblOrderNotes";
             lblOrderNotes.Size = new Size(45, 20);
             lblOrderNotes.TabIndex = 1;
@@ -97,7 +98,7 @@
             // 
             // btnStarters
             // 
-            btnStarters.Location = new Point(12, 106);
+            btnStarters.Location = new Point(31, 105);
             btnStarters.Name = "btnStarters";
             btnStarters.Size = new Size(107, 29);
             btnStarters.TabIndex = 2;
@@ -107,7 +108,7 @@
             // 
             // btnMainCourses
             // 
-            btnMainCourses.Location = new Point(12, 153);
+            btnMainCourses.Location = new Point(31, 152);
             btnMainCourses.Name = "btnMainCourses";
             btnMainCourses.Size = new Size(107, 29);
             btnMainCourses.TabIndex = 2;
@@ -117,7 +118,7 @@
             // 
             // btnDesserts
             // 
-            btnDesserts.Location = new Point(12, 199);
+            btnDesserts.Location = new Point(31, 198);
             btnDesserts.Name = "btnDesserts";
             btnDesserts.Size = new Size(107, 29);
             btnDesserts.TabIndex = 2;
@@ -127,7 +128,7 @@
             // 
             // btnBeverages
             // 
-            btnBeverages.Location = new Point(12, 247);
+            btnBeverages.Location = new Point(31, 246);
             btnBeverages.Name = "btnBeverages";
             btnBeverages.Size = new Size(109, 29);
             btnBeverages.TabIndex = 2;
@@ -138,62 +139,67 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(152, 91);
+            dataGridView1.Location = new Point(171, 90);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(471, 201);
+            dataGridView1.Size = new Size(746, 201);
             dataGridView1.TabIndex = 3;
             // 
             // btnCompleteOrder
             // 
-            btnCompleteOrder.Location = new Point(12, 340);
+            btnCompleteOrder.Location = new Point(250, 319);
             btnCompleteOrder.Name = "btnCompleteOrder";
-            btnCompleteOrder.Size = new Size(94, 48);
+            btnCompleteOrder.Size = new Size(94, 58);
             btnCompleteOrder.TabIndex = 2;
             btnCompleteOrder.Text = "Complete Order";
             btnCompleteOrder.UseVisualStyleBackColor = true;
+            btnCompleteOrder.Click += btnCompleteOrder_Click;
             // 
             // btnCancelOrder
             // 
-            btnCancelOrder.Location = new Point(142, 340);
+            btnCancelOrder.Location = new Point(380, 319);
             btnCancelOrder.Name = "btnCancelOrder";
-            btnCancelOrder.Size = new Size(94, 48);
+            btnCancelOrder.Size = new Size(94, 58);
             btnCancelOrder.TabIndex = 2;
             btnCancelOrder.Text = "Cancel Order";
             btnCancelOrder.UseVisualStyleBackColor = true;
+            btnCancelOrder.Click += btnCancelOrder_Click;
             // 
             // btnPayment
             // 
-            btnPayment.Location = new Point(265, 340);
+            btnPayment.Location = new Point(503, 319);
             btnPayment.Name = "btnPayment";
-            btnPayment.Size = new Size(94, 48);
+            btnPayment.Size = new Size(94, 58);
             btnPayment.TabIndex = 2;
             btnPayment.Text = "Payment";
             btnPayment.UseVisualStyleBackColor = true;
+            btnPayment.Click += btnPayment_Click;
             // 
             // btnAddNote
             // 
-            btnAddNote.Location = new Point(385, 340);
+            btnAddNote.Location = new Point(623, 319);
             btnAddNote.Name = "btnAddNote";
-            btnAddNote.Size = new Size(94, 48);
+            btnAddNote.Size = new Size(94, 58);
             btnAddNote.TabIndex = 2;
             btnAddNote.Text = "Add Note";
             btnAddNote.UseVisualStyleBackColor = true;
+            btnAddNote.Click += btnAddNote_Click;
             // 
             // btnOrderHistory
             // 
-            btnOrderHistory.Location = new Point(510, 340);
+            btnOrderHistory.Location = new Point(748, 319);
             btnOrderHistory.Name = "btnOrderHistory";
-            btnOrderHistory.Size = new Size(94, 48);
+            btnOrderHistory.Size = new Size(94, 58);
             btnOrderHistory.TabIndex = 2;
             btnOrderHistory.Text = "Order History";
             btnOrderHistory.UseVisualStyleBackColor = true;
+            btnOrderHistory.Click += btnOrderHistory_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(202, 12);
+            label2.Location = new Point(428, 12);
             label2.Name = "label2";
             label2.Size = new Size(184, 28);
             label2.TabIndex = 5;
@@ -202,17 +208,27 @@
             // cmbTableNo
             // 
             cmbTableNo.FormattingEnabled = true;
-            cmbTableNo.Location = new Point(83, 56);
+            cmbTableNo.Location = new Point(102, 55);
             cmbTableNo.Name = "cmbTableNo";
             cmbTableNo.Size = new Size(50, 28);
             cmbTableNo.TabIndex = 6;
             cmbTableNo.SelectedIndexChanged += cmbTableNo_SelectedIndexChanged;
             // 
+            // lbl
+            // 
+            lbl.AutoSize = true;
+            lbl.Location = new Point(519, 58);
+            lbl.Name = "lbl";
+            lbl.Size = new Size(0, 20);
+            lbl.TabIndex = 7;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(630, 399);
+            ClientSize = new Size(952, 399);
+            ControlBox = false;
+            Controls.Add(lbl);
             Controls.Add(cmbTableNo);
             Controls.Add(label2);
             Controls.Add(dataGridView1);
@@ -231,6 +247,7 @@
             Controls.Add(label1);
             Controls.Add(btnMainMenu);
             Name = "OrderForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "OrderForm";
             Load += OrderForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -257,5 +274,6 @@
         private Button btnOrderHistory;
         private Label label2;
         private ComboBox cmbTableNo;
+        private Label lbl;
     }
 }
