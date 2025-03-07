@@ -31,10 +31,10 @@
             groupBox1 = new GroupBox();
             btnLogout = new Button();
             btnCategory = new Button();
-            btnReports = new Button();
             btnMenu = new Button();
             btnOrder = new Button();
             btnTable = new Button();
+            btnReports = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,17 +77,6 @@
             btnCategory.UseVisualStyleBackColor = true;
             btnCategory.Click += btnCategory_Click;
             // 
-            // btnReports
-            // 
-            btnReports.Location = new Point(374, 219);
-            btnReports.Margin = new Padding(4, 5, 4, 5);
-            btnReports.Name = "btnReports";
-            btnReports.Size = new Size(290, 111);
-            btnReports.TabIndex = 2;
-            btnReports.Text = "Reports";
-            btnReports.UseVisualStyleBackColor = true;
-            btnReports.Click += btnReports_Click;
-            // 
             // btnMenu
             // 
             btnMenu.Location = new Point(76, 219);
@@ -121,6 +110,17 @@
             btnTable.UseVisualStyleBackColor = true;
             btnTable.Click += btnTable_Click;
             // 
+            // btnReports
+            // 
+            btnReports.Location = new Point(374, 219);
+            btnReports.Margin = new Padding(4, 5, 4, 5);
+            btnReports.Name = "btnReports";
+            btnReports.Size = new Size(290, 111);
+            btnReports.TabIndex = 2;
+            btnReports.Text = "Reports";
+            btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += btnReports_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -139,11 +139,11 @@
         #endregion
 
         private GroupBox groupBox1;
-        private Button btnReports;
         private Button btnMenu;
         private Button btnOrder;
         private Button btnTable;
         private Button btnLogout;
         private Button btnCategory;
+        private Button btnReports;
     }
 }

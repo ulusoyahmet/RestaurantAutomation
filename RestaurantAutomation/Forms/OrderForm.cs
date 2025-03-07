@@ -766,7 +766,7 @@ namespace RestaurantAutomation.UI.Forms
                 Form noteForm = new Form
                 {
                     Width = 400,
-                    Height = 200,
+                    Height = 250,
                     Text = "Add Order Note",
                     StartPosition = FormStartPosition.CenterParent,
                     FormBorderStyle = FormBorderStyle.FixedDialog,
@@ -786,6 +786,7 @@ namespace RestaurantAutomation.UI.Forms
                 {
                     Text = "Save",
                     Location = new Point(150, 130),
+                    Size = new Size(75, 50),
                     DialogResult = DialogResult.OK
                 };
 
