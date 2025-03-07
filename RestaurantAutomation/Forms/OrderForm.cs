@@ -782,15 +782,136 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                // You can open order history form here
-                MessageBox.Show("Sipariş geçmişi ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Create order history form
+                Form historyForm = new Form
+                {
+                    Text = "Order History",
+                    Size = new Size(800, 600),
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
 
-                // OrderHistoryForm historyForm = new OrderHistoryForm();
-                // historyForm.ShowDialog();
+                // Create DataGridView
+                DataGridView dgvHistory = new DataGridView
+                {
+                    Dock = DockStyle.Fill,
+                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                    AllowUserToAddRows = false,
+                    AllowUserToDeleteRows = false,
+                    ReadOnly = true,
+                    SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                    MultiSelect = false
+                };
+
+                // Create DataTable for order history
+                DataTable historyTable = new DataTable();
+                historyTable.Columns.AddRange(new DataColumn[]
+                {
+            new DataColumn("OrderID", typeof(Guid)),
+            new DataColumn("TableNumber", typeof(int)),
+            new DataColumn("OrderDate", typeof(DateTime)),
+            new DataColumn("TotalAmount", typeof(decimal)),
+            new DataColumn("Status", typeof(string)),
+            new DataColumn("Note", typeof(string))
+                });
+
+                // Load order history data
+                var orders = _orderService.GetAll()
+                    .OrderByDescending(o => o.OrderDate)
+                    .ToList();
+
+                foreach (var order in orders)
+                {
+                    var table = _tableService.GetByID(order.TableID);
+                    decimal totalAmount = 0;
+
+                    // Calculate total amount from order details
+                    var orderDetails = _orderDetailService.GetAll()
+                        .Where(od => od.OrderID == order.ID);
+
+                    foreach (var detail in orderDetails)
+                    {
+                        var menuItem = _menuItemService.GetByID(detail.MenuItemID);
+                        if (menuItem != null)
+                        {
+                            totalAmount += menuItem.Price * detail.Quantity;
+                        }
+                    }
+
+                    // Add row to history table
+                    historyTable.Rows.Add(
+                        order.ID,
+                        table?.TableNumber,
+                        order.OrderDate,
+                        totalAmount,
+                        order.Payment != null ? "Paid" : "Active",
+                        order.Note
+                    );
+                }
+
+                // Set DataSource first
+                dgvHistory.DataSource = historyTable;
+
+                // Format columns - with null checks and try-catch
+                try
+                {
+                    if (dgvHistory.Columns != null)
+                    {
+                        var orderIdColumn = dgvHistory.Columns["OrderID"];
+                        if (orderIdColumn != null)
+                        {
+                            orderIdColumn.Visible = false;
+                        }
+
+                        var orderDateColumn = dgvHistory.Columns["OrderDate"];
+                        if (orderDateColumn != null)
+                        {
+                            orderDateColumn.DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+                        }
+
+                        var totalAmountColumn = dgvHistory.Columns["TotalAmount"];
+                        if (totalAmountColumn != null)
+                        {
+                            totalAmountColumn.DefaultCellStyle.Format = "C2";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error formatting columns: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                // Add double click handler to show order details
+                //dgvHistory.DoubleClick += (s, ev) =>
+                //{
+                //    if (dgvHistory.CurrentRow != null)
+                //    {
+                //        Guid orderId = (Guid)dgvHistory.CurrentRow.Cells["OrderID"].Value;
+                //        ShowOrderDetails(orderId);
+                //    }
+                //};
+
+                // Create close button
+                Button btnClose = new Button
+                {
+                    Text = "Close",
+                    DialogResult = DialogResult.OK,
+                    Dock = DockStyle.Bottom,
+                    Height = 40
+                };
+
+                // Add controls to form
+                historyForm.Controls.Add(dgvHistory);
+                historyForm.Controls.Add(btnClose);
+
+                historyForm.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş geçmişi açılırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading order history: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
