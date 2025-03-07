@@ -23,7 +23,7 @@ namespace RestaurantAutomation.UI.Forms
         private void MenuForm_Load(object sender, EventArgs e)
         {
             GetAllProducts(null);
-            GetAllCategories();        
+            GetAllCategories();
         }
 
         private void GetAllCategories()
@@ -105,10 +105,13 @@ namespace RestaurantAutomation.UI.Forms
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // show the selected image in the picturebox
+                    // PictureBox'ın SizeMode özelliğini ayarla
+                    pcbImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+                    // Resmi PictureBox'a yükle
                     pcbImage.Image = new Bitmap(openFileDialog.FileName);
 
-                    // convert the image to byte array
+                    // Resmi byte dizisine dönüştür
                     using (MemoryStream ms = new MemoryStream())
                     {
                         pcbImage.Image.Save(ms, pcbImage.Image.RawFormat);
@@ -160,6 +163,20 @@ namespace RestaurantAutomation.UI.Forms
             txtDescription.Text = selectedMenuItem.Description;
             txtPrice.Text = selectedMenuItem.Price.ToString();
             cmbCategory.SelectedValue = selectedMenuItem.CategoryID;
+
+            if (selectedMenuItem.Image != null)
+            {
+                // convert byte[] to image
+                using (MemoryStream ms = new MemoryStream(selectedMenuItem.Image))
+                {
+                    pcbImage.SizeMode = PictureBoxSizeMode.Zoom;
+                    pcbImage.Image = Image.FromStream(ms);
+                }
+            }
+            else
+            {
+                pcbImage.Image = null;
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
