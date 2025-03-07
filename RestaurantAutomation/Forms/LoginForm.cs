@@ -102,7 +102,7 @@ namespace RestaurantAutomation.UI.Forms
 
                 MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Store the logged-in user
-                SessionManager.LoggedInUser = user;
+                SessionManager.LoggedInUser = newUser;
                 LoginSuccessful = true;
                 this.Close();
             }
