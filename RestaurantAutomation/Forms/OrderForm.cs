@@ -2,6 +2,7 @@
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
+using RestaurantAutomation.UI.Helpers;
 using System.Data;
 
 namespace RestaurantAutomation.UI.Forms
@@ -334,14 +335,25 @@ namespace RestaurantAutomation.UI.Forms
 
                 foreach (MenuItem item in menuItems)
                 {
-                    Button itemButton = new Button
+    
+                    Button? itemButton = new Button
                     {
                         Text = $"{item.Name}\n{item.Price:C2}",
+                        TextAlign = ContentAlignment.BottomCenter,
                         Width = 120,
                         Height = 80,
                         Tag = item,
-                        Margin = new Padding(5)
+                        Margin = new Padding(5),
+                        BackgroundImageLayout = ImageLayout.Stretch
                     };
+
+
+                    // Try to set background image
+                    var image = ImageHelper.ByteArrayToImage(item.Image);
+                    if (image != null)
+                    {
+                        itemButton.BackgroundImage = image;
+                    }
 
                     itemButton.Click += (sender, e) =>
                     {
@@ -351,6 +363,28 @@ namespace RestaurantAutomation.UI.Forms
 
                     panel.Controls.Add(itemButton);
                 }
+
+                //foreach (MenuItem item in menuItems)
+                //{
+                //    Button itemButton = new Button
+                //    {
+                //        Text = $"{item.Name}\n{item.Price:C2}",
+                //        Width = 120,
+                //        Height = 80,
+                //        Tag = item,
+                //        Margin = new Padding(5),
+                //        // add menu item image(binary in db) to button
+                //        BackgroundImage = ImageHelper.ByteArrayToImage(item.Image),
+                //    };
+
+                //    itemButton.Click += (sender, e) =>
+                //    {
+                //        AddItemToOrder(item);
+                //        menuItemsForm.Close();
+                //    };
+
+                //    panel.Controls.Add(itemButton);
+                //}
 
                 menuItemsForm.ShowDialog();
             }
