@@ -13,12 +13,14 @@ namespace RestaurantAutomation.UI.Forms
         private readonly MenuItemService _menuItemService;
         private readonly CategoryService _categoryService;
         private readonly OrderDetailService _orderDetailService;
+        private readonly PaymentService _paymentService;
 
         private readonly OrderRepository _orderRepository;
         private readonly TableRepository _tableRepository;
         private readonly MenuItemRepository _menuItemRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly OrderDetailRepository _orderDetailRepository;
+        private readonly PaymentRepository _paymentRepository;
 
         private readonly AppDbContext _context;
         private readonly AppDbContext _dbContext;
@@ -37,12 +39,14 @@ namespace RestaurantAutomation.UI.Forms
             _menuItemRepository = new MenuItemRepository(_context);
             _categoryRepository = new CategoryRepository(_context);
             _orderDetailRepository = new OrderDetailRepository(_context, _dbContext);
+            _paymentRepository = new PaymentRepository(_context);
 
             _orderService = new OrderService(_orderRepository);
             _tableService = new TableService(_tableRepository);
             _menuItemService = new MenuItemService(_menuItemRepository);
             _categoryService = new CategoryService(_categoryRepository);
             _orderDetailService = new OrderDetailService(_orderDetailRepository);
+            _paymentService = new PaymentService(_paymentRepository);
 
             if (selectedTable == null)
             {
@@ -590,7 +594,6 @@ namespace RestaurantAutomation.UI.Forms
                 }
             }
         }
-
         private void btnPayment_Click(object sender, EventArgs e)
         {
             if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
@@ -601,17 +604,114 @@ namespace RestaurantAutomation.UI.Forms
 
             try
             {
-                // You can open payment form here
-                MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Create payment form
+                Form paymentForm = new Form
+                {
+                    Text = "Payment",
+                    Size = new Size(300, 200),
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
 
-                // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-                // paymentForm.ShowDialog();
+                // Create controls
+                Label lblAmount = new Label
+                {
+                    Text = "Total Amount:",
+                    Location = new Point(20, 20)
+                };
+
+                TextBox txtAmount = new TextBox
+                {
+                    Text = lblTotalAmount.Text.Replace("₺", "").Trim(),
+                    Location = new Point(120, 20),
+                    Width = 150,
+                    ReadOnly = true
+                };
+
+                Label lblPaymentType = new Label
+                {
+                    Text = "Payment Type:",
+                    Location = new Point(20, 50)
+                };
+
+                ComboBox cmbPaymentType = new ComboBox
+                {
+                    DropDownStyle = ComboBoxStyle.DropDownList,
+                    Location = new Point(120, 50),
+                    Width = 150
+                };
+                cmbPaymentType.Items.AddRange(new string[] { "Cash", "Credit Card", "Debit Card" });
+                cmbPaymentType.SelectedIndex = 0;
+
+                Button btnConfirm = new Button
+                {
+                    Text = "Confirm Payment",
+                    DialogResult = DialogResult.OK,
+                    Location = new Point(100, 120),
+                    Width = 120
+                };
+
+                // Add controls to form
+                paymentForm.Controls.AddRange(new Control[] {
+                    lblAmount, txtAmount,
+                    lblPaymentType, cmbPaymentType,
+                    btnConfirm
+                });
+
+                if (paymentForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Create payment record
+                    var payment = new Payment
+                    {
+                        ID = Guid.NewGuid(),
+                        Amount = decimal.Parse(txtAmount.Text),
+                        PaymentDate = DateTime.Now,
+                        OrderID = _currentOrderId.Value
+                    };
+
+                    // Add payment to database
+                    _paymentService.Create(payment);
+
+                    // Update table status
+                    UpdateTableStatus("Empty");
+
+                    // Clear order
+                    _orderItemsTable.Clear();
+                    _currentOrderId = null;
+                    UpdateTotal();
+
+                    MessageBox.Show("Payment processed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing payment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //private void btnPayment_Click(object sender, EventArgs e)
+        //{
+        //    if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
+        //    {
+        //        MessageBox.Show("Ödenecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        // You can open payment form here
+        //        MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        //        // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
+        //        // paymentForm.ShowDialog();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void btnAddNote_Click(object sender, EventArgs e)
         {
