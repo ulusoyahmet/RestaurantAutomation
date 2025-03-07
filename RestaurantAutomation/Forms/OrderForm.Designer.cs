@@ -146,7 +146,7 @@
             // 
             // btnCancelOrder
             // 
-            btnCancelOrder.Location = new Point(274, 310);
+            btnCancelOrder.Location = new Point(272, 310);
             btnCancelOrder.Name = "btnCancelOrder";
             btnCancelOrder.Size = new Size(94, 58);
             btnCancelOrder.TabIndex = 2;
