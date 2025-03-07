@@ -113,7 +113,7 @@ namespace RestaurantAutomation.UI.Forms
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             deleteButtonColumn.Name = "DeleteColumn";
             deleteButtonColumn.Width = 80;
-           // deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Check if column already exists before adding
             if (dataGridView1.Columns["DeleteColumn"] == null)
@@ -124,11 +124,91 @@ namespace RestaurantAutomation.UI.Forms
             // Hide Id column
             dataGridView1.Columns["Id"].Visible = false;
 
-            // Register event handler
+            // Set ProductName column to ReadOnly
+            if (dataGridView1.Columns["ProductName"] != null)
+                dataGridView1.Columns["ProductName"].ReadOnly = true;
+
+            // Set Price column to ReadOnly
+            if (dataGridView1.Columns["Price"] != null)
+                dataGridView1.Columns["Price"].ReadOnly = true;
+
+            // Set TotalPrice column to ReadOnly
+            if (dataGridView1.Columns["TotalPrice"] != null)
+                dataGridView1.Columns["TotalPrice"].ReadOnly = true;
+
+            // Register event handlers
             dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
 
             // Update total
             UpdateTotal();
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the edited cell is in the Quantity column
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 &&
+                dataGridView1.Columns[e.ColumnIndex].Name == "Quantity")
+            {
+                UpdateRowTotal(e.RowIndex);
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the edited cell is in the Quantity column
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 &&
+                dataGridView1.Columns[e.ColumnIndex].Name == "Quantity")
+            {
+                try
+                {
+                    // Miktar sıfır veya negatif olamaz
+                    int quantity = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value);
+                    if (quantity <= 0)
+                    {
+                        MessageBox.Show("Miktar en az 1 olmalıdır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value = 1;
+                    }
+
+                    // Değişikliği veritabanına kaydet
+                    Guid menuItemId = (Guid)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
+                    int newQuantity = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value);
+
+                    if (_currentOrderId.HasValue)
+                    {
+                        UpdateOrderDetail(menuItemId, newQuantity);
+                    }
+
+                    // Satır toplamını güncelle
+                    UpdateRowTotal(e.RowIndex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Miktar güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void UpdateRowTotal(int rowIndex)
+        {
+            try
+            {
+                // Miktar ve birim fiyatı al
+                int quantity = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Quantity"].Value);
+                decimal price = Convert.ToDecimal(dataGridView1.Rows[rowIndex].Cells["Price"].Value);
+
+                // Toplam fiyatı hesapla ve güncelle
+                decimal totalPrice = price * quantity;
+                dataGridView1.Rows[rowIndex].Cells["TotalPrice"].Value = totalPrice;
+
+                // Genel toplamı güncelle
+                UpdateTotal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Satır toplamı hesaplanırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
