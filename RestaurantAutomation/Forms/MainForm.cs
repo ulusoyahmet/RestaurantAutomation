@@ -75,7 +75,7 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            // Logout logic...
+            Application.Restart();
         }
 
         private void btnCategory_Click(object sender, EventArgs e)
