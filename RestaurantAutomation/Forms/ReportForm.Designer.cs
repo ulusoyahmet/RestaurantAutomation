@@ -34,10 +34,9 @@
             // btnMainMenu
             // 
             btnMainMenu.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnMainMenu.Location = new Point(9, 9);
-            btnMainMenu.Margin = new Padding(3, 4, 3, 4);
+            btnMainMenu.Location = new Point(8, 7);
             btnMainMenu.Name = "btnMainMenu";
-            btnMainMenu.Size = new Size(35, 40);
+            btnMainMenu.Size = new Size(31, 30);
             btnMainMenu.TabIndex = 11;
             btnMainMenu.Text = "🡰";
             btnMainMenu.UseVisualStyleBackColor = true;
@@ -45,9 +44,9 @@
             // 
             // ReportForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(722, 492);
+            ClientSize = new Size(632, 369);
             ControlBox = false;
             Controls.Add(btnMainMenu);
             Margin = new Padding(2);
