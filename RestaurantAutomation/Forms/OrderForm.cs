@@ -108,12 +108,12 @@ namespace RestaurantAutomation.UI.Forms
 
             // Add delete button column
             DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
-            deleteButtonColumn.HeaderText = "Sil";
-            deleteButtonColumn.Text = "Sil";
+            deleteButtonColumn.HeaderText = "Delete";
+            deleteButtonColumn.Text = "Delete";
             deleteButtonColumn.UseColumnTextForButtonValue = true;
             deleteButtonColumn.Name = "DeleteColumn";
-            deleteButtonColumn.Width = 100;
-            deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            deleteButtonColumn.Width = 80;
+           // deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Check if column already exists before adding
             if (dataGridView1.Columns["DeleteColumn"] == null)
@@ -226,7 +226,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.Payment == null);
+                var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.IsPayment==false && o.IsDeleted==false);
 
                 if (order != null)
                 {
@@ -543,29 +543,18 @@ namespace RestaurantAutomation.UI.Forms
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
         {
-            //if (!_currentOrderId.HasValue)
-            //{
-            //    MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            if (!_currentOrderId.HasValue)
+            {
+                MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             DialogResult result = MessageBox.Show("Bu siparişi iptal etmek istediğinizden emin misiniz?", "Sipariş İptali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 try
-                {
-                    // Delete order details
-                    //var orderDetails = _orderDetailService.GetAll().Where(od => od.OrderID == _currentOrderId.Value);
-                    //foreach (var detail in orderDetails)
-                    //{
-                    //    var product = _menuItemService.GetByID(detail.MenuItemID);
-                    //    _orderDetailService.DeleteByOrderProductID(detail.ID, product.ID);
-                    //}
-
-                    // Delete order
-                    //_orderService.Delete(_currentOrderId.Value);
-
+                {                   
                     // Update table status
                     UpdateTableStatus("Empty");
 
@@ -577,6 +566,12 @@ namespace RestaurantAutomation.UI.Forms
 
                     // Clear order list
                     _orderItemsTable.Clear();
+                    if (_currentOrderId.HasValue)
+                    {
+                        Order currentOrder = _orderRepository.GetByID(Guid.Parse(_currentOrderId.ToString()));
+                        currentOrder.IsDeleted = true;
+                        _orderService.Update(currentOrder);
+                    }
                     _currentOrderId = null;
 
                     // Update total
@@ -600,12 +595,92 @@ namespace RestaurantAutomation.UI.Forms
             }
 
             try
-            {
-                // You can open payment form here
-                MessageBox.Show("Ödeme ekranına yönlendiriliyorsunuz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {               
+                Form paymentForm = new Form
+                {
+                    Text = "Payment",
+                    Width = 500,
+                    Height = 400,
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
+                               
 
-                // PaymentForm paymentForm = new PaymentForm(_currentOrderId.Value);
-                // paymentForm.ShowDialog();
+                FlowLayoutPanel panel = new FlowLayoutPanel
+                {
+                    Dock = DockStyle.Fill,
+                    AutoScroll = true,
+                    Padding = new Padding(10),
+                    FlowDirection = FlowDirection.TopDown,
+                    WrapContents = false
+                };
+
+               
+                foreach (DataRow product in _orderItemsTable.Rows)
+                {
+                    Label lblProduct = new Label
+                    {
+                        Text = $"{product["ProductName"]} -- {product["Quantity"]} X {product["Price"]:C}",
+                        AutoSize = true
+                    };
+                    panel.Controls.Add(lblProduct);                    
+                }
+
+                FlowLayoutPanel bottomPanel = new FlowLayoutPanel
+                {
+                    Dock = DockStyle.Bottom,
+                    Height = 50
+                };
+
+                Label lblTotal = new Label
+                {
+                    Text = $"Total: {lblTotalAmount.Text}",
+                    AutoSize = true,
+                    Font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Bold),                    
+                    Margin = new Padding(20, 7, 0, 0)
+
+                };
+                panel.Controls.Add(lblTotal);
+
+                Button btnPay = new Button
+                {
+                    Text = "Pay",
+                    AutoSize = true,
+                    Padding = new Padding(5),
+                    Location = new Point(380, 10),
+                    Anchor = AnchorStyles.Right | AnchorStyles.Bottom
+                };
+                panel.Controls.Add(btnPay);
+
+                btnPay.Click += (sender, e) =>
+                {
+                    if (_currentOrderId.HasValue)
+                    {
+                        Order currentOrder = _orderRepository.GetByID(Guid.Parse(_currentOrderId.ToString()));
+                        currentOrder.IsPayment = true;
+                        _orderService.Update(currentOrder);
+                    }
+                    _currentOrderId = null;
+                    MessageBox.Show("Payment process is succes.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ((DataTable)dataGridView1.DataSource).Rows.Clear();
+                    lblTotalAmount.Text = null;
+                    UpdateTableStatus("Empty");
+                    paymentForm.Close();
+                };
+
+                bottomPanel.Controls.Add(btnPay);
+                bottomPanel.Controls.Add(lblTotal);
+
+                
+
+                paymentForm.Controls.Add(panel);
+                paymentForm.Controls.Add(bottomPanel);
+                paymentForm.Show();
+
+
+                
             }
             catch (Exception ex)
             {

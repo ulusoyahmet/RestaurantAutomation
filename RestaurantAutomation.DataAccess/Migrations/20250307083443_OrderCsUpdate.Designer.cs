@@ -12,8 +12,8 @@ using RestaurantAutomation.DataAccess.Context;
 namespace RestaurantAutomation.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250306231705_Init")]
-    partial class Init
+    [Migration("20250307083443_OrderCsUpdate")]
+    partial class OrderCsUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,12 @@ namespace RestaurantAutomation.DataAccess.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPayment")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");

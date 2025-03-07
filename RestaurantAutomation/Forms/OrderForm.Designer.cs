@@ -38,7 +38,6 @@
             btnDesserts = new Button();
             btnBeverages = new Button();
             dataGridView1 = new DataGridView();
-            btnCompleteOrder = new Button();
             btnCancelOrder = new Button();
             btnPayment = new Button();
             btnAddNote = new Button();
@@ -142,22 +141,12 @@
             dataGridView1.Location = new Point(171, 90);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(746, 201);
+            dataGridView1.Size = new Size(643, 201);
             dataGridView1.TabIndex = 3;
-            // 
-            // btnCompleteOrder
-            // 
-            btnCompleteOrder.Location = new Point(250, 319);
-            btnCompleteOrder.Name = "btnCompleteOrder";
-            btnCompleteOrder.Size = new Size(94, 58);
-            btnCompleteOrder.TabIndex = 2;
-            btnCompleteOrder.Text = "Complete Order";
-            btnCompleteOrder.UseVisualStyleBackColor = true;
-            btnCompleteOrder.Click += btnCompleteOrder_Click;
             // 
             // btnCancelOrder
             // 
-            btnCancelOrder.Location = new Point(380, 319);
+            btnCancelOrder.Location = new Point(274, 310);
             btnCancelOrder.Name = "btnCancelOrder";
             btnCancelOrder.Size = new Size(94, 58);
             btnCancelOrder.TabIndex = 2;
@@ -167,7 +156,7 @@
             // 
             // btnPayment
             // 
-            btnPayment.Location = new Point(503, 319);
+            btnPayment.Location = new Point(398, 310);
             btnPayment.Name = "btnPayment";
             btnPayment.Size = new Size(94, 58);
             btnPayment.TabIndex = 2;
@@ -177,7 +166,7 @@
             // 
             // btnAddNote
             // 
-            btnAddNote.Location = new Point(623, 319);
+            btnAddNote.Location = new Point(518, 310);
             btnAddNote.Name = "btnAddNote";
             btnAddNote.Size = new Size(94, 58);
             btnAddNote.TabIndex = 2;
@@ -187,7 +176,7 @@
             // 
             // btnOrderHistory
             // 
-            btnOrderHistory.Location = new Point(748, 319);
+            btnOrderHistory.Location = new Point(643, 310);
             btnOrderHistory.Name = "btnOrderHistory";
             btnOrderHistory.Size = new Size(94, 58);
             btnOrderHistory.TabIndex = 2;
@@ -226,7 +215,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(952, 399);
+            ClientSize = new Size(885, 399);
             ControlBox = false;
             Controls.Add(lbl);
             Controls.Add(cmbTableNo);
@@ -236,7 +225,6 @@
             Controls.Add(btnAddNote);
             Controls.Add(btnPayment);
             Controls.Add(btnCancelOrder);
-            Controls.Add(btnCompleteOrder);
             Controls.Add(btnBeverages);
             Controls.Add(btnDesserts);
             Controls.Add(btnMainCourses);
@@ -267,7 +255,6 @@
         private Button btnDesserts;
         private Button btnBeverages;
         private DataGridView dataGridView1;
-        private Button btnCompleteOrder;
         private Button btnCancelOrder;
         private Button btnPayment;
         private Button btnAddNote;

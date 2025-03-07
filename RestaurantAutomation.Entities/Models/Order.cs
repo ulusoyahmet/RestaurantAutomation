@@ -9,5 +9,7 @@ namespace RestaurantAutomation.Entities.Models
         public virtual Table? Table { get; set; }
         public virtual Payment? Payment { get; set; }
         public string? Note { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsPayment { get; set; }
     }
 }
