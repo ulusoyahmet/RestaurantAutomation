@@ -174,7 +174,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ürün silinirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while deleting the product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -218,7 +218,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Masa bilgileri yüklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while loading table information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -263,7 +263,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş bilgisi alınırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while retrieving order information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -294,7 +294,7 @@ namespace RestaurantAutomation.UI.Forms
                 var category = _categoryService.GetAll().FirstOrDefault(c => c.Name == categoryName);
                 if (category == null)
                 {
-                    MessageBox.Show($"{categoryName} kategorisi bulunamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"The {categoryName} category was not found.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -324,7 +324,7 @@ namespace RestaurantAutomation.UI.Forms
 
                 if (!menuItems.Any())
                 {
-                    MessageBox.Show($"{categoryName} kategorisinde ürün bulunamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"No products were found in the {categoryName} category.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -352,7 +352,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Menü öğeleri yüklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while loading menu items: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -363,7 +363,7 @@ namespace RestaurantAutomation.UI.Forms
                 // Check if table is selected
                 if (_currentTable == null)
                 {
-                    MessageBox.Show("Lütfen önce bir masa seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a table first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -417,7 +417,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ürün eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while adding the product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -427,7 +427,7 @@ namespace RestaurantAutomation.UI.Forms
             {
                 if (_currentTable == null)
                 {
-                    MessageBox.Show("Sipariş oluşturmak için bir masa seçilmelidir.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("A table must be selected to create an order.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -443,7 +443,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş oluşturulurken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while creating the order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -463,7 +463,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş detayı eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while adding the order detail: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -482,7 +482,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş detayı güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while updating the order detail: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -505,7 +505,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Masa durumu güncellenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while updating the table status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         
@@ -514,11 +514,11 @@ namespace RestaurantAutomation.UI.Forms
         {
             if (!_currentOrderId.HasValue)
             {
-                MessageBox.Show("İptal edilecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("There are no orders to cancel.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Bu siparişi iptal etmek istediğinizden emin misiniz?", "Sipariş İptali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to cancel this order?", "Order Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -546,11 +546,11 @@ namespace RestaurantAutomation.UI.Forms
                     // Update total
                     UpdateTotal();
 
-                    MessageBox.Show("Sipariş başarıyla iptal edildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The order has been successfully cancelled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Sipariş iptal edilirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while cancelling the order.{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -559,7 +559,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             if (!_currentOrderId.HasValue || _orderItemsTable.Rows.Count == 0)
             {
-                MessageBox.Show("Ödenecek sipariş bulunmamaktadır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("There are no orders to be paid.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -632,7 +632,7 @@ namespace RestaurantAutomation.UI.Forms
                         _orderService.Update(currentOrder);
                     }
                     _currentOrderId = null;
-                    MessageBox.Show("Payment process is succes.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The payment process was successful.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ((DataTable)dataGridView1.DataSource).Rows.Clear();
                     lblTotalAmount.Text = null;
                     UpdateTableStatus("Empty");
@@ -653,7 +653,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ödeme işlemi sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred during the payment process: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -661,7 +661,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             if (!_currentOrderId.HasValue)
             {
-                MessageBox.Show("Not eklemek için aktif bir sipariş olmalıdır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("There must be an active order to add a note.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -675,7 +675,7 @@ namespace RestaurantAutomation.UI.Forms
                 {
                     Width = 400,
                     Height = 200,
-                    Text = "Sipariş Notu Ekle",
+                    Text = "Add Order Note",
                     StartPosition = FormStartPosition.CenterParent,
                     FormBorderStyle = FormBorderStyle.FixedDialog,
                     MaximizeBox = false,
@@ -692,7 +692,7 @@ namespace RestaurantAutomation.UI.Forms
 
                 Button btnSave = new Button
                 {
-                    Text = "Kaydet",
+                    Text = "Save",
                     Location = new Point(150, 130),
                     DialogResult = DialogResult.OK
                 };
@@ -711,14 +711,14 @@ namespace RestaurantAutomation.UI.Forms
                     Order currentOrder = _orderRepository.GetByID(Guid.Parse(_currentOrderId.ToString()));
                     currentOrder.Note = note;
                     _orderRepository.Update(currentOrder);
-                    MessageBox.Show("Not başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The note has been successfully added.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     lblOrderNotes.Text = "Note: " + note;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Not eklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while adding the note: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -729,7 +729,7 @@ namespace RestaurantAutomation.UI.Forms
                 // Sipariş geçmişi için yeni bir form oluştur
                 Form gecmisForm = new Form
                 {
-                    Text = "Sipariş Geçmişi",
+                    Text = "Order History",
                     Width = 800,
                     Height = 500,
                     StartPosition = FormStartPosition.CenterParent,
@@ -756,11 +756,11 @@ namespace RestaurantAutomation.UI.Forms
 
                 // DataTable oluştur
                 DataTable dtSiparisler = new DataTable();
-                dtSiparisler.Columns.Add("Sipariş ID", typeof(string));
-                dtSiparisler.Columns.Add("Sipariş Tarihi", typeof(DateTime));
-                dtSiparisler.Columns.Add("Masa No", typeof(int));
-                dtSiparisler.Columns.Add("Ürünler", typeof(string));
-                dtSiparisler.Columns.Add("Toplam Tutar", typeof(decimal));
+                dtSiparisler.Columns.Add("Order ID", typeof(string));
+                dtSiparisler.Columns.Add("Order Date", typeof(DateTime));
+                dtSiparisler.Columns.Add("Table Number", typeof(int));
+                dtSiparisler.Columns.Add("Products", typeof(string));
+                dtSiparisler.Columns.Add("Total Amount", typeof(decimal));
 
                 // Siparişleri DataTable'a ekle
                 foreach (var siparis in odenmisler)
@@ -817,7 +817,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Sipariş geçmişi açılırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while loading the order history. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -831,7 +831,7 @@ namespace RestaurantAutomation.UI.Forms
             }
             else
             {
-                MessageBox.Show("Ana form bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The main form could not be found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
         }
@@ -875,7 +875,7 @@ namespace RestaurantAutomation.UI.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Masa bilgisi alınırken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An error occurred while retrieving table information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
