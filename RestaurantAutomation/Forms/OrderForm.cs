@@ -2,6 +2,7 @@
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
+using RestaurantAutomation.UI.Helpers;
 using System.Data;
 
 namespace RestaurantAutomation.UI.Forms
@@ -306,7 +307,7 @@ namespace RestaurantAutomation.UI.Forms
         {
             try
             {
-                var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.IsPayment==false && o.IsDeleted==false);
+                var order = _orderService.GetAll().FirstOrDefault(o => o.TableID == tableId && o.IsPayment == false && o.IsDeleted == false);
 
                 if (order != null)
                 {
@@ -410,14 +411,25 @@ namespace RestaurantAutomation.UI.Forms
 
                 foreach (MenuItem item in menuItems)
                 {
-                    Button itemButton = new Button
+                    Button? itemButton = new Button
                     {
                         Text = $"{item.Name}\n{item.Price:C2}",
+                        TextAlign = ContentAlignment.BottomCenter,
                         Width = 120,
-                        Height = 80,
+                        Height = 120,
                         Tag = item,
-                        Margin = new Padding(5)
+                        Margin = new Padding(5),
+                        BackgroundImageLayout = ImageLayout.Stretch
                     };
+
+
+                    // Try to set background image
+                    var image = ImageHelper.ByteArrayToImage(item.Image);
+                    if (image != null)
+                    {
+                        itemButton.BackgroundImage = image;
+                    }
+
 
                     itemButton.Click += (sender, e) =>
                     {
@@ -588,7 +600,7 @@ namespace RestaurantAutomation.UI.Forms
                 MessageBox.Show($"An error occurred while updating the table status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
         {
@@ -603,7 +615,7 @@ namespace RestaurantAutomation.UI.Forms
             if (result == DialogResult.Yes)
             {
                 try
-                {                   
+                {
                     // Update table status
                     UpdateTableStatus("Empty");
 
@@ -644,7 +656,7 @@ namespace RestaurantAutomation.UI.Forms
             }
 
             try
-            {               
+            {
                 Form paymentForm = new Form
                 {
                     Text = "Payment",
@@ -655,7 +667,7 @@ namespace RestaurantAutomation.UI.Forms
                     MaximizeBox = false,
                     MinimizeBox = false
                 };
-                               
+
 
                 FlowLayoutPanel panel = new FlowLayoutPanel
                 {
@@ -666,7 +678,7 @@ namespace RestaurantAutomation.UI.Forms
                     WrapContents = false
                 };
 
-               
+
                 foreach (DataRow product in _orderItemsTable.Rows)
                 {
                     Label lblProduct = new Label
@@ -674,7 +686,7 @@ namespace RestaurantAutomation.UI.Forms
                         Text = $"{product["ProductName"]} -- {product["Quantity"]} X {product["Price"]:C}",
                         AutoSize = true
                     };
-                    panel.Controls.Add(lblProduct);                    
+                    panel.Controls.Add(lblProduct);
                 }
 
                 FlowLayoutPanel bottomPanel = new FlowLayoutPanel
@@ -687,7 +699,7 @@ namespace RestaurantAutomation.UI.Forms
                 {
                     Text = $"Total: {lblTotalAmount.Text}",
                     AutoSize = true,
-                    Font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Bold),                    
+                    Font = new System.Drawing.Font("Arial", 10, System.Drawing.FontStyle.Bold),
                     Margin = new Padding(20, 7, 0, 0)
 
                 };
@@ -722,14 +734,14 @@ namespace RestaurantAutomation.UI.Forms
                 bottomPanel.Controls.Add(btnPay);
                 bottomPanel.Controls.Add(lblTotal);
 
-                
+
 
                 paymentForm.Controls.Add(panel);
                 paymentForm.Controls.Add(bottomPanel);
                 paymentForm.Show();
 
 
-                
+
             }
             catch (Exception ex)
             {
@@ -827,7 +839,7 @@ namespace RestaurantAutomation.UI.Forms
                     ReadOnly = true,
                     //AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                     SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                };               
+                };
 
                 // Ödenmiş siparişleri veritabanından al
                 var odenmisler = _orderService.GetAll()
@@ -889,8 +901,8 @@ namespace RestaurantAutomation.UI.Forms
 
                 // Form'a kontrolleri ekle
                 panel.Controls.Add(dgvSiparisGecmisi);
-                
-                gecmisForm.Controls.Add(panel);               
+
+                gecmisForm.Controls.Add(panel);
 
                 // Formu göster
                 gecmisForm.ShowDialog();
