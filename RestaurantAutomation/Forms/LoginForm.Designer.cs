@@ -49,11 +49,9 @@
             groupBox1.Controls.Add(lblPassword);
             groupBox1.Controls.Add(lblUsername);
             groupBox1.Controls.Add(btnSignIn);
-            groupBox1.Location = new Point(15, 16);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Location = new Point(10, 10);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(514, 375);
+            groupBox1.Size = new Size(360, 225);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
@@ -61,76 +59,68 @@
             // 
             cmbRoles.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRoles.FormattingEnabled = true;
-            cmbRoles.Location = new Point(170, 81);
-            cmbRoles.Margin = new Padding(4, 5, 4, 5);
+            cmbRoles.Location = new Point(119, 49);
             cmbRoles.Name = "cmbRoles";
-            cmbRoles.Size = new Size(253, 33);
+            cmbRoles.Size = new Size(178, 23);
             cmbRoles.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(76, 86);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(53, 52);
             label1.Name = "label1";
-            label1.Size = new Size(46, 25);
+            label1.Size = new Size(30, 15);
             label1.TabIndex = 5;
             label1.Text = "Role";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(170, 191);
-            txtPassword.Margin = new Padding(4, 5, 4, 5);
+            txtPassword.Location = new Point(119, 115);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(253, 31);
+            txtPassword.Size = new Size(178, 23);
             txtPassword.TabIndex = 4;
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(170, 139);
-            txtUsername.Margin = new Padding(4, 5, 4, 5);
+            txtUsername.Location = new Point(119, 83);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(253, 31);
+            txtUsername.Size = new Size(178, 23);
             txtUsername.TabIndex = 3;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(76, 196);
-            lblPassword.Margin = new Padding(4, 0, 4, 0);
+            lblPassword.Location = new Point(53, 118);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(87, 25);
+            lblPassword.Size = new Size(57, 15);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(76, 144);
-            lblUsername.Margin = new Padding(4, 0, 4, 0);
+            lblUsername.Location = new Point(53, 86);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(91, 25);
+            lblUsername.Size = new Size(60, 15);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Username";
             // 
             // btnSignIn
             // 
-            btnSignIn.Location = new Point(170, 256);
-            btnSignIn.Margin = new Padding(4, 5, 4, 5);
+            btnSignIn.Location = new Point(119, 154);
             btnSignIn.Name = "btnSignIn";
-            btnSignIn.Size = new Size(254, 50);
+            btnSignIn.Size = new Size(178, 30);
             btnSignIn.TabIndex = 0;
             btnSignIn.Text = "Sign In / Sign Up";
             btnSignIn.Click += btnSignIn_Click;
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(564, 419);
+            ClientSize = new Size(879, 507);
             Controls.Add(groupBox1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sign Up / Login";
