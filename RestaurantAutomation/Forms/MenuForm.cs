@@ -2,6 +2,7 @@
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
+using RestaurantAutomation.UI.Helpers;
 using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
@@ -73,6 +74,8 @@ namespace RestaurantAutomation.UI.Forms
                 // if the selectedMenuItem is not null, it means that the user is trying to update an existing product
                 else
                 {
+
+
                     selectedMenuItem.Name = txtProductName.Text;
                     selectedMenuItem.CategoryID = (Guid)cmbCategory.SelectedValue;
                     selectedMenuItem.Price = Convert.ToDecimal(txtPrice.Text);
@@ -163,6 +166,8 @@ namespace RestaurantAutomation.UI.Forms
             txtDescription.Text = selectedMenuItem.Description;
             txtPrice.Text = selectedMenuItem.Price.ToString();
             cmbCategory.SelectedValue = selectedMenuItem.CategoryID;
+            // get byte image from database
+            pcbImage.Image = ImageHelper.ByteArrayToImage(selectedMenuItem.Image);
 
             if (selectedMenuItem.Image != null)
             {
