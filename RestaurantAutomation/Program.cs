@@ -19,17 +19,21 @@ namespace RestaurantAutomation
             ApplicationConfiguration.Initialize();
 
             // Show the login form
-            using (LoginForm loginForm = new LoginForm())
-            {
-                Application.Run(loginForm);
+            //using (LoginForm loginForm = new LoginForm())
+            //{
+            //    Application.Run(loginForm);
 
-                // If login is successful, show the main form
-                if (loginForm.LoginSuccessful)
-                {
-                    MainFormInstance = new MainForm();
-                    Application.Run(MainFormInstance);
-                }
-            }
+            //    // If login is successful, show the main form
+            //    if (loginForm.LoginSuccessful)
+            //    {
+            //        MainFormInstance = new MainForm();
+            //        Application.Run(MainFormInstance);
+            //    }
+            //}
+
+            // open tableform directly
+            TableForm tableForm = new();
+            Application.Run(tableForm);
         }
     }
 }

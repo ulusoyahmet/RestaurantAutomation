@@ -1,9 +1,9 @@
-﻿using RestaurantAutomation.Business.Services;
+﻿using System.Drawing.Drawing2D;
+using RestaurantAutomation.Business.Services;
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
 using RestaurantAutomation.UI.Helpers;
-using System.Windows.Forms;
 
 namespace RestaurantAutomation.UI.Forms
 {
@@ -23,6 +23,21 @@ namespace RestaurantAutomation.UI.Forms
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
+            
+
+            int radius = 20; // Change this value for more or less rounding
+            Rectangle rect = new Rectangle(0, 0, pcbImage.Width, pcbImage.Height);
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
+            path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
+            path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
+            path.CloseFigure();
+
+            pcbImage.Region = new Region(path);
+
+
             GetAllProducts(null);
             GetAllCategories();
         }
@@ -216,6 +231,11 @@ namespace RestaurantAutomation.UI.Forms
 
                 MessageBox.Show(ex.Message); ;
             }
+        }
+
+        private void guna2HtmlLabel4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

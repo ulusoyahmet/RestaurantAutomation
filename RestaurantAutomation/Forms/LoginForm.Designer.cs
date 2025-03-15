@@ -61,7 +61,7 @@
             // 
             // guna2GroupBox1
             // 
-            guna2GroupBox1.BackColor = SystemColors.Control;
+            guna2GroupBox1.BackColor = Color.Transparent;
             guna2GroupBox1.BorderRadius = 20;
             guna2GroupBox1.Controls.Add(btnSignIn);
             guna2GroupBox1.Controls.Add(txtPassword);
@@ -72,21 +72,23 @@
             guna2GroupBox1.Controls.Add(cmbRoles);
             guna2GroupBox1.CustomBorderColor = Color.FromArgb(12, 155, 193);
             guna2GroupBox1.CustomizableEdges = customizableEdges15;
-            guna2GroupBox1.FillColor = Color.MintCream;
+            guna2GroupBox1.FillColor = Color.SeaShell;
             guna2GroupBox1.Font = new Font("Segoe UI", 9F);
-            guna2GroupBox1.ForeColor = SystemColors.ButtonFace;
+            guna2GroupBox1.ForeColor = SystemColors.Window;
             guna2GroupBox1.Location = new Point(212, 109);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2GroupBox1.Size = new Size(550, 373);
             guna2GroupBox1.TabIndex = 2;
+            guna2GroupBox1.Text = "Login";
+            guna2GroupBox1.TextAlign = HorizontalAlignment.Center;
             // 
             // btnSignIn
             // 
-            btnSignIn.BackColor = Color.FromArgb(12, 155, 193);
-            btnSignIn.BorderColor = Color.FromArgb(12, 155, 193);
-            btnSignIn.BorderRadius = 40;
-            btnSignIn.CustomBorderColor = Color.DarkGray;
+            btnSignIn.BackColor = Color.Transparent;
+            btnSignIn.BorderColor = Color.Transparent;
+            btnSignIn.BorderRadius = 20;
+            btnSignIn.CustomBorderColor = SystemColors.Window;
             btnSignIn.CustomizableEdges = customizableEdges1;
             btnSignIn.FillColor = Color.FromArgb(12, 155, 193);
             btnSignIn.Font = new Font("Segoe UI", 9F);
@@ -102,7 +104,6 @@
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.Window;
-            txtPassword.BorderColor = Color.FromArgb(12, 155, 193);
             txtPassword.BorderRadius = 20;
             txtPassword.CustomizableEdges = customizableEdges3;
             txtPassword.DefaultText = "";
@@ -121,10 +122,11 @@
             txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtPassword.Size = new Size(221, 36);
             txtPassword.TabIndex = 2;
+            txtPassword.TextOffset = new Point(10, 0);
             // 
             // guna2PictureBox3
             // 
-            guna2PictureBox3.BackColor = SystemColors.Window;
+            guna2PictureBox3.BackColor = Color.Transparent;
             guna2PictureBox3.CustomizableEdges = customizableEdges5;
             guna2PictureBox3.Image = (Image)resources.GetObject("guna2PictureBox3.Image");
             guna2PictureBox3.ImageRotate = 0F;
@@ -139,7 +141,6 @@
             // txtUsername
             // 
             txtUsername.BackColor = SystemColors.Window;
-            txtUsername.BorderColor = Color.FromArgb(12, 155, 193);
             txtUsername.BorderRadius = 20;
             txtUsername.CustomizableEdges = customizableEdges7;
             txtUsername.DefaultText = "";
@@ -157,10 +158,11 @@
             txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtUsername.Size = new Size(221, 36);
             txtUsername.TabIndex = 2;
+            txtUsername.TextOffset = new Point(10, 0);
             // 
             // guna2PictureBox2
             // 
-            guna2PictureBox2.BackColor = SystemColors.Window;
+            guna2PictureBox2.BackColor = Color.Transparent;
             guna2PictureBox2.CustomizableEdges = customizableEdges9;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
@@ -174,9 +176,9 @@
             // 
             // guna2PictureBox1
             // 
-            guna2PictureBox1.BackColor = SystemColors.Window;
+            guna2PictureBox1.BackColor = Color.Transparent;
             guna2PictureBox1.CustomizableEdges = customizableEdges11;
-            guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
+            guna2PictureBox1.Image = Properties.Resources.Settings;
             guna2PictureBox1.ImageRotate = 0F;
             guna2PictureBox1.Location = new Point(122, 79);
             guna2PictureBox1.Name = "guna2PictureBox1";
@@ -189,7 +191,7 @@
             // cmbRoles
             // 
             cmbRoles.BackColor = Color.Transparent;
-            cmbRoles.BorderColor = Color.FromArgb(12, 155, 193);
+            cmbRoles.BorderColor = Color.FromArgb(213, 218, 223);
             cmbRoles.BorderRadius = 20;
             cmbRoles.CustomizableEdges = customizableEdges13;
             cmbRoles.DrawMode = DrawMode.OwnerDrawFixed;
@@ -204,6 +206,7 @@
             cmbRoles.ShadowDecoration.CustomizableEdges = customizableEdges14;
             cmbRoles.Size = new Size(221, 36);
             cmbRoles.TabIndex = 0;
+            cmbRoles.TextOffset = new Point(10, 0);
             // 
             // LoginForm
             // 

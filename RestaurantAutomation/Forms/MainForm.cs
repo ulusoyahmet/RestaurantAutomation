@@ -23,13 +23,19 @@ namespace RestaurantAutomation.UI.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            btnReports.Visible = false;
+            // make btnReport unclickable for non-admin users
+            btnReports.Enabled = false;
+
             if (SessionManager.LoggedInUser != null)
             {
                 var role = _roleService.GetByID(SessionManager.LoggedInUser.RoleID);
 
-                // Hide Reports button if the user is not an admin
-                btnReports.Visible = role.Name == "admin";
+                // if the user is an admin, enable the button
+                if (role.Name == "admin")
+                {
+                    btnReports.Enabled = true;
+                }
+
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using RestaurantAutomation.Business.Services;
+﻿using System.Windows.Markup;
+using Guna.UI2.WinForms;
+using RestaurantAutomation.Business.Services;
 using RestaurantAutomation.DataAccess.Context;
 using RestaurantAutomation.DataAccess.Repositories;
 using RestaurantAutomation.Entities.Models;
@@ -25,11 +27,11 @@ namespace RestaurantAutomation.UI.Forms
         //private void LoadTables()
         //{
         //    flowLayoutPanel1.Controls.Clear();
-        //    var tables = _tableService.GetAll();
+        //    var tables = _tableService.GetAll().OrderBy(t => t.TableNumber); // Masaları sıralı al
 
         //    foreach (var table in tables)
         //    {
-        //        Button tableButton = new Button
+        //        Guna2Button tableButton = new Guna2Button
         //        {
         //            Text = $"Table {table.TableNumber}\n{table.TableCategory}",
         //            Name = $"btn_{table.ID}",
@@ -40,8 +42,10 @@ namespace RestaurantAutomation.UI.Forms
         //        // Set color based on table status
         //        tableButton.BackColor = table.Status == "Empty" ? Color.GreenYellow : Color.Red;
 
-        //        // Add click handler
+        //        // Add single click handler for selection
         //        tableButton.Click += TableButton_Click;
+        //        // Add double click handler for status change
+        //        tableButton.DoubleClick += TableButton_DoubleClick;
 
         //        // Add tooltip showing table details
         //        var toolTip = new ToolTip();
@@ -61,16 +65,59 @@ namespace RestaurantAutomation.UI.Forms
 
             foreach (var table in tables)
             {
-                Button tableButton = new Button
+                Guna2Button tableButton = new Guna2Button
                 {
                     Text = $"Table {table.TableNumber}\n{table.TableCategory}",
                     Name = $"btn_{table.ID}",
-                    Size = new Size(120, 100),
-                    Tag = table
+                    Size = new Size(120, 120),
+                    Tag = table,
+                    // Center text horizontally
+                    TextAlign = HorizontalAlignment.Center,
+                    // Set image properties
+                    ImageSize = new Size(60, 60),
+                    // set image to center of button
+                    ImageAlign = HorizontalAlignment.Center,
+                    // Position text and image with proper vertical spacing
+                    ImageOffset = new Point(12, -25), // Move image up from center
+                    TextOffset = new Point(-15, 25), // Move text down from center
+                    BorderThickness = 1,
+                    BorderColor = Color.Transparent,
+                    BorderRadius = 10,
+                    FillColor = Color.Black,
+                    ForeColor = Color.White // Ensure text is visible on black background
                 };
 
-                // Set color based on table status
-                tableButton.BackColor = table.Status == "Empty" ? Color.GreenYellow : Color.Red;
+
+                //Guna2Button tableButton = new Guna2Button
+                //{
+                //    Text = $"Table {table.TableNumber}\n{table.TableCategory}",
+                //    Name = $"btn_{table.ID}",
+                //    Size = new Size(120, 120),
+                //    Tag = table,
+                //    // Center text and image horizontally
+                //    TextAlign = HorizontalAlignment.Center,
+                //    ImageAlign = HorizontalAlignment.Center,
+                //    // Set image size
+                //    ImageSize = new Size(60, 60),
+                //    // Center text and image vertically
+                //    TextOffset = new Point(0, 20), // Adjust this value to position text right under the image
+                //    ImageOffset = new Point(0, -20), // Adjust this value to position image above the text
+                //    BorderThickness = 1,
+                //    BorderColor = Color.Transparent,
+                //    BorderRadius = 10,
+                //    FillColor = Color.Black
+                //};
+
+
+                // Set background image based on table status
+                if (table.Status == "Empty")
+                {
+                    tableButton.Image = Properties.Resources.empty; // Replace with your empty table image resource
+                }
+                else
+                {
+                    tableButton.Image = Properties.Resources.occupied; // Replace with your occupied table image resource
+                }
 
                 // Add single click handler for selection
                 tableButton.Click += TableButton_Click;
@@ -88,28 +135,36 @@ namespace RestaurantAutomation.UI.Forms
             }
         }
 
+
+
+        // Single click - Select table
         // Single click - Select table
         private void TableButton_Click(object sender, EventArgs e)
         {
-            if (sender is Button btn && btn.Tag is Table table)
+            if (sender is Guna2Button btn && btn.Tag is Table table)
             {
                 selectedTable = table;
-                // Visual feedback for selection (optional)
+                // Visual feedback for selection
                 foreach (Control c in flowLayoutPanel1.Controls)
                 {
-                    if (c is Button b)
+                    if (c is Guna2Button b)
                     {
-                        b.FlatStyle = FlatStyle.Standard;
+                        b.BorderThickness = 1;
+                        b.BorderColor = Color.Transparent;
+                        b.FillColor = Color.White;
                     }
                 }
-                btn.FlatStyle = FlatStyle.Flat;
+                // Make borders of Guna2Button thicker and darker
+                btn.BorderThickness = 3;
+                btn.BorderColor = Color.DarkBlue;
+                btn.FillColor = Color.LightBlue;
             }
         }
 
         // Double click - Change status
         private void TableButton_DoubleClick(object sender, EventArgs e)
         {
-            if (sender is Button btn && btn.Tag is Table table)
+            if (sender is Guna2Button btn && btn.Tag is Table table)
             {
                 var result = MessageBox.Show(
                     $"Do you want to change status of Table {table.TableNumber}?",
@@ -124,7 +179,7 @@ namespace RestaurantAutomation.UI.Forms
                     _tableService.Update(table);
 
                     // Update button appearance
-                    btn.BackColor = table.Status == "Empty" ? Color.GreenYellow : Color.Red;
+                    btn.Image = table.Status == "Empty" ? Properties.Resources.empty : Properties.Resources.occupied;
                 }
             }
         }
@@ -140,7 +195,6 @@ namespace RestaurantAutomation.UI.Forms
             base.OnFormClosing(e);
             _context.Dispose();
         }
-
         private void btnAddTable_Click(object sender, EventArgs e)
         {
             try
@@ -155,23 +209,29 @@ namespace RestaurantAutomation.UI.Forms
                 };
 
                 // ComboBox oluştur ve kategorileri ekle
-                ComboBox cmbCategory = new ComboBox
+                Guna2ComboBox cmbCategory = new Guna2ComboBox
                 {
                     DropDownStyle = ComboBoxStyle.DropDownList,
                     Location = new Point(50, 20),
                     Width = 200
                 };
-                cmbCategory.Items.AddRange(new string[] { "Indoor", "Outdoor", "Garden" });
+                cmbCategory.Items.AddRange(["Indoor", "Outdoor", "Garden"]);
                 cmbCategory.SelectedIndex = 0;
 
                 // Onaylama butonu
-                Button btnOK = new Button
+                Guna2Button btnOK = new Guna2Button
                 {
                     Text = "OK",
-                    DialogResult = DialogResult.OK,
                     Location = new Point(100, 70),
                     Width = 80,
                     Height = 50
+                };
+
+                // OK button click event to set DialogResult and close the form
+                btnOK.Click += (s, args) =>
+                {
+                    categoryForm.DialogResult = DialogResult.OK;
+                    categoryForm.Close();
                 };
 
                 // Form'a öğeleri ekle
@@ -283,38 +343,3 @@ namespace RestaurantAutomation.UI.Forms
     }
 }
 
-
-//namespace RestaurantAutomation.UI.Forms
-//{
-//    public partial class TableForm : Form
-//    {
-//        public TableForm()
-//        {
-//            InitializeComponent();
-
-//            for (int i = 0; i < 19; i++)
-//            {
-//                Button b = new Button();
-//                b.Text = "Table " + i;
-//                b.Name = "btn_" + i;
-//                b.Size = new Size(100, 100);
-
-//                if (i % 2 == 0)
-//                {
-//                    b.BackColor = Color.GreenYellow;
-//                }
-//                else
-//                {
-//                    b.BackColor = Color.Red;
-//                }
-//                flowLayoutPanel1.Controls.Add(b);
-//            }
-//        }
-
-//        private void btnMainMenu_Click(object sender, EventArgs e)
-//        {
-//            Program.MainFormInstance.Show();
-//            this.Hide();
-//        }
-//    }
-//}
